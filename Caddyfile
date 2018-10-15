@@ -1,0 +1,17 @@
+http://caddy.uucin.com { 
+        log access_log.log  # 日志
+        gzip  # 使用gzip压缩
+        basicauth / user password
+#        tls 
+        root public/
+        errors {
+            404 public/404.html
+            500 public/500.html
+       }
+#        proxy / http://127.0.0.1:1313 { # 路径转发
+#                header_upstream Host {host}
+#                header_upstream X-Real-IP {remote}
+#                header_upstream X-Forwarded-For {remote}
+#                header_upstream X-Forwarded-Proto {scheme}
+#        }
+}

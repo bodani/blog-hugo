@@ -1,0 +1,12 @@
+contentDir = "content"
+RSSLink = ""
+baseURL = "http://caddy.uucin.com/"
+languageCode = "en-us"
+title = "sdfsdf"
+
+[Params]
+	subTitle = "人类的家园"
+	copyright = "2018 by Eamon"
+
+[NavBar]
+       
