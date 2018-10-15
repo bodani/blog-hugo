@@ -1,11 +1,16 @@
-本站主要目录结构说明
-　　content 　　 所用网站内容文件，MarkDown格式
-    config.toml　首页标题，副标题等
-　　public　　　 成果物    引用 https://github.com/bodani/.git
-　　themes　     网站主题　引用 https://github.com/bodani/Simple.git 
+ ## 本站主要目录结构说明  
+
+　　content 　　 所用网站内容文件，MarkDown格式  
+
+    config.toml　首页标题，副标题等 
+
+　　public　　　 成果物    引用 https://github.com/bodani/.git 
+
+　　themes　     网站主题　引用 https://github.com/bodani/Simple.git  
+
 　　　　　　　　 layouts/partials/header.html  首页格式
 
-本站基本操作说明
+ ## 本站基本操作说明
 
    ./rundemo.sh  用于临时效果展示　,在开发过程中使用
 
