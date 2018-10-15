@@ -2,10 +2,10 @@ contentDir = "content"
 RSSLink = ""
 baseURL = "http://caddy.uucin.com/"
 languageCode = "en-us"
-title = "sdfsdf"
+title = "标题"
 
 [Params]
-	subTitle = "人类的家园"
+	subTitle = "副标题"
 	copyright = "2018 by Eamon"
 
 [NavBar]
