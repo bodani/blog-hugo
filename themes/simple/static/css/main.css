@@ -1,7 +1,8 @@
 /* Multi-level navigation links */
 
 .navlinks-container {
-    position: relative;
+    position: relative; 
+    width: 10%;
 }
 
 .navlinks-parent:after {
@@ -34,7 +35,7 @@
     }
 }
 
-@media only screen and (min-width: 768px) {
+@media only screen and (min-width: 68px) {
     .navlinks-container {
         text-align: center;
     }

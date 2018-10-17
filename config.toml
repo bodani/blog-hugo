@@ -2,10 +2,10 @@ contentDir = "content"
 RSSLink = ""
 baseURL = "http://zhangeamon.top/"
 languageCode = "en-us"
-title = "标题"
-
+title = "Let's Go!"
+staticDir = "static"
 [Params]
-	subTitle = "副标题"
+	subTitle = "Let's build cloud native together,  go! go! go! "
 	copyright = "2018 by Eamon"
 
 [NavBar]

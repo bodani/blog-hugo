@@ -26,29 +26,50 @@
             <li class="navlinks-container">
                <a class="navlinks-parent" href="javascript:void(0)" title="" >数据库</a>
                 <div class="navlinks-children">
-                  <a href="{{ .Site.BaseURL }}db-pg/" title="">Postgres</a>
-                  <a href="{{ .Site.BaseURL }}continent-Europe/" title="">欧洲</a>
-                  <a href="{{ .Site.BaseURL }}continent-Africa/" title="">非洲</a>
-                  <a href="{{ .Site.BaseURL }}continent-NorthAmerica/" title="">北美洲</a>
-                  <a href="{{ .Site.BaseURL }}continent-SouthAmerica/" title="">南美洲</a>
-                  <a href="{{ .Site.BaseURL }}continent-Oceania/" title="">大洋洲</a>
-                  <a href="{{ .Site.BaseURL }}continent-Antarctica/" title="">南极洲</a>
-                </div>
-            </li>
-                            
-            <li class="navlinks-container">
-               <a class="navlinks-parent" href="javascript:void(0)" title="acs" >四大洋</a>
-                <div class="navlinks-children">
-                  <a href="{{ .Site.BaseURL }}ocean-Arctic/" title="">北冰洋</a>
-                  <a href="{{ .Site.BaseURL }}ocean-Atlantic/" title="">大西洋</a>
-                  <a href="{{ .Site.BaseURL }}ocean-Indian/" title="">印度洋</a>
-                  <a href="{{ .Site.BaseURL }}ocean-Pacific/" title="">太平洋</a>
+                  <a href="{{ .Site.BaseURL }}postgres/" title="">Postgres</a>
+                  <a href="{{ .Site.BaseURL }}tidb/" title="">TiDB</a>
+                  <a href="{{ .Site.BaseURL }}es/" title="">ES</a>
                 </div>
             </li>
 
-	    <li><a href="{{ .Site.BaseURL }}chinese/" title="">中文</a></li>
-	    <li><a href="{{ .Site.BaseURL }}english/" title="">英文</a></li>
-	    <li><a href="{{ .Site.BaseURL }}about/" title="关于">About</a></li>
+            <li class="navlinks-container">
+               <a class="navlinks-parent" href="javascript:void(0)" title="" >云平台</a>
+                <div class="navlinks-children">
+                  <a href="{{ .Site.BaseURL }}kvm/" title="">KVM</a>
+                  <a href="{{ .Site.BaseURL }}etcd/" title="">Etcd</a>
+                  <a href="{{ .Site.BaseURL }}docker/" title="">Docker</a>
+                  <a href="{{ .Site.BaseURL }}k8s/" title="">Kubernetes</a>
+                  <a href="{{ .Site.BaseURL }}glusterfs/" title="">GlusterFS</a>
+                  <a href="{{ .Site.BaseURL }}calico/" title="">Calico</a>
+                  <a href="{{ .Site.BaseURL }}elk/" title="">ELK</a>
+                  <a href="{{ .Site.BaseURL }}prometheus/" title="">Prometheus</a>
+                </div>
+            </li>
+             
+            <li class="navlinks-container">
+               <a class="navlinks-parent" href="javascript:void(0)" title="" >中间件</a>
+                <div class="navlinks-children">
+                  <a href="{{ .Site.BaseURL }}redis/" title="">Redis</a>
+                  <a href="{{ .Site.BaseURL }}kafka/" title="">Kafka</a>
+                  <a href="{{ .Site.BaseURL }}memcache/" title="">Memcache</a>
+                  <a href="{{ .Site.BaseURL }}rabbitmq/" title="">RabbitMQ</a>
+                  <a href="{{ .Site.BaseURL }}middleware/" title="">其他</a>
+                </div>
+            </li>
+           
+            <li class="navlinks-container">
+               <a class="navlinks-parent" href="javascript:void(0)" title="" >写代码</a>
+                <div class="navlinks-children">
+                  <a href="{{ .Site.BaseURL }}python/" title="">Python</a>
+                  <a href="{{ .Site.BaseURL }}go/" title="">GO</a>
+                  <a href="{{ .Site.BaseURL }}java/" title="">JAVA</a>
+                  <a href="{{ .Site.BaseURL }}ansible/" title="">Ansible</a>
+                </div>
+            </li>
+ 
+	    <li><a href="{{ .Site.BaseURL }}network-security/" title="">网络/安全</a></li>
+            <li><a href="{{ .Site.BaseURL }}linux/" title=""> Linux </a></li>
+	    <li><a href="{{ .Site.BaseURL }}about/" title="">关于</a></li>
      </ul>
   </div>
 </nav>
