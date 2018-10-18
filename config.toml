@@ -1,6 +1,6 @@
 contentDir = "content"
 RSSLink = ""
-baseURL = "http://zhangeamon.top/"
+baseURL = "https://zhangeamon.top/"
 languageCode = "en-us"
 title = "Let's Go!"
 staticDir = "static"
