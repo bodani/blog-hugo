@@ -19,7 +19,7 @@
 
  ## 本站编写基本操作
 
-　　hugo add posts/new.md 新建页面
+　　hugo new posts/new.md 新建页面
 
     
  
