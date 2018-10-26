@@ -147,7 +147,7 @@ tree /tmp/
 设置远程节点的文件的文件属性
 
 ```
-ansible dns -m file -a 'path=/tmp/abc.txt state=touch mode=0666 owner=user1'   
+ansible all -m file -a 'path=/tmp/abc.txt state=touch mode=0666 owner=user1'   
 
 - state 参数说明 
   - directory：如果目录不存在，创建目录
@@ -247,3 +247,7 @@ ansible all -m lineinfile -a "path=/etc/selinux/config regexp=^SELINUX= line=SEL
 + replace
 
 替换一个文件中符合匹配的所有行
+
++ setup
+
+获取系统属性变量
