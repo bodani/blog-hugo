@@ -36,7 +36,8 @@ cat hosts
 
 ```
 
-+ 免密登录 
++ [免密登录](../linux/no-passwd)
+
 
 ##### 常用命令
 ```
@@ -251,3 +252,15 @@ ansible all -m lineinfile -a "path=/etc/selinux/config regexp=^SELINUX= line=SEL
 + setup
 
 获取系统属性变量
+
++ sysctl
+
+```
+      ignoreerrors:          # Use this option to ignore errors about unknown keys.
+      name:                  # (required) The dot-separated path (aka `key') specifying the sysctl variable.
+      reload:                # If `yes', performs a `/sbin/sysctl -p' if the `sysctl_file' is updated. If `no', does not reload `sysctl' even if the `sysctl_file' is updated.
+      state:                 # Whether the entry should be present or absent in the sysctl file.
+      sysctl_file:           # Specifies the absolute path to `sysctl.conf', if not `/etc/sysctl.conf'.
+      sysctl_set:            # Verify token value with the sysctl command and set with -w if necessary
+      value:                 # Desired value of the sysctl key.
+```

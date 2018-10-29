@@ -23,7 +23,7 @@ draft: false
 ```
 ##### Handlers 和 notity 
 由特定条件触发的操作，满足条件方才执行，否则不执行。
-Handlers也是task列表，这些task与前述的tasks并没有本质上的不同,用于当关注的资源发生变化时，才会采取一定的操作。
+Handlers也是task列表，这些task与前述的task并没有本质上的不同,用于当关注的资源发生变化时，才会采取一定的操作。
 
 ```
 - hosts: webs

@@ -11,7 +11,7 @@ draft: false
   - MODULES：   Ansible执行命令的功能模块，多数为内置的核心模块，也可自定义,ansible-doc –l 可查看模块 
   - PLUGINS：   模块功能的补充，如连接类型插件、循环插件、变量插件、过滤插件等，该功能不常用 
   - API：       供第三方程序调用的应用程序编程接口 
-  - ANSIBLE：   组合INVENTORY、 API、 MODULES、PLUGINS的绿框，可以理解为是ansible命令工具，其为核心执行工具
+  - ANSIBLE：   ansible命令工具，其为核心执行工具
 
 + 常用命令
 
