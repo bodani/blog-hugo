@@ -264,3 +264,15 @@ ansible all -m lineinfile -a "path=/etc/selinux/config regexp=^SELINUX= line=SEL
       sysctl_set:            # Verify token value with the sysctl command and set with -w if necessary
       value:                 # Desired value of the sysctl key.
 ```
+
++ blockinfile
+ 
+ name: Insert/update/remove a text block surrounded by marker lines
+
+```
+  insertafter 修改的标记点 
+  insertbefore
+  path 目标文件
+  block 内容
+```
+
