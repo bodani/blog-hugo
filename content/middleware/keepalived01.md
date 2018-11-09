@@ -18,4 +18,4 @@ draft: false
 
 2. 局域网内 virtual_router_id 与其他集群配置冲突。 另外 router_id 主机标示，一般为hostname即可。
 
-
+ 解决方法： unicast_peer{ } 配置成单播模式
