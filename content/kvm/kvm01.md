@@ -29,8 +29,9 @@ dns-nameservers 114.114.114.114
 
 .创建一个虚拟机
 
+```
 virt-install --connect qemu:///system -n test01 -r 1024 -f /home/kvm/test01.qcow2 -s 20 -c /home/kvm/ubuntu-12.04.1-server-amd64.iso --vnc --noautoconsole --os-type linux --os-variant ubuntuPrecise --accelerate --network=bridge:br0 
-
+```
 #### centos7 
 ---
 
@@ -70,8 +71,9 @@ systemctl enable libvirtd
 
 .创建虚拟机
 
+```
 virt-install --virt-type kvm --name test01 --ram 1024 --vcpus 1 --cdrom=/home/kvm/CentOS-7.0-1406-x86_64-DVD.iso --disk path=/home/kvm/test01.qcow2,size=10,format=qcow2 --network bridge=br0 --graphics vnc,listen=0.0.0.0 --noautoconsole --os-type=linux --os-variant=rhel7 
-
+```
 
 .连接道virth
 
@@ -87,7 +89,9 @@ virsh --connect qemu:///system
 - 克隆
  
 ---   
+```
 virt-clone --connect=qemu:///system -o server-02 -n server-clone -f /var/lib/libvirt/images/server-clone.img
+```
 
 参数说明  
 -o --original 原始被克隆镜像 
@@ -112,6 +116,7 @@ qemu-img resize [-q] filename [+ | -]size
 
 1.修改前查看 
 
+```
 qemu-img info test01.qcow2
 image: test01.qcow2
 file format: qcow2
@@ -121,6 +126,7 @@ cluster_size: 65536
 Format specific information:
     compat: 1.1
     lazy refcounts: true
+```
 
 2.关闭虚拟机
 virsh shutdown test01
