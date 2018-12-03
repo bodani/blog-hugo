@@ -1,0 +1,82 @@
+---
+title: "Centos 初始化配置"
+date: 2018-12-03T10:34:06+08:00
+draft: false
+---
+
+1. 网络配置 
+
+ 略
+
+ 1.2 ip_froward  
+
+    查看 sysctl -a | grep ip_
+
+    修改 vi /etc/sysctl.conf   
+```
+    net.ipv4.ip_forward = 1
+```
+   最大使用内存
+```
+   vm.max_map_count=262144
+```
+    生效 sysctl -p
+
+2. 系统更新
+
+yum -y update
+
+3. 安装扩展及工具
+
+yum -y install epel-release net-tools bind-utils
+
+4. 文件链接限制
+
+查看 ulimit -n
+
+修改 vi /etc/security/limits.conf
+
+```
+* - nofile 65536
+* soft nproc 65536
+* hard nproc 65536
+* soft nofile 65536
+* hard nofile 65536
+```
+```
+rm /etc/security/limits.d/*  -rf
+```
+5 安全
+
+   5.1 selinux
+
+    查看 getenforce
+
+    修改 临时 setenforce 0 永久 vi /etc/sysconfig/selinux
+
+  5.2 firewalld
+
+  5.3 ssh 
+
+      禁用root用户，切换为其他用户登录
+
+      修改22端口
+
+6 系统时间
+
+    ntp
+```
+  yum install chrony
+
+  systemctl enable chronyd.service
+
+  systemctl start chronyd.service
+
+``` 
+
+建议使用 yum install ntp
+```
+  systemctl start ntpd
+
+  systemctl enable ntpd
+```
