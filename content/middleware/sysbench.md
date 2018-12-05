@@ -4,14 +4,13 @@ date: 2018-11-16T19:25:45+08:00
 draft: false
 ---
 
-##### 下载安装 1.0.15
-
+##### 下载安装 1.0.15 [sysbench官网](https://github.com/akopytov/sysbench)
 ```
 curl -s https://packagecloud.io/install/repositories/akopytov/sysbench/script.rpm.sh | sudo bash
 sudo yum -y install sysbench
 
 ```
-
+##### 参数说明
 ```
 sysbench --help
 Usage:
@@ -94,10 +93,8 @@ Compiled-in tests: 测试类型
 See 'sysbench <testname> help' for a list of options for each test.
 
 ```
-
+##### 默认lua 脚本位置
 ```
-默认lua 脚本位置
-
 ll /usr/share/sysbench/
 total 60
 -rwxr-xr-x 1 root root  1452 7月   4 04:07 bulk_insert.lua
@@ -122,10 +119,12 @@ total 60
 - cleanup 这个阶段是去清除数据的、也就是prepare阶段初始化好的表要都drop掉。
 
 ```
-sysbench --mysql-host=localhost --mysql-port=3306 --mysql-user=sbtest --mysql-password=123456 --mysql-db=tempdb oltp_insert prepare
-
-sysbench --mysql-host=localhost --mysql-port=3306 --mysql-user=sbtest --mysql-password=123456 --mysql-db=tempdb oltp_insert run
-
-sysbench --mysql-host=localhost --mysql-port=3306 --mysql-user=sbtest --mysql-password=123456 --mysql-db=tempdb oltp_insert cleanup
-
+sysbench --threads=100 --time=100 --db-driver=mysql --mysql-host=localhost --mysql-port=3306 --mysql-user=sbtest --mysql-password=123456 --mysql-db=tempdb oltp_insert prepare
+sysbench --threads=100 --time=100 --db-driver=mysql --mysql-host=localhost --mysql-port=3306 --mysql-user=sbtest --mysql-password=123456 --mysql-db=tempdb oltp_insert run
+sysbench --threads=100 --time=100 --db-driver=mysql --mysql-host=localhost --mysql-port=3306 --mysql-user=sbtest --mysql-password=123456 --mysql-db=tempdb oltp_insert cleanup
+```
+```
+sysbench --threads=100 --time=100 --db-driver=pgsql --pgsql-host=10.1.7.126 --pgsql-port=5432 --pgsql-user=postgres --pgsql-password=123456 --pgsql-db=test1 oltp_insert prepare
+sysbench --threads=100 --time=100 --db-driver=pgsql --pgsql-host=10.1.7.126 --pgsql-port=5432 --pgsql-user=postgres --pgsql-password=123456 --pgsql-db=test1 oltp_insert run
+sysbench --threads=100 --time=100 --db-driver=pgsql --pgsql-host=10.1.7.126 --pgsql-port=5432 --pgsql-user=postgres --pgsql-password=123456 --pgsql-db=test1 oltp_insert clean
 ```

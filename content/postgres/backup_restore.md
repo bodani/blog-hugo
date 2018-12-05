@@ -12,3 +12,11 @@ Postgres 数据库备份恢复命令
 备份表：pg_dump -U postgres -t tablename dbname > 33.sql
 恢复表：psql -U postgres -d dbname < 33.sql
 ```
+
+实时备份恢复
+
+https://github.com/ossc-db/pg_rman
+
+https://github.com/wal-e/wal-e
+
+https://github.com/wal-g/wal-g
