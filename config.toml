@@ -7,6 +7,6 @@ staticDir = "static"
 [Params]
 	subTitle = "Let's build cloud native together,  go! go! go! "
 	copyright = "2018 by Eamon"
-        linkGithub = "https://github.com/bodani/bodani.github.io"
+        linkGithub = "https://github.com/bodani/blog-hugo"
 [NavBar]
        
