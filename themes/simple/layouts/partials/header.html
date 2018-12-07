@@ -28,6 +28,7 @@
                <a class="navlinks-parent" href="javascript:void(0)" title="" >数据库</a>
                 <div class="navlinks-children">
                   <a href="{{ .Site.BaseURL }}postgres/" title="">Postgres</a>
+                  <a href="{{ .Site.BaseURL }}mysql/" title="">Mysql</a>
                   <a href="{{ .Site.BaseURL }}tidb/" title="">TiDB</a>
                   <a href="{{ .Site.BaseURL }}es/" title="">ElasticSearch</a>
                 </div>
@@ -36,15 +37,13 @@
             <li class="navlinks-container">
                <a class="navlinks-parent" href="javascript:void(0)" title="" >云平台</a>
                 <div class="navlinks-children">
-                  <a href="{{ .Site.BaseURL }}kvm/" title="">KVM</a>
-                  <a href="{{ .Site.BaseURL }}etcd/" title="">Etcd</a>
+                  <a href="{{ .Site.BaseURL }}kvm/" title="">虚拟化</a>
+                  <a href="{{ .Site.BaseURL }}storage/" title="">云存储</a>
                   <a href="{{ .Site.BaseURL }}docker/" title="">Docker</a>
                   <a href="{{ .Site.BaseURL }}k8s/" title="">Kubernetes</a>
-                  <a href="{{ .Site.BaseURL }}glusterfs/" title="">GlusterFS</a>
-                  <a href="{{ .Site.BaseURL }}calico/" title="">Calico</a>
-                  <a href="{{ .Site.BaseURL }}elk/" title="">ELK</a>
-                  <a href="{{ .Site.BaseURL }}prometheus/" title="">Prometheus</a>
-                  <a href="{{ .Site.BaseURL }}istio/" title="">Istio</a>
+                  <a href="{{ .Site.BaseURL }}elk/" title="">日志</a>
+                  <a href="{{ .Site.BaseURL }}monitor/" title="">监控</a>
+                  <a href="{{ .Site.BaseURL }}istio/" title="">微服务治理</a>
                 </div>
             </li>
              
@@ -53,7 +52,7 @@
                 <div class="navlinks-children">
                   <a href="{{ .Site.BaseURL }}redis/" title="">Redis</a>
                   <a href="{{ .Site.BaseURL }}kafka/" title="">Kafka</a>
-                  <a href="{{ .Site.BaseURL }}memcache/" title="">Memcache</a>
+                  <a href="{{ .Site.BaseURL }}memcached/" title="">Memcached</a>
                   <a href="{{ .Site.BaseURL }}rabbitmq/" title="">RabbitMQ</a>
                   <a href="{{ .Site.BaseURL }}middleware/" title="">其他</a>
                 </div>
