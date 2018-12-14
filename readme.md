@@ -22,4 +22,6 @@
 　　hugo new posts/new.md 新建页面
 
     
- 
+## 下载
+
+   git clone --recurse-submodules=public https://github.com/bodani/blog-hugo.git 

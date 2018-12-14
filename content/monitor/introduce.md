@@ -9,3 +9,4 @@ zabbix
 promethues
 
 
+osquery
