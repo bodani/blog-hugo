@@ -20,3 +20,20 @@ https://github.com/ossc-db/pg_rman
 https://github.com/wal-e/wal-e
 
 https://github.com/wal-g/wal-g
+
+
+由于原始库中存在extension 需要超级管理员权限进行恢复，恢复后将所有者变更为普通用户。
+pg中没有方法可以将整个database 中table 的 owner 进行修改，使用如下方法进行批量修改
+
+
+批量修改表和视图的所有者
+```
+DO $$DECLARE r record;
+BEGIN
+FOR r IN SELECT tablename/viewname FROM pg_tables/pg_views WHERE schemaname = 'public'
+LOOP
+    EXECUTE 'alter table '|| r.tablename/r.viewname ||' owner to new_owner;';
+END LOOP;
+END$$;
+```
+

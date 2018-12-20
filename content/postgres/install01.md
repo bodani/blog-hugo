@@ -4,21 +4,41 @@ date: 2018-10-17T14:37:56+08:00
 draft: false
 ---
 
-1.源下载
+1.准备源
 
 ```
+清除历史残余，有些是系统自带的旧版本数据库
+
+rpm -qa | grep postgres
+
+rpm -r ****
+
+安装新数据源
+
 yum install https://download.postgresql.org/pub/repos/yum/10/redhat/rhel-7-x86_64/pgdg-centos10-10-2.noarch.rpm
+
+可将所有的软件更新到最新版本如 ， postgresql-10.2 更新到当前最新的postgresql-10.6
+
+yum update -y 
+
 ```
 2.安装
 
 ```
-yum install postgresql10-server postgresql10-contrib
+yum install -y postgresql10-server postgresql10  postgresql10-contrib
 ```
 
 3.初始化
 
 ```
 /usr/pgsql-10/bin/postgresql-10-setup initdb
+
+可将数据存放到其他目录下，使用[软连接](linux/ln-s)的方式。
+
+为什么会使用软连接而不是更改PGDATA环境变量，因为升级数据库的时 PGDATA 被指回默认值。
+
+通过软连接的方式不改变初始值 1 升级的时候不用修改PGDATA  2 数据位置存放固定，便于以后管理。
+
 ```
 
 4.启动服务　＆　开机自启
@@ -84,7 +104,7 @@ net.core.wmem_default = 262144
 net.core.wmem_max = 4194304  
 net.ipv4.tcp_max_syn_backlog = 4096  
 net.core.netdev_max_backlog = 10000  
-net.ipv4.netfilter.ip_conntrack_max = 655360  
+#net.ipv4.netfilter.ip_conntrack_max = 655360  
 net.ipv4.tcp_timestamps = 0  
 net.ipv4.tcp_tw_recycle=1  
 net.ipv4.tcp_timestamps=1  
@@ -118,6 +138,17 @@ vi /etc/security/limits.conf
 * hard    memlock 500000000 
 
 ```
+
+#### ntp
+
+```
+yum install ntp -y
+
+systemctl start ntpd
+systemctl enable ntpd
+``` 
+
+
 
 reboot 生效
 

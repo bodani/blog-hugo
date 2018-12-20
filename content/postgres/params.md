@@ -6,7 +6,14 @@ draft: false
 
 #### postgres 数据库参数该如何设置
 
-https://github.com/le0pard/pgtune
+##### [性能参数](https://github.com/le0pard/pgtune) [日志参数](postgres/log/)  
+
+##### 管理
+```
+listen_addresses = "*"
+superuser_reserved_connections = 0
+port = 5432
+```
 
 #### 修改
 

@@ -9,3 +9,5 @@ draft: false
 [postgres_exporter](https://github.com/wrouesnel/postgres_exporter)
 
 [pgwatch2](https://github.com/cybertec-postgresql/pgwatch2)
+
+[pgmetrics](https://github.com/rapidloop/pgmetrics)[pgdash]https://pgdash.io/
