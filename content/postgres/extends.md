@@ -17,3 +17,5 @@ draft: false
 - 面向OLAP的codegen数据库 pg_LLVM
 
 - 向量计算插件 vops
+
+- 数据库性能分析 [pg_stat_statements](postgres/pg_stat_statements) pg_buffercache
