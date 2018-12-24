@@ -16,7 +16,7 @@ yum install postgresql10-contrib.x86_64
 ```
 vi $PGDATA/postgresql.conf  
 
-shared_preload_libraries='pg_stat_statements'  # 加载模块　需要重启
+shared_preload_libraries='pg_stat_statements'  # 加载模块　需要重启 , 近期测试不需要添加也可以。自带扩展
 
 track_io_timing = on  # 跟踪IO耗时 (可选)
 
