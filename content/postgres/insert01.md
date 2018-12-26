@@ -1,5 +1,5 @@
 ---
-title: "Insert 1w条数据"
+title: "快速生成大量数据"
 date: 2018-12-14T13:13:57+08:00
 draft: false
 ---

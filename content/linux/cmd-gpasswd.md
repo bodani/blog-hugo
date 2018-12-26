@@ -1,5 +1,5 @@
 ---
-title: "命令之 － gpasswd"
+title: "gpasswd 命令"
 date: 2018-10-18T09:52:03+08:00
 draft: false
 ---

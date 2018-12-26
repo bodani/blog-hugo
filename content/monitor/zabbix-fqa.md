@@ -3,12 +3,20 @@ title: "Zabbix FQA"
 date: 2018-12-24T16:53:20+08:00
 draft: false
 ---
+#### 如何使用篇
+---
+- 如何安装  
+``
+https://www.zabbix.com/download?zabbix=4.0&os_distribution=centos&os_version=7&db=PostgreSQL
+```
+
+
 
 #### FQA
 
 - Too Many Process
 
-原因: 被监控的主机进程数过多  
+原因: 被监控的主机进程数过多或默认的触发条件过低 
 分析: 
 
 ```
@@ -27,5 +35,5 @@ ps -ef | grep zabbix | wc
 
 [更多](https://www.zabbix.com/documentation/4.0/zh/manual/appendix/items/proc_mem_num_notes?s[]=proc&s[]=num)
 
-
+默认的触发值过低300 在实际的生产环境中改为1000
 
