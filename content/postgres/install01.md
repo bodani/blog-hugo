@@ -33,13 +33,14 @@ yum install -y postgresql10-server postgresql10  postgresql10-contrib
 ```
 /usr/pgsql-10/bin/postgresql-10-setup initdb
 
+```
 可将数据存放到其他目录下，使用[软连接](linux/ln-s)的方式。
 
 为什么会使用软连接而不是更改PGDATA环境变量，因为升级数据库的时 PGDATA 被指回默认值。
 
-通过软连接的方式不改变初始值 1 升级的时候不用修改PGDATA  2 数据位置存放固定，便于以后管理。
-
-```
+通过软连接的方式不改变初始值:   
+1 升级的时候不用修改PGDATA   
+2 数据位置存放固定，便于以后管理。  
 
 4.启动服务　＆　开机自启
 

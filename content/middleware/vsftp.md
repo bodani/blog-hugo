@@ -98,16 +98,30 @@ allow_writeable_chroot=YES
 问题3 
 
 vsftp上传文件出现553 Could not create file
-
+```
 首先在ftp的目录中创建一个目录，然后设置权限为777
 $ sudo mkdir /var/ftp/write
 $sudo chmod -R 777 /var/ftp/write
 然后修改vsftp的配置文件/etc/vsftpd.conf文件
 在最后添加上
 local_root=/var/ftp
-
+```
 问题4
 
 客户端建立连接慢，尤其是离线状态
 
 reverse_lookup_enable=NO
+
+问题5 
+
+530  Login incorrect
+
+如果是root用户 原因是因为在 /etc/vsftpd/user_list /etc/vsftpd/ftpusers 中的用户禁止登陆    
+如果是虚拟用户 检查 /etc/shells 看是否包括如下配置   
+
+```
+cat /etc/shells 
+/sbin/nologin
+/usr/sbin/nologin
+
+```
