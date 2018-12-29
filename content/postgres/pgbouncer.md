@@ -9,6 +9,18 @@ draft: false
 - Pgbouncer是一个针对PostgreSQL数据库的轻量级连接池  
 - pgbouncer 的目标是降低因为新建到 PostgreSQL 的连接而导致的性能损失   
 
+使用术语说明：  
+为了后面的描述更清晰，使用如下术语
+- Client : 指访问者  
+- Pgboucer: 指连接池  
+- Postgres: 指数据库。
+- Connetions: 指彼此之间的连接
+
+整体架构  
+
+原来: Client -> Postgres
+现在: Client -> Pgbounce -> Postgres
+
 ##### 优势  
 内存消耗低(默认为2k/连接)，因为Bouncer不需要每次都接受完整的数据包。   
 Postgres的连接是进程模型，pogbouncer 使用libevent进行socket 通信。  
@@ -25,7 +37,7 @@ Postgres的连接是进程模型，pogbouncer 使用libevent进行socket 通信�
 
 ```
 yum list pgbouncer.x86_64
-pgbouncer.x86_64                                                                                                                     1.9.0-1.rhel7
+pgbouncer.x86_64                         1.9.0-1.rhel7
 
 yum install pgbouncer.x86_64 -y
 ```
@@ -67,8 +79,8 @@ default_pool_size 表示默认连接池中建立多少个到后端数据库的�
 [databases]中 user 表示连接到后端数据库所使用的用户
 [pgbouncer]中 user 表示用户连接到pgbouncer中所使用的用户
 
-情况1： 如果在databases中指定user=zabbix 无论使用的是哪个用户，连接postgres的用户都是zabbix
-情况2:  如果在database中没有指定user ,连接postgres的用户为使用的用户
+情况1： 如果在databases中指定user=zabbix Clinet无论使用的是哪个用户，连接postgres的用户都是zabbix
+情况2:  如果在database中没有指定user ,连接postgres的用户为Client使用的用户
 
 pg中查看当前用户
 ```
@@ -99,6 +111,31 @@ auth_query | SELECT usename, passwd FROM pg_shadow WHERE usename=$1
 [pgbouncer]中   
 default_pool_size: 连接池的默认大小  
 max_client_conn: client到pgbouncer的最大数  
-pool_mode: 连接模式  
-min_
+pool_mode: 连接模式   
+min_pool_size: 连接池的最小大小，即每个连接池至少会向后端数据库保持多少个连接。Pgboucer -> Postgres     
+reserve_pool_size: How many additional connections to allow to a pool. 0 disables.  
+reserve_pool_timeout: 保留连接的超时时间   
+max_user_connections: Client -> pgbouncer 每个用户最大连接数
+max_db_connections: Client -> Pgbouncer 每个数据库最大连接数
+disable_pqexec:  禁止简单查询。 简单查询协议允许一个请求发送多条Sql，但是容易造成Sql注入风险。
 
+#### 关于日志信息配置说明
+syslog: 是否打开syslog  
+syslog_ident: Under what name to send logs to syslog.  Default: pgbouncer (program name)
+log_disconnections:     
+log_connections:     
+log_pooler_errors: Client pgbouncer 之间的错误日志  
+
+#### 关于访问pgbouncer配置 
+
+admin_users:  可以登陆console执行所有命令的用户。 多个用户之间用','号分割
+stats_users:  可以登陆console执行SHOW 命令(except SHOW FDS)的用户。 
+
+#### 关于监控检查超时设置  
+server_reset_query: 当一个后端的数据库连接会话被某一个客户端使用时，它的属性可能会被修改。当这个后端数据库连接被第二个客户端使用的时就有可能产生问题。如上个连接中有 ABORT or ROLLBACK ,下个使用此连接的用户肯能会很惨。   
+所以需要将所有的属性清空。  Default: DISCARD ALL
+
+server_check_delay： Default: 30.0   
+server_check_query： select 1   
+
+[更多配置信息](http://pgbouncer.github.io/config.html#console-access-control)
