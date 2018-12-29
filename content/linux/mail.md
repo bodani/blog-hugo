@@ -36,3 +36,5 @@ set smtp-auth-password=xxx    #认证密码
 ```
 echo"zabbix test " |mail -s "zabbix" xxx@xxx.com #如果邮箱中能收到邮件，表示测试成功。
 ```
+
+
