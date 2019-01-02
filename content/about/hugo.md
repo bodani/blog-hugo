@@ -17,12 +17,20 @@ date: 2018-03-27
 ###### 　　本网站是基于Hugo生成, 可运行在Caddy服务中。文档格式为markdown。　
  
 
+
  未完成
 
  1. 目前的导航栏是有硬编码写在simple/layouts/partials/header.html中，数据与展现完全耦合。TODO 数据有config.toml 中定义，　页面动态加载数据。数据与展现解耦，实现通用主题。
  2.  二级目录生成plubic网页时没有index.html 索引页。
- 3. 添加百度统计功能
- 4. 添加站内搜索功能　
+ 3. 添加百度统计功能, 已完成
+ 4. 添加站内搜索功能     　
+
+站内搜索功能 ,只有标题支持中文 contain 不支持中文    
+https://gohugo.io/tools/search/    
+https://github.com/10Dimensional/hugo-algolia   
+
+
+
 <br/>
 
 <center>
