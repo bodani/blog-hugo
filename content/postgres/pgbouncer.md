@@ -36,12 +36,14 @@ Postgres的连接是进程模型，pogbouncer 使用libevent进行socket 通信�
 #### 安装
 
 ```
+查看当前系统中版本
 yum list pgbouncer.x86_64
 pgbouncer.x86_64                         1.9.0-1.rhel7
 
 升级到最新版
 yum update pgbouncer.x86_64
 
+安装
 yum install pgbouncer.x86_64 -y
 
 启动
