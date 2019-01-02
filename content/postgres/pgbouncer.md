@@ -92,10 +92,14 @@ postgres=# select * from current_user;
 ```
 
 auth_file 内容
-格式 user password
+格式 "user" "password",注意需要双引号   
 可以在数据库中获取内容
 ```
 select usename,passwd from pg_shadow ; 
+```
+```
+cat /etc/pgbouncer/userlist.txt  
+"zabbix" "md520e0e8833ebe8947cd347f94b1c4977f"
 ```
 认证方法: 在pgbouncer中执行
 ```
@@ -104,6 +108,51 @@ auth_query | SELECT usename, passwd FROM pg_shadow WHERE usename=$1
 ```
 
 推荐： 不在database中配置user 在auth_file中配置user
+
+#### 登陆pgboucer 控制台
+
+```
+psql -p 6432 -U postgres  -h 127.0.0.1 pgbouncer
+psql (10.4, 服务器 1.9.0/bouncer)
+输入 "help" 来获取帮助信息.
+
+pgbouncer=# show clients
+pgbouncer-# ;
+ type |   user   | database  | state  |   addr    | port  | local_addr | local_port |    connect_time     |    request_time     | wait | wait_us | close_needed |    ptr    | link | remote_pid | tls 
+------+----------+-----------+--------+-----------+-------+------------+------------+---------------------+---------------------+------+---------+--------------+-----------+------+------------+-----
+ C    | postgres | pgbouncer | active | 127.0.0.1 | 57048 | 127.0.0.1  |       6432 | 2019-01-02 16:22:22 | 2019-01-02 16:22:29 |    0 |       0 |            0 | 0x1a938c0 |      |          0 | 
+(1 行记录)
+
+pgbouncer=# show pools;
+     database     |   user    | cl_active | cl_waiting | sv_active | sv_idle | sv_used | sv_tested | sv_login | maxwait | maxwait_us | pool_mode 
+------------------+-----------+-----------+------------+-----------+---------+---------+-----------+----------+---------+------------+-----------
+ normandy_cloud_d | postgres  |         0 |          0 |         0 |       0 |       1 |         0 |        0 |       0 |          0 | session
+ pgbouncer        | pgbouncer |         1 |          0 |         0 |       0 |       0 |         0 |        0 |       0 |          0 | statement
+(2 行记录)
+
+更多
+
+show  help;
+NOTICE:  Console usage
+描述:  
+	SHOW HELP|CONFIG|DATABASES|POOLS|CLIENTS|SERVERS|VERSION
+	SHOW FDS|SOCKETS|ACTIVE_SOCKETS|LISTS|MEM
+	SHOW DNS_HOSTS|DNS_ZONES
+	SHOW STATS|STATS_TOTALS|STATS_AVERAGES
+	SET key = arg
+	RELOAD
+	PAUSE [<db>]
+	RESUME [<db>]
+	DISABLE <db>
+	ENABLE <db>
+	RECONNECT [<db>]
+	KILL <db>
+	SUSPEND
+	SHUTDOWN
+
+
+```
+
 
 #### 关于poolsize的说明
 
