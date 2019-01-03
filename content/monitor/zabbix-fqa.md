@@ -6,7 +6,7 @@ draft: false
 #### 如何使用篇
 ---
 - 如何安装  
-``
+```
 https://www.zabbix.com/download?zabbix=4.0&os_distribution=centos&os_version=7&db=PostgreSQL
 ```
 

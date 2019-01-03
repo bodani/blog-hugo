@@ -251,6 +251,7 @@ server promoting
 
 8 [pg_rewind](https://www.cnblogs.com/zhangeamon/p/7602269.html)
 
-
+9 扩展阅读  
+ [性能](https://m.aliyun.com/yunqi/articles/73540)   
 
 
