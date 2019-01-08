@@ -10,9 +10,41 @@ draft: false
 
 ##### 管理
 ```
-listen_addresses = "*"
-superuser_reserved_connections = 0
-port = 5432
+listen_addresses = "*"             # 连接访问控制，哪些ip可以访问， * 全部。 结合pg_hba.conf , iptables设置。
+superuser_reserved_connections = 3 # 预留给超级管理员的连接数。
+port = 5432                        # 默认访问端口
+```
+
+#### 成本因子 
+
+```
+# - Planner Cost Constants -
+#seq_page_cost = 1.0                    # measured on an arbitrary scale 顺序扫描
+random_page_cost = 1.1                  # same scale as above            随机扫描。HDD 4 ;SSD 1.1; 由于SSD没有磁盘寻道时间，顺序扫描和随机扫描的差距不是那么大。比例设置的相近即可。 
+#cpu_tuple_cost = 0.01                  # same scale as above
+#cpu_index_tuple_cost = 0.005           # same scale as above
+#cpu_operator_cost = 0.0025             # same scale as above
+#parallel_tuple_cost = 0.1              # same scale as above
+#parallel_setup_cost = 1000.0   # same scale as above
+#min_parallel_table_scan_size = 8MB
+#min_parallel_index_scan_size = 512kB
+effective_cache_size = 666666          # 系统总内存减去数据库shared_buffer减去其他应用占有的内存。 理解为数据可加载到内存的大小。
+```
+
+#### TCP 连接
+
+Linux 中tcp默认连接超时时间2小时,如果2个小时没有数据包则认为该连接为空闲状态，系统自动关闭。
+
+```
+# - TCP Keepalives -
+# see "man 7 tcp" for details
+
+#tcp_keepalives_idle = 60                # TCP_KEEPIDLE, in seconds;
+                                        # 0 selects the system default
+#tcp_keepalives_interval = 10            # TCP_KEEPINTVL, in seconds;  发个心跳数据包，告诉系统我没有空闲
+                                        # 0 selects the system default
+#tcp_keepalives_count = 6               # TCP_KEEPCNT;
+                                        # 0 selects the system default
 ```
 
 #### 修改
