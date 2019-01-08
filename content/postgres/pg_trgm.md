@@ -189,3 +189,18 @@ explain analyze verbose select * from t_car where car_id like '%辽Be6%df%';
 
 ```
 
+#### 扩展阅读
+
+[rum](https://github.com/postgrespro/rum?spm=a2c4e.11153940.blogcont111793.51.50575bf0HjdIsl) 是一个索引插件，由Postgrespro开源，适合全文检索，属于GIN的增强版本。   
+
+增强包括：   
+
+1、在RUM索引中，存储了lexem的位置信息，所以在计算ranking时，不需要回表查询（而GIN需要回表查询）。    
+ 
+2、RUM支持phrase搜索，而GIN无法支持。    
+
+3、在一个RUM索引中，允许用户在posting tree中存储除ctid（行号）以外的字段VALUE，例如时间戳。    
+
+如果这种需求多了还是考虑[elasticsearch](../es)吧
+
+
