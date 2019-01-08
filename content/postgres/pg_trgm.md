@@ -203,4 +203,4 @@ explain analyze verbose select * from t_car where car_id like '%辽Be6%df%';
 
 如果这种需求多了还是考虑[elasticsearch](../es)吧
 
-
+[zombodb](https://github.com/zombodb/zombodb)是PostgreSQL与ElasticSearch结合的一个索引接口，可以直接读写ES。

@@ -16,6 +16,10 @@ draft: false
 
 详细介绍 https://leopard.in.ua/2015/04/13/postgresql-indexes   
 
+还可以创建部分索引和表达式索引
+
+通过[pageinspect](https://www.postgresql.org/docs/10/pageinspect.html)debug索引
+
 #### GiST和GIN索引类型
 
 有两种类型的索引可以用于加快全文搜索。注意全文检索不一定非要使用索引。 但是在规则基础上搜索列的情况下，索引往往是可取的。
