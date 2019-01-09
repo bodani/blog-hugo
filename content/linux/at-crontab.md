@@ -37,7 +37,7 @@ systemctl start atd
 
 #### 例子说明
 
-新建一个定期任务
+新建一个定期任务 ctrl + d 退出
 ```
 # at -t 201901091123.00
 at> touch /home/11.23.at     
