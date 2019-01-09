@@ -24,9 +24,46 @@ select pg_size_pretty(pg_database_size('postgres'));
  14 MB
 (1 row)
 
+or
+
+\l+
+
 ```
 
-命令 \l+
+- 数据库表或单条索引占用空间
+
+```
+select pg_size_pretty(pg_relation_size('t_name'));
+ pg_size_pretty 
+----------------
+ 24 kB
+(1 行记录)
+
+or
+
+\d+
+```
+
+- 表中所有索引占有的空间
+
+```
+select pg_size_pretty(pg_indexes_size('t_name'));
+ pg_size_pretty 
+----------------
+ 280 kB
+(1 行记录)
+```
+
+- 查看一条数据在数据库占用的空间
+
+```
+select pg_column_size('Let us go !!!');
+ pg_column_size 
+----------------
+             14
+(1 行记录)
+
+```
 
 - 其他
 
