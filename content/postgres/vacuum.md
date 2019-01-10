@@ -7,7 +7,7 @@ draft: false
 #### 介绍
 
 数据库总是不断地在执行删除，更新等操作。良好的空间管理非常重要，能够对性能带来大幅提高。在postgresql中用于维护数据库磁盘空间的工具是VACUUM，其重要的作用是删除那些已经标示为删除的数据并释放空间。
-postgresql中执行deletei,update操作后，表中的记录只是被标示为删除状态，并没有释放空间，在以后的update或insert操作中该部分的空间是不能够被重用的。经过vacuum清理后，空间才能得到释放。
+postgresql中执行delete,update操作后，表中的记录只是被标示为删除状态，并没有释放空间，在以后的update或insert操作中该部分的空间是不能够被重用的。经过vacuum清理后，空间才能得到释放。
 
 
 #### 意义
@@ -156,7 +156,7 @@ vacuum analyze时，会更新统计信息，让PG的planner能够算出更准确
 
 #### vacuum参数介绍
 
-##### autovacuum有好多参数，用来控制其行为，大致有以下几个：
+##### autovacuum 触发条件，大致有以下几个：
 ```
 autovacuum：默认为on，表示是否开起autovacuum。默认开起。特别的，当需要冻结xid时，尽管此值为off，PG也会进行vacuum。
 autovacuum_naptime：下一次vacuum的时间，默认1min。 这个naptime会被vacuum launcher分配到每个DB上。autovacuum_naptime/num of db。
@@ -180,3 +180,7 @@ vacuum_cost_limit：当超过此值时，vacuum会sleep。默认值为200。
 ```
 
 [参见](http://blog.itpub.net/30088583/viewspace-1592066/)
+
+#### 扩展阅读  
+
+Autovacuum 基础调优 [中文](https://mp.weixin.qq.com/s/ekKuDMEkQsZX5vx0VG0_1A) [英文](https://blog.2ndquadrant.com/autovacuum-tuning-basics/#PostgreSQL%20Performance%20Tuning)
