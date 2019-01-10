@@ -69,6 +69,29 @@ random_page_cost = 1.1                  # same scale as above
 effective_cache_size = 666666
 ```
 
+#### 影响执行计划的参数设置
+```
+开关
+enable_bitmapscan
+enable_gathermerge
+enable_hashagg
+enable_hashjoin
+enable_indexonlyscan
+enable_indexscan
+enable_material
+enable_mergejoin
+enable_nestloop
+enable_seqscan
+enable_sort
+enable_tidscan
+
+关联
+from_collapse_limit 
+join_collapse_limit
+geqo_threshold
+```
+
+
 #### 在日志中记录explain信息
 
 通过auto_explain 扩展可在日志中记录explain信息

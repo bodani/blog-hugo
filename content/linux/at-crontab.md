@@ -70,6 +70,8 @@ job 10 at Wed Jan  9 11:24:00 2019
 
 ##### 扩展内容
 
+centos 7
+
 ```
 # ll -a /var/spool/at/
 总用量 12
@@ -84,3 +86,31 @@ drwx------  2 root root    6 1月   9 10:23 spool
 .SEQ 序列
 
 a0000901896c6b 任务内容，at -c id 输出的内容
+
+可以直接执行对应的脚本文件进行测试
+
+```
+sh a0000901896c6b
+```
+
+ubuntu 
+
+```
+/var/spool/cron/atjobs
+```
+
+##### 执行日志
+
+```
+cat /var/log/messages | grep atd
+Jan  9 10:00:36 kvm74 atd[27978]: Starting job 1 (a0000101896c10) for user 'root' (0)
+Jan  9 10:04:00 kvm74 atd[29511]: Starting job 2 (a0000201896c1c) for user 'root' (0)
+Jan  9 10:07:00 kvm74 atd[31902]: Starting job 4 (a0000401896c1f) for user 'root' (0)
+Jan  9 10:18:28 kvm74 atd[6985]: Starting job 5 (a000050181670b) for user 'root' (0)
+Jan  9 10:20:28 kvm74 atd[8173]: Starting job 6 (a000060181670e) for user 'root' (0)
+Jan  9 10:21:33 kvm74 atd[9617]: Starting job 7 (a000070181670f) for user 'root' (0)
+Jan  9 10:23:00 kvm74 atd[10016]: Starting job 8 (a0000801896c2f) for user 'root' (0)
+Jan  9 11:23:00 kvm74 atd[13963]: Starting job 9 (a0000901896c6b) for user 'root' (0)
+Jan  9 11:24:00 kvm74 atd[14248]: Starting job 10 (a0000a01896c6c) for user 'root' (0)
+Jan 10 08:57:00 kvm74 atd[13667]: Starting job 11 (a0000b01897179) for user 'root' (0)
+```
