@@ -91,6 +91,17 @@ join_collapse_limit
 geqo_threshold
 ```
 
+设置
+
+- session set enable_bitmapscan = default;
+- 全局 postgresql.conf
+- 用户级 alter user postgres set enable_bitmapscan = off;
+- 数据库级别 alter database postgres set enable_bitmapscan = off;
+
+查看 
+
+- session show enable_bitmapscan;
+- 用户级别 select * from pg_user;
 
 #### 在日志中记录explain信息
 

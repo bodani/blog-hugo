@@ -114,3 +114,18 @@ Jan  9 11:23:00 kvm74 atd[13963]: Starting job 9 (a0000901896c6b) for user 'root
 Jan  9 11:24:00 kvm74 atd[14248]: Starting job 10 (a0000a01896c6c) for user 'root' (0)
 Jan 10 08:57:00 kvm74 atd[13667]: Starting job 11 (a0000b01897179) for user 'root' (0)
 ```
+
+#### 错误总汇
+
+```
+cat /var/log/syslog* | grep atd
+Jan 11 08:29:00 atd[14999]: Exec failed for mail command: No such file or directory
+```
+https://ubuntuforums.org/showthread.php?t=1777706
+
+上面的问题在系统环境中没有出现，在执行docker时出现
+
+如执行命令为
+```
+docker exec -it docker-name date
+```
