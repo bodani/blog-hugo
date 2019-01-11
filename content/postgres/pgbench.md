@@ -104,5 +104,29 @@ script statistics:
 
 #### 自定义测试
 
+示例说明
+```
+pgbench -M prepared -n -r -c 32 -j 32 -P 5 -C -f ./test.sql -U postgres pgbenchdb -T 300
+```
+
+注意事项: pgbench与pg不要在同一台机器上
+
 各种场景压力测试
 https://github.com/digoal/blog/blob/362b84417ca8b7aaf1add31fe7689c347642bb9a/201706/20170601_02.md
+
+#### 遇见问题
+
+测试 -C 参数时 使用的pgbouncer作为连接池出现如下错误
+```
+Cannot assign requested address
+```
+原因客户端频繁的连服务器，由于每次连接都在很短的时间内结束，导致很多的TIME_WAIT，以至于用光了可用的端口号，所以新的连接没办法绑定端口，即“Cannot assign requested address”。  
+是客户端的问题不是服务器端的问题。通过netstat，的确看到很多TIME_WAIT状态的连接。 
+
+client端频繁建立连接，而端口释放较慢，导致建立新连接时无可用端口。
+
+解决方法：
+
+执行命令修改如下2个内核参数 （需要root权限）  
+sysctl -w net.ipv4.tcp_timestamps=1  开启对于TCP时间戳的支持,若该项设置为0，则下面一项设置不起作用   
+sysctl -w net.ipv4.tcp_tw_recycle=1  表示开启TCP连接中TIME-WAIT sockets的快速回收   

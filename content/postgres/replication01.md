@@ -33,7 +33,6 @@ hot_standby = on # 正常在从库配置，如果在主库配置完毕，因为�
 2 从主库复制数据
 ```
 pg_basebackup -h 10.2.0.14 -U postgres -F p -P -R -D /var/lib/pgsql/10/data/ -l postgresback20181219
-
 ```
 pg_basebackup支持两种全量备份的方式，
 
