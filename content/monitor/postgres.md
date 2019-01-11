@@ -12,3 +12,8 @@ PG的很多性能数据可以通过查询pg_stat_或pg_statio_开头的系统表
 
 PG专用的监控工具   
 pgsnap, pgstatspack,pgwatch,pg_statsinfo等。这些工具主要做PG的性能分析，状态查看的。不能做故障通知。    
+
+
+https://github.com/cybertec-postgresql/pgwatch2
+
+https://github.com/wrouesnel/postgres_exporter
