@@ -18,4 +18,13 @@ draft: false
 JAVA_OPTS="-Djava.util.logging.config.file=/var/jenkins_home/log.properties -Duser.timezone=Asia/Shanghai  -Xms4096m -Xmx4096m 
 ```
 
+问题过几天后有出现
+
+```
+/var/log/message 
+kernel crash after "unregister_netdevice: waiting for lo to become free. Usage count = 
+```
+
+换台build机
+
 问题解决
