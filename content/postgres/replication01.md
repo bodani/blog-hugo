@@ -251,6 +251,9 @@ server promoting
 8 [pg_rewind](https://www.cnblogs.com/zhangeamon/p/7602269.html)
 
 9 扩展阅读  
- [性能](https://m.aliyun.com/yunqi/articles/73540)   
+ 
+ - PostgreSQL 10加入了quorum based的同步复制功能，用户可以配置若干standby节点，并配置需要将WAL发送多少份才返回给客户端事务结束的消息。
+
+ - [性能](https://m.aliyun.com/yunqi/articles/73540)   
 
 
