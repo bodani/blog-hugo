@@ -75,6 +75,10 @@ mdadm /dev/md1 -a /dev/sdb7
 1 新增加的硬盘需要与原硬盘大小一致    
 2 如果原有阵列缺少工作磁盘（如raid1只有一块在工作，raid5只有2块在工作），这时新增加的磁盘直接变为工作磁盘，如果原有阵列工作正常，则新增加的磁盘为热备磁盘。 
 ```
+##### 重新添加
+```
+mdadm /dev/md1 --re-add /dev/sdb7
+```
 ##### 停止阵列  
 ```
 选项：-S = --stop
@@ -88,3 +92,53 @@ mdadm -R  /dev/md1
 
 [详情](https://www.cnblogs.com/zhangeamon/p/6866429.html)
 
+
+
+```
+For Manage mode:
+       -t, --test
+              Unless a more serious error occurred, mdadm will exit with a status of 2 if no changes were made to the array and 0 if at least one change was made.  This can be useful when an indirect specifier such as missing, detached or faulty  is  used  in
+              requesting an operation on the array.  --test will report failure if these specifiers didn't find any match.
+
+       -a, --add
+              hot-add  listed devices.  If a device appears to have recently been part of the array (possibly it failed or was removed) the device is re-added as described in the next point.  If that fails or the device was never part of the array, the device
+              is added as a hot-spare.  If the array is degraded, it will immediately start to rebuild data onto that spare.
+
+              Note that this and the following options are only meaningful on array with redundancy.  They don't apply to RAID0 or Linear.
+
+       --re-add
+              re-add a device that was previously removed from an array.  If the metadata on the device reports that it is a member of the array, and the slot that it used is still vacant, then the device will be added back to the array in the same  position.
+              This  will normally cause the data for that device to be recovered.  However based on the event count on the device, the recovery may only require sections that are flagged a write-intent bitmap to be recovered or may not require any recovery at
+              all.
+
+              When used on an array that has no metadata (i.e. it was built with --build) it will be assumed that bitmap-based recovery is enough to make the device fully consistent with the array.
+
+              When used with v1.x metadata, --re-add can be accompanied by --update=devicesize, --update=bbl, or --update=no-bbl.  See the description of these option when used in Assemble mode for an explanation of their use.
+
+              If the device name given is missing then mdadm will try to find any device that looks like it should be part of the array but isn't and will try to re-add all such devices.
+
+              If the device name given is faulty then mdadm will find all devices in the array that are marked faulty, remove them and attempt to immediately re-add them.  This can be useful if you are certain that the reason for failure has been resolved.
+
+       --add-spare
+              Add a device as a spare.  This is similar to --add except that it does not attempt --re-add first.  The device will be added as a spare even if it looks like it could be an recent member of the array.
+
+       -r, --remove
+              remove listed devices.  They must not be active.  i.e. they should be failed or spare devices.
+
+              As well as the name of a device file (e.g.  /dev/sda1) the words failed, detached and names like set-A can be given to --remove.  The first causes all failed device to be removed.  The second causes any device which is no longer connected to the
+              system (i.e an 'open' returns ENXIO) to be removed.  The third will remove a set as describe below under --fail.
+
+       -f, --fail
+              Mark  listed  devices  as  faulty.   As  well as the name of a device file, the word detached or a set name like set-A can be given.  The former will cause any device that has been detached from the system to be marked as failed.  It can then be
+              removed.
+
+              For RAID10 arrays where the number of copies evenly divides the number of devices, the devices can be conceptually divided into sets where each set contains a single complete copy of the data on the array.  Sometimes a RAID10 array will be  con‐
+              figured so that these sets are on separate controllers.  In this case all the devices in one set can be failed by giving a name like set-A or set-B to --fail.  The appropriate set names are reported by --detail.
+
+       --set-faulty
+              same as --fail.
+
+       --replace
+              Mark  listed devices as requiring replacement.  As soon as a spare is available, it will be rebuilt and will replace the marked device.  This is similar to marking a device as faulty, but the device remains in service during the recovery process
+              to increase resilience against multiple failures.  When the replacement process finishes, the replaced device will be marked as faulty.
+```

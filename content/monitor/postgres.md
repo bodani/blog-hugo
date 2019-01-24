@@ -14,7 +14,7 @@ zabbix
 
 http://pg-monz.github.io/pg_monz/index-en.html
 
-[1](monitor/zabbix-postgres-fqa/)
+[zabbix-extensions](monitor/zabbix-postgres-fqa/)
 
 PG专用的监控工具   
 pgsnap, pgstatspack,pgwatch,pg_statsinfo等。这些工具主要做PG的性能分析，状态查看的。不能做故障通知。    

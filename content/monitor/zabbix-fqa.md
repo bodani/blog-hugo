@@ -6,11 +6,50 @@ draft: false
 #### 如何使用篇
 ---
 - 如何安装  
-```
-https://www.zabbix.com/download?zabbix=4.0&os_distribution=centos&os_version=7&db=PostgreSQL
-```
+
+[安装文档](https://www.zabbix.com/download?zabbix=4.0&os_distribution=centos&os_version=7&db=PostgreSQL)
+
+架构模型为服务端、被监控端。   
+被监控端agent安装在需要被监控的主机上，负责收集被监控主机相关状态的信息指标如内存，cup，网络等。  
+服务端负责汇总所有agent的信息，如存储，处理，展现。数据存放在指定的数据库中如mysql pg。
+
+需安装软件说明
+
+zabbix-server-pgsql 服务端   
+zabbix-web-pgsql    服务端界面  
+zabbix-agent        被监控端，与被监控端安装在一起
 
 
+- 常用模块说明
+
+``` 
+Administration
+   Users 新建属于自己的用户，禁用guest，慎用admin
+      user 用户名 密码
+      media 接收信息
+      premissions 权限
+
+   Media type 媒体类型，用于配置发送报警媒介， Email或自定义脚本
+     Email 配置系统发送邮件 163为例 
+            Name email
+            Type Email
+            SMTP server smtp.163.com
+SMTP server port 25
+     SMTP helo   smtp.163.com
+     SMTP email  注册的邮箱地址
+       Username  注册的用户名
+       password  密码
+
+Configuration 
+   Hosts 管理被监控的主机
+     host 配置被监控的主机
+     Templates 监控的内容模版
+   Actions 触发报警时的动作，一般给管理员方法信息
+   Discovery 自动发现
+
+Monitoring
+
+```  
 
 #### FQA
 
