@@ -142,3 +142,19 @@ For Manage mode:
               Mark  listed devices as requiring replacement.  As soon as a spare is available, it will be rebuilt and will replace the marked device.  This is similar to marking a device as faulty, but the device remains in service during the recovery process
               to increase resilience against multiple failures.  When the replacement process finishes, the replaced device will be marked as faulty.
 ```
+
+##### 查看raid组装信息
+
+```
+cat /proc/mdstat 
+Personalities : [raid10] 
+md127 : active raid10 sdc[1] sdd[2] sda[3] sdb[0]
+      999950336 blocks super 1.2 512K chunks 2 near-copies [4/4] [UUUU]
+      bitmap: 1/8 pages [4KB], 65536KB chunk
+
+unused devices: <none>
+```
+[UUUU] 启动正常U up?   
+S spare   
+R rebuiding  
+
