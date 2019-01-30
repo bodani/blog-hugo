@@ -1,5 +1,5 @@
 ---
-title: "EXTENDS pg_stat_statements"
+title: "pg_stat_statements 数据库统计信息"
 date: 2018-11-29T11:08:27+08:00
 draft: false
 ---
