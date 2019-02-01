@@ -32,6 +32,8 @@ Device:         rrqm/s   wrqm/s     r/s     w/s    rMB/s    wMB/s avgrq-sz avgqu
 sda               0.00     0.05    0.06    0.11     0.00     0.00    53.87     0.00    1.35    0.60    1.78   0.23   0.00
 sdb               0.00     0.02    0.08    6.65     0.00     0.07    21.00     0.00    0.49    0.42    0.50   0.26   0.17
 ```
+[详细说明](https://blog.csdn.net/shaochenshuo/article/details/76212566)
+
 哪些进程占用
 ```
 iotop -oP
@@ -117,3 +119,5 @@ yum install vnstat
 
 ##### 扩展阅读
 https://github.com/brendangregg/perf-tools
+
+http://linuxperf.com/?page_id=2

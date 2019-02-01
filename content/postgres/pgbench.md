@@ -63,7 +63,7 @@ pgbenchdb=# \d+
 ##### 开始测试
 
 ```
-pgbench -M prepared -r -n -c 100 - 100 -T 100 -U postgres   pgbenchdb 
+pgbench -M prepared -r -n -c 100 -j 100 -T 100 -U postgres   pgbenchdb 
 transaction type: <builtin: TPC-B (sort of)>
 scaling factor: 10
 query mode: prepared

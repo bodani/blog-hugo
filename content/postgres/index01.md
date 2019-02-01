@@ -20,6 +20,20 @@ draft: false
 
 通过[pageinspect](https://www.postgresql.org/docs/10/pageinspect.html)debug索引
 
+查看数据库有哪些索引类型
+```
+select * from pg_am;
+ amname |  amhandler  | amtype 
+--------+-------------+--------
+ btree  | bthandler   | i
+ hash   | hashhandler | i
+ gist   | gisthandler | i
+ gin    | ginhandler  | i
+ spgist | spghandler  | i
+ brin   | brinhandler | i
+(6 行记录)
+
+```
 #### GiST和GIN索引类型
 
 有两种类型的索引可以用于加快全文搜索。注意全文检索不一定非要使用索引。 但是在规则基础上搜索列的情况下，索引往往是可取的。
