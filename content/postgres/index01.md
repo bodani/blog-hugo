@@ -4,6 +4,25 @@ date: 2018-11-19T09:00:44+08:00
 draft: false
 ---
 
+#### 创建索引
+
+```
+\h create index
+命令：       CREATE INDEX
+描述：       建立新的索引
+语法：
+CREATE [ UNIQUE ] INDEX [ CONCURRENTLY ] [ [ IF NOT EXISTS ] 名称 ] ON 表名 [ USING 方法 ]
+    ( { 列名称 | ( 表达式 ) } [ COLLATE 校对规则 ] [ 操作符类型的名称 ] [ ASC | DESC ] [ NULLS { FIRST | LAST } ] [, ...] )
+    [ WITH ( 存储参数 = 值 [, ... ] ) ]
+    [ TABLESPACE 表空间的名称 ]
+    [ WHERE 述词 ]
+```
+
+1. 增加maintenance_work_mem,有利于提高创建索引的效率
+2. 创建索引时会有一个share锁锁表，确保表不能有任何更改。在生产系统中如果在一个大表中阻塞时间过长会有问题，解决方法， create index CONCURRENTLY 。  
+   创建的时间会增加一倍，不保证会创建成功。
+
+
 #### 数据库索引类型概览
 
 - b-tree适合所有的数据类型，支持排序，支持大于、小于、等于、大于或等于、小于或等于的搜索。
