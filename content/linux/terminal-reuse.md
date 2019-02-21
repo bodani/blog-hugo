@@ -12,10 +12,50 @@ draft: false
 
 - tmux
 - gux
-- screem
+- screen
 
 
 #### 详解 [tmux](https://www.cnblogs.com/wangqiguo/p/8905081.html)
+
+
+
+#### screen 常用方法
+
+###### 安装 
+
+```
+yum install screen
+```
+###### 创建任务 cmd01
+```
+screen -S cmd01
+
+进入命令界面 ， 输入长任务命令
+
+```
+
+###### 退出方式 
+
+```
+ctrl+A ctrl+d
+
+回到主命令界面，任务继续执行
+
+ctrl+C，ctrl+d
+
+回到主命令界面，任务被强制结束
+```
+
+###### 查看任务
+```
+screen -ls
+```
+
+###### 重新进入任务
+
+```
+screen -r cmd01
+```
 
 
 

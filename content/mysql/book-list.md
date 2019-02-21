@@ -38,3 +38,9 @@ draft: false
 《InnoDB - A journey to the core》Jeremy Cole
 
 
+学习笔记文档:
+
+ https://notes.diguage.com/mysql/
+
+
+
