@@ -35,3 +35,8 @@ chmod
 chown 
 ```
 
+修改软连接的所用者 使用 -h 参数 
+
+```
+chown -h postgres:postgres data/
+```
