@@ -42,6 +42,11 @@ pg_basebackup支持两种全量备份的方式，
 
 pg_basebackup对于全量备份的数据和日志，提供了串行备份和并行备份的方式。fetch模式也就是串行备份需要保证在备份数据的过程中，备份开始时刻的日志需要一直保存下来， 也就说pg的wal_keep_segments需要足够大去保存日志文件，如果备份数据期间，日志开始时刻的日志已经被移除，那么备份就会失败。而stream模式，也就是并行备份过程中wal_max_sender必须保证不小于2。 而stream模式不支持，将数据和日志以流的方式输出到标准输出
 
+限速，在生产系统中防止对正常业务的影响
+```
+-r, --max-rate=RATE    maximum transfer rate to transfer data directory
+                         (in kB/s, or use suffix "k" or "M")
+```
 注意新拷贝数据的权限
 ```
 chown postgres:postgres data/ -R

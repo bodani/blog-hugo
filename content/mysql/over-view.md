@@ -17,7 +17,7 @@ draft: false
 show (global) variables;
 
 查看某个指定的配置参数
-show variables like '%max_heap_table_size%';                                                                                                                                                                                                  
+show variables like '%max_heap_table_size%';  
 +---------------------+----------+   
 | Variable_name       | Value    |
 +---------------------+----------+
