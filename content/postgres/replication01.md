@@ -103,6 +103,13 @@ primary_conninfo = 'user=postgres host=10.2.0.14 port=5432 sslmode=disable sslco
 systemctl start postgresql-10.service
 systemctl enable postgresql-10.service
 ```
+```
+#recovery.conf
+
+recovery_min_apply_delay = 0   #延迟多少分钟应用
+trigger_file = '/home/postgres.trigger' #从库变主库时应用
+```
+
 
 4 验证
 
@@ -129,7 +136,7 @@ postgres=#\l
 状态查看
 
 ```
-主库
+主库 查看同步状态
 postgres=# select * from pg_stat_replication ;
 -[ RECORD 1 ]----+------------------------------
 pid              | 21092
@@ -152,7 +159,7 @@ replay_lag       | 00:44:13.274217
 sync_priority    | 0
 sync_state       | async
 
-从库
+从库 查看wal receiver的统计信息
 select * from pg_stat_wal_receiver ;
 -[ RECORD 1 ]---------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 pid                   | 9329
@@ -167,7 +174,29 @@ latest_end_lsn        | A/D09F1758
 latest_end_time       | 2018-12-19 15:25:40.694523+08
 slot_name             | node_a_slot
 conninfo              | user=postgres passfile=/root/.pgpass dbname=replication host=10.1.0.14 port=5432 fallback_application_name=walreceiver sslmode=prefer sslcompression=1 krbsrvname=postgres target_session_attrs=any
+
+-- 暂停WAL的应用，例如要做一些排错时  
+select pg_wal_replay_pause();  
+-[ RECORD 1 ]-------+-  
+pg_wal_replay_pause |   
+  
+-- 查看状态  
+select pg_is_wal_replay_paused();  
+-[ RECORD 1 ]-----------+--  
+pg_is_wal_replay_paused | t  
+ 
+-- 恢复wal 
+select pg_wal_replay_resume();  
+-[ RECORD 1 ]--------+-  
+pg_wal_replay_resume |   
+  
+-- 查看状态
+select pg_is_wal_replay_paused();  
+-[ RECORD 1 ]-----------+--  
+pg_is_wal_replay_paused | f  
+
 ```
+
 
 5 wal 日志保持时效
 
