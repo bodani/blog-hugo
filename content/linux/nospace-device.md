@@ -6,11 +6,10 @@ draft: false
 
 #### 问题描述
 
-Linux 系统中出现磁盘空间不足错误： 
+ Linux 系统中出现磁盘空间不足错误： 
 
-```
-No space left on device …
-```
+- No space left on device …
+- 在linux环境下，用vi打开某文件时，提示Write error in swap file
 
 #### 原因分析
 
@@ -126,3 +125,6 @@ ps -U 105 查看是哪个用户
 ```
 
 重启对应的服务 
+
+
+

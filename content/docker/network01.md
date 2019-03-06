@@ -215,3 +215,82 @@ docker0		8000.024262081be1	no		veth16209e7
 - joined 共享一个网络栈，共享网卡和配置信息，joined 容器之间可以通过 127.0.0.1 直接通信. --network=container:name
 
 
+#### 实际应用
+---
+
+##### 背景介绍
+
+在使用过程中应用docker-compose 来管理本地的docker, docker-compose默认为每个docker-compose应用创建自己的网络.
+
+```
+ip r
+default via 10.1.7.50 dev eth0 proto static metric 100 
+10.1.0.0/16 dev eth0 proto kernel scope link src 10.1.88.74 metric 100 
+172.17.0.0/16 dev docker0 proto kernel scope link src 172.17.0.1 
+172.19.0.0/16 dev br-130b4184e72e proto kernel scope link src 172.19.0.1 
+172.21.0.0/16 dev br-f277f9a2b577 proto kernel scope link src 172.21.0.1 
+172.22.0.0/16 dev br-24d29dd54a64 proto kernel scope link src 172.22.0.1 
+172.23.0.0/16 dev br-caf35e9eae30 proto kernel scope link src 172.23.0.1 
+192.168.0.0/16
+```
+
+很容易与实体机的网络环境发生冲突
+
+需要使用docker network 来统一管理分配
+
+##### 创建网桥
+
+```
+# 创建网络
+docker  network create --subnet 172.19.0.0/16 --gateway 172.19.0.1 service;
+docker  network create --subnet 172.18.0.0/16 --gateway 172.18.0.1 web;
+
+# 查看网络
+docker network ls
+NETWORK ID          NAME                DRIVER              SCOPE
+201b9332eb9a        bridge              bridge              local
+ac97b8f65d31        host                host                local
+7ca81ce4f054        none                null                local
+130b4184e72e        service             bridge              local
+24d29dd54a64        web                 bridge              local
+
+# 具体信息
+
+docker inspect service
+docker inspect web
+
+```
+
+#### 在docker-compose 中应用网络
+
+
+```
+# 配置网络
+cat docker-compose.yaml 
+
+version: '2'
+services:
+  web:
+   image: busybox
+   command: sleep 3600
+   ports:
+     - "8000:8000"
+   container_name: web
+networks:
+  default:
+    external:
+      name: web 
+
+# 启动容器
+
+docker-compose up -d
+
+# 查看容器网络
+
+docker-compose ps  
+
+
+docker exec -it 容器ID ip a
+```
+
+
