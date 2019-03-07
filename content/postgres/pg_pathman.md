@@ -35,6 +35,12 @@ Default partition Partition improvements
 
 https://www.jianshu.com/p/1cba77d18694
 
+#### 注意事项
+
+需要将pg_pathman放在后面注册，如pg_stat_statements。
+```
+shared_preload_libraries = 'pg_stat_statements,pg_pathman'
+```
 #### 参考
 
 https://github.com/postgrespro/pg_pathman
