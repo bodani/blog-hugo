@@ -29,6 +29,12 @@ Default partition Partition improvements
 不足:   
 在主表添加权限，索引，trigger等无法继承 分区表不可以作为其他表的外键主表   
 
+
+#### 分区表数量对插入数据的影响
+
+
+https://www.jianshu.com/p/1cba77d18694
+
 #### 参考
 
 https://github.com/postgrespro/pg_pathman
