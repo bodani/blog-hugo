@@ -6,7 +6,9 @@ draft: false
 
 #### postgres 数据库参数该如何设置
 
-##### [性能参数](https://github.com/le0pard/pgtune) [日志参数](postgres/log/)  
+####  性能参数[pgtune](https://github.com/le0pard/pgtune) [pgconfig](https://www.pgconfig.org/)  
+
+####  [日志参数](postgres/log/)  
 
 ##### 管理
 ```
