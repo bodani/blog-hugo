@@ -11,6 +11,7 @@ draft: false
 - htop
 - atop
 - vmstat -wt 1
+- dstat
 
 #### 内存篇
 ---
