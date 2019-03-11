@@ -6,4 +6,4 @@ draft: false
 
 https://www.cnblogs.com/zhangeamon/p/9772118.html
 
-使用维护手册](./book/patroni使用维护手册.pdf)
+[使用维护手册](./book/patroni使用维护手册.pdf)
