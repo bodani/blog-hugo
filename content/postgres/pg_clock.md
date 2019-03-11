@@ -17,6 +17,10 @@ select pg_blocking_pids(pid);
  pg_blocking_pids 
 ------------------
  {}
+
+终止进程
+
+select pg_cancel_backend(pid);
 ```
 
 
