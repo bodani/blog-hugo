@@ -20,7 +20,9 @@ select pg_blocking_pids(pid);
 
 终止进程
 
-select pg_cancel_backend(pid);
+select pg_cancel_backend(pid);  # select 
+
+select pg_terminate_backend(pid); # update insert delete 
 ```
 
 
