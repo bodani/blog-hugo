@@ -26,6 +26,7 @@ draft: false
 ##### 应用
 
 预防wal写放大
+
 http://www.postgres.cn/news/viewone/1/273
 
 更多细节说明
