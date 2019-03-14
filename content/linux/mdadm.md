@@ -158,3 +158,14 @@ unused devices: <none>
 S spare   
 R rebuiding  
 
+##### state 状态 active 和 clean 的区别
+
+clean - no pending writes, but otherwise active.
+    When written to inactive array, starts without resync
+    If a write request arrives then
+      if metadata is known, mark 'dirty' and switch to 'active'.
+      if not known, block and switch to write-pending
+    If written to an active array that has pending writes, then fails.
+active
+    fully active: IO and resync can be happening.
+    When written to inactive array, starts with resync
