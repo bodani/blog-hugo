@@ -70,6 +70,15 @@ archive_command = 'test ! -f /mnt/backup/%f && cp %p /mnt/backup/%f'
 
 如果遇到问题结合查看数据库日志
 
+查看归档状态
+
+```
+postgres=# select * from pg_stat_archiver ;  
+ archived_count |    last_archived_wal     |      last_archived_time       | failed_count |     last_failed_wal      |       last_failed_time        |         stats_reset          
+----------------+--------------------------+-------------------------------+--------------+--------------------------+-------------------------------+------------------------------
+             64 | 00000001000000C3000000A6 | 2019-03-15 09:23:46.991612+08 |           27 | 00000001000000C30000006B | 2019-03-14 14:05:04.921754+08 | 2019-03-07 10:08:45.58083+08
+```
+
 ##### 实际应用
 
 目标：按日期存放wal日志到/mnt/archdir/
@@ -130,5 +139,4 @@ cd /var/lib/pgsql/10/data/
 /usr/pgsql-10/bin/pg_controldata .
 #根据当前状态删除无用wal
 /usr/pgsql-10/bin/pg_archivecleanup -d pg_wal/ 00000001000000C30000006D
-
 ```
