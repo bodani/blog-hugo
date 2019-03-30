@@ -12,7 +12,12 @@ draft: false
 
 [pgmetrics](https://github.com/rapidloop/pgmetrics)
 
-[pgdash](https://pgdash.io/)
+[pgdash](https://pgdash.io/)  (收费)
+
+[pganalyze](https://pganalyze.com)
+
+[参考自己实现](https://yq.aliyun.com/live/927)
+
 
 状态查看
 [pgcenter](https://github.com/lesovsky/pgcenter)

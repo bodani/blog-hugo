@@ -76,3 +76,23 @@ ps -ef | grep zabbix | wc
 
 默认的触发值过低300 在实际的生产环境中改为1000
 
+- zabbix poller processes more than 75% busy
+
+原因: 当被监控的主机逐渐增多时。zabbix server 端如果采用被动模式时，server 主机的性能会遇到瓶颈。
+
+处理方法:  StartPollers 增加 
+
+vi zabbix_server.conf
+```
+### Option: StartPollers
+#       Number of pre-forked instances of pollers.
+#
+# Mandatory: no
+# Range: 0-1000
+# Default:
+# StartPollers=5
+StartPollers=20
+```
+
+注意观察数据库连接数
+
