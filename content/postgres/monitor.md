@@ -4,22 +4,24 @@ date: 2018-12-06T16:21:08+08:00
 draft: false
 ---
 
-[zabbix](https://github.com/cavaliercoder/libzbxpgsql)
+#### 各种监控方式
 
-[postgres_exporter](https://github.com/wrouesnel/postgres_exporter)
+- [zabbix](https://github.com/cavaliercoder/libzbxpgsql)  Monitor PostgreSQL with Zabbix
 
-[pgwatch2](https://github.com/cybertec-postgresql/pgwatch2)
+- [postgres_exporter](https://github.com/wrouesnel/postgres_exporter)  A PostgresSQL metric exporter for Prometheus
 
-[pgmetrics](https://github.com/rapidloop/pgmetrics)
+- [pgwatch2](https://github.com/cybertec-postgresql/pgwatch2) PostgreSQL metrics monitor/dashboard
 
-[pgdash](https://pgdash.io/)  (收费)
+- [pgmetrics](https://github.com/rapidloop/pgmetrics) Collect and display information and stats from a running PostgreSQL server 
 
-[pganalyze](https://pganalyze.com)
+- [pgdash](https://pgdash.io/)  (收费)
 
-[参考自己实现](https://yq.aliyun.com/live/927)
+- [pganalyze](https://pganalyze.com) PostgreSQL Performance Monitoring
+
+- [参考自己实现](https://yq.aliyun.com/live/927) 
 
 
-状态查看
+#### 状态查看
 [pgcenter](https://github.com/lesovsky/pgcenter)
 
 
