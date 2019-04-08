@@ -77,10 +77,10 @@ virt-install --virt-type kvm --name test01 --ram 1024 --vcpus 1 --cdrom=/home/kv
 
 .连接道virth
 
-virsh --connect qemu:///system 
-.virt-viewer 
-    连接本机的虚拟机:virt-viewer -c qemu:///system 虚拟机名 
-    连接远程的虚拟机:virt-viewer -c qemu+ssh://ip/system 虚拟机名
+virsh --connect qemu:///system  
+.virt-viewer  
+    连接本机的虚拟机:virt-viewer -c qemu:///system 虚拟机名   
+    连接远程的虚拟机:virt-viewer -c qemu+ssh://ip/system 虚拟机名  
 
  
 
@@ -129,11 +129,15 @@ Format specific information:
 ```
 
 2.关闭虚拟机
+```
 virsh shutdown test01
+```
 
 3.修改磁盘文件大小
+```
 qemu-img resize test01.qcow2 +10G
 Image resized.
+```
 
 4.查看 结果
 
