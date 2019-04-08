@@ -1,10 +1,10 @@
 ---
-title: "免密码登录"
+title: "ssh 免密码登&跳板机配置"
 date: 2018-10-18T14:46:58+08:00
 draft: false
 ---
 
-### Linux 免密码登录实现
+#### Linux 免密码登录实现
 
 1.说明
 
@@ -78,3 +78,56 @@ ssh-dss AAAAB3NzaC1kc3MAAACBAOpJ6cmiyh504HrttEpLbECs8GbNNZAKbKRNvAhZYGYkUNTFM4/G
 ```
 
 成功!!!
+
+#### ssh 跳板机
+
+ssh proxycommand
+
+1. 说明 ：
+
+- 客户端 C
+- 跳板机 J
+- 服务器 S
+
+传统方式 C 通过先登陆J ,再登陆S
+跳板机方式  C 可以直接登陆S，不需要先登陆J
+
+2. 配置
+
+- C 的公钥拷贝到S
+- 配置C 的用户下的.ssh/config文件
+
+```
+Host 10.1.88.72
+    User root
+    Port 22
+    ForwardAgent yes
+    ProxyCommand ssh -p 22 root@10.1.88.1 -W %h:%p 2> /dev/null
+```  
+10.1.88.72 S 服务器  
+10.1.88.1  J 跳板机 
+
+
+登陆方式 
+
+```
+ssh root@10.1.88.72
+```
+
+3. 通配符方式
+
+当存在更过的服务器，或新增服务器时，如果每次都修改配置文件难免显得不够方便，太low。 由于无论是先有的服务器还是新增的服务器ip应该是在同一个网段或有规律。这样更方便生成通配符来匹配。
+
+```
+host 10.1.88.*
+    User root
+    Port 22
+    ForwardAgent yes
+    ProxyCommand ssh -p 22 root@10.1.88.1 -W %h:%p 2> /dev/null
+```
+
+登陆方式
+
+```
+ssh root@10.1.88.72
+```
