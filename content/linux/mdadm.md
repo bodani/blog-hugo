@@ -169,3 +169,6 @@ clean - no pending writes, but otherwise active.
 active
     fully active: IO and resync can be happening.
     When written to inactive array, starts with resync
+
+
+[更过详情](https://www.tecmint.com/category/raid/)
