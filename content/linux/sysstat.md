@@ -6,6 +6,12 @@ draft: false
 
 ##### 整体篇
 ---
+安装
+
+```
+yum install sysstat -y
+```
+
 
 - top
 - htop
