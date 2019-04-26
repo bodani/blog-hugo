@@ -76,6 +76,7 @@ select pg_column_size('Let us go !!!');
 ```
 
 - 查出所有表（包含索引）并排序
+
 ```
 SELECT table_schema || '.' || table_name AS table_full_name, pg_size_pretty(pg_total_relation_size('"' || table_schema || '"."' || table_name || '"')) AS size
 FROM information_schema.tables
@@ -84,6 +85,7 @@ pg_total_relation_size('"' || table_schema || '"."' || table_name || '"') DESC l
 ```
 
 - 查出表大小按大小排序并分离data与index
+
 ```
 SELECT
 table_name,
