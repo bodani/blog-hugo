@@ -65,7 +65,10 @@ select host,user from mysql.user;
 
 SHOW GRANTS FOR 'finley'@'localhost';
 ```
-
+##### 删除
+```
+DROP USER 'finley'@'localhost';
+```
 
 ##### 
 
