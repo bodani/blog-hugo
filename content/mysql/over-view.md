@@ -70,7 +70,26 @@ SHOW GRANTS FOR 'finley'@'localhost';
 DROP USER 'finley'@'localhost';
 ```
 
-##### 
+##### 常见错误
+
+```
+连接时被拒绝
+ERROR 1130 (HY000): Host '10.1.88.32' is not allowed to connect to this MySQL server
+
+修改访问来源IP
+update user set host = '%' where host= 'localhost' and user = 'finley';
+FLUSH PRIVILEGES;
+```
+
+```
+连接时客户端报错
+ERROR 2059 (HY000): Authentication plugin 'caching_sha2_password' cannot be loaded: /usr/lib64/mysql/plugin/caching_sha2_password.so: cannot open shared object file: No such file or directory
+
+修改plugin类型
+ALTER USER 'custom'@'%' IDENTIFIED WITH mysql_native_password BY '1qa@WS3ed';
+FLUSH PRIVILEGES;
+select host,user ,plugin from user;
+``` 
 
 
 #### 配置管理
@@ -94,6 +113,9 @@ set max_heap_table_size = 167772160;
 
 #### 数据导入导出 
 
+```
+mysqldump
+```
 #### 高可用&主从架构
 
 #### 监控 
