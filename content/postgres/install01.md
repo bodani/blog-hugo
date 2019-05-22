@@ -31,9 +31,19 @@ yum install -y postgresql10-server postgresql10  postgresql10-contrib
 3.初始化
 
 ```
+默认
 /usr/pgsql-10/bin/postgresql-10-setup initdb
 
+自定义
+/usr/pgsql-10/bin/initdb -D $PGDATA -U postgres -E UTF-8 --lc-collate=en_US.UTF-8 --lc-ctype=en_US.UTF-8 -k
+
+-D 数据存放位置
+-U 超级用户
+-E 默认编码
+--lc-collate --lc-ctype 语言环境
+-k 使用 data checksums
 ```
+
 可将数据存放到其他目录下，使用[软连接](linux/ln-s)的方式。
 
 为什么会使用软连接而不是更改PGDATA环境变量，因为升级数据库的时 PGDATA 被指回默认值。

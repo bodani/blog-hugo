@@ -114,7 +114,9 @@ set max_heap_table_size = 167772160;
 #### 数据导入导出 
 
 ```
-mysqldump
+mysqldump -h 10.1.88.74 -u custom -P 3306 --databases sbtest  -v -p > backup.sql
+
+mysql -u custom -h 10.1.88.74 -P 3306  -D sbtest -p < backup.sql 
 ```
 #### 高可用&主从架构
 
