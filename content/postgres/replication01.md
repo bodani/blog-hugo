@@ -24,6 +24,8 @@ max_wal_senders = 10
 wal_level = logical # minimal, replica, or logical
 
 hot_standby = on # 正常在从库配置，如果在主库配置完毕，因为从库复制主库配置不需要再修改从库配置。
+
+wal_log_hints = on
 ```
 
 #### 从库配置
@@ -94,6 +96,7 @@ cat recovery.conf
 standby_mode = 'on'
 primary_conninfo = 'user=postgres host=10.2.0.14 port=5432 sslmode=disable sslcompression=1'
 
+
 ```
 
 3 从库配置  
@@ -106,6 +109,7 @@ systemctl enable postgresql-10.service
 ```
 #recovery.conf
 
+recovery_target_timeline='latest'
 recovery_min_apply_delay = 0   #延迟多少分钟应用
 trigger_file = '/home/postgres.trigger' #从库变主库时应用
 ```
