@@ -154,3 +154,5 @@ COPY postgres_log FROM 'log/postgresql-2018-12-05_103141.csv' WITH csv;
 查询分析
 
 自由发挥
+
+拓展 pgaudit

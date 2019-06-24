@@ -23,10 +23,23 @@ ln -s source target
 ```
 cd /var/lib/pgsql/10/
 ```
-2  创建软连接
+2.1  创建软连接
 ```
 ln -s /data/pgsql/10/data/ data
 ```
+
+2.2 删除软连接
+
+```
+rm data
+``` 
+
+删除软连接和数据
+
+```
+rm data/
+```
+
 3  权限和所有者  
 
 ```
