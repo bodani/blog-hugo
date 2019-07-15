@@ -96,3 +96,9 @@ StartPollers=20
 
 注意观察数据库连接数
 
+- 修改数据库连接配置
+
+```
+vi /etc/zabbix/web/zabbix.conf.php
+
+```
