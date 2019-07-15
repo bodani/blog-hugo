@@ -21,7 +21,7 @@ draft: false
 - checkpoint_segments  WAL log的最大数量，系统默认值是3。超过该数量的WAL日志，会自动触发checkpoint。
 - checkpoint_timeout  系统自动执行checkpoint之间的最大时间间隔。系统默认值是5分钟。
 - checkpoint_completion_target 该参数表示checkpoint的完成时间占两次checkpoint时间间隔的比例，系统默认值是0.5,也就是说每个checkpoint需要在checkpoints间隔时间的50%内完成。
-- checkpoint_warning 系统默认值是30秒，如果checkpoints的实际发生间隔小于该参数，将会在server log中写入写入一条相关信息。可以通过设置为0禁用。
+- checkpoint_warning 系统默认值是30秒，如果checkpoints的实际发生间隔小于该参数，将会在server log中写入一条相关信息。可以通过设置为0禁用。
 
 ##### 应用
 
