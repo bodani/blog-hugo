@@ -75,6 +75,11 @@ getenforce
 
 修改22端口
 
+登陆加速 
+```
+GSSAPIAuthentication no
+UseDNS no
+```
 #### 系统时间
 
 ntp
