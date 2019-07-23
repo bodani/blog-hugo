@@ -71,7 +71,12 @@ getenforce
 
 ##### 设置 ssh 
 
-禁用root用户，切换为其他用户登录
+禁用root用户，密钥登陆 切换为其他用户登录
+
+```
+PermitRootLogin without-password
+#PermitRootLogin yes
+```
 
 修改22端口
 
