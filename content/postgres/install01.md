@@ -40,7 +40,8 @@ yum install -y postgresql10-server postgresql10  postgresql10-contrib
 -D 数据存放位置
 -U 超级用户
 -E 默认编码
---lc-collate --lc-ctype 语言环境
+--lc-collate 区域 Collate会影响中文的排序，在zh_CN的区域下中文按拼音排序，其它区域按字符编码排序。
+--lc-ctype 字符类型Ctype会影响pg_trgm和部分正则匹配的结果，比如Ctype为'C'时，pg_trgm将无法支持中文。
 -k 使用 data checksums
 ```
 
