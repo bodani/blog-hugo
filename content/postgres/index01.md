@@ -88,4 +88,21 @@ GIN索引并没有损耗标准查询，但它们的性能取决于对数独特�
 
 [原文](http://www.postgres.cn/docs/9.4/textsearch-indexes.html)
 
+其他
 
+Django使用postgresql做数据库 db_index创建索引时会创建第二个索引varchar_pattern_ops问题
+
+https://blog.csdn.net/xiaofuge027/article/details/95338398
+
+删除无用索引
+
+```
+DO $$DECLARE r record;
+BEGIN
+FOR r IN select  indexrelname from pg_stat_user_indexes where schemaname = 'public' and indexrelname like '%like'
+
+LOOP
+    EXECUTE 'drop index ' || r.indexrelname ||';';
+END LOOP;
+END$$;
+```
