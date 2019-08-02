@@ -27,6 +27,53 @@ draft: false
 
 预防wal写放大
 
+
+##### 如何判断是否需要优化WAL？
+
+关于如何判断是否需要优化WAL，可以通过分析WAL，然后检查下面的条件，做一个粗略的判断：
+
+- FPI比例高于70%
+- HOT_UPDATE比例低于70%
+
+FPI查看方法
+
+```
+/usr/pgsql-10/bin/pg_waldump -z -p /var/lib/pgsql/10/data/pg_wal/ -t 2  -s 15/56098120 -e 15/56098200
+
+-z 统计信息
+
+-p wal path
+
+-t timeline
+
+-s sart lsn
+
+-e end lsn
+
+获取wal lsn psql -c "checkpoint;select pg_current_wal_lsn" 
+```
+
+HOT_UPDATE 查看
+
+```
+select * from pg_stat_user_tables ;
+```
+
+以上仅仅是粗略的经验值，仅供参考。并且这个FPI比例可能不适用于低写负载的系统，低写负载的系统FPI比例一定非常高，但是，低写负载系统由于写操作很少，因此FPI比例即使高一点也没太大影响。
+
+
+优化WAL及副作用
+
+
+- 延长checkpoint时间间隔
+导致crash恢复时间变长。crash恢复时需要回放的WAL日志量一般小于max_wal_size的一半，WAL回放速度(wal_compression=on时)一般是50MB/s~150MB/s之间。可以根据可容忍的最大crash恢复时间，估算出允许的max_wal_size的最大值。
+
+- 调整fillfactor
+过小的设置会浪费存储空间，这个不难理解。另外，对于频繁更新的表，即使把fillfactor设成100%，每个page里还是要一部分空间被dead tuple占据，不会比设置成一个合适的稍小的fillfactor更节省空间。
+
+- 设置wal_compression=on
+需要额外占用CPU资源进行压缩，但影响不大
+
 http://www.postgres.cn/news/viewone/1/273
 
 更多细节说明
