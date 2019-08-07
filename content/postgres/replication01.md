@@ -110,7 +110,7 @@ systemctl enable postgresql-10.service
 #recovery.conf
 
 recovery_target_timeline='latest'
-recovery_min_apply_delay = 0   #延迟多少分钟应用
+recovery_min_apply_delay = 5min   #延迟多少分钟应用
 trigger_file = '/home/postgres.trigger' #从库变主库时应用
 ```
 

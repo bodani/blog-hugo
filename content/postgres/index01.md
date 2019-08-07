@@ -106,3 +106,9 @@ LOOP
 END LOOP;
 END$$;
 ```
+
+#### 索引管理
+
+```
+reindex (verbose) table 
+```
