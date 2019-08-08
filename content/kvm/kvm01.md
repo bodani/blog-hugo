@@ -40,7 +40,7 @@ yum install qemu-kvm libvirt virt-install bridge-utils
 .配置实体机网络
 
 cat ifcfg-enp7s0
-
+```
 DEVICE="enp7s0"
 ONBOOT=yes
 BOOTPROTO=static
@@ -49,9 +49,9 @@ UUID=96a09db3-9b06-4a50-8d0c-9868cf531b84
 TYPE=Ethernet
 BRIDGE=br0
 IPADDR=0.0.0.0
-
+```
 cat ifcfg-br0
-
+```
 DEVICE=br0
 ONBOOT=yes
 BOOTPROTO=static
@@ -60,6 +60,7 @@ IPADDR=10.1.*.*
 PREFIX=16
 GATEWAY=10.1.0.1
 DNS1=223.5.5.5
+```
 
 查看 brctl show
 
