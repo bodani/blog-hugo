@@ -18,7 +18,14 @@ draft: false
 
 2 fillfactor
 
-3 reindex 从新建立索引，不要忽略表膨胀中索引的影响，通常来说索引所占的空间和维护成本要高于数据表，在pg version 12版本中预计reindex时不需要锁表。
+3 vacuum_defer_cleanup_age > 0, 是以事务为单位。配合pg_resetwal 可以做到flashback
+```
+代价1，主库膨胀，因为垃圾版本要延迟若干个事务后才能被回收。
+代价2，重复扫描垃圾版本，重复耗费垃圾回收进程的CPU资源。（n_dead_tup会一直处于超过垃圾回收阈值的状态，从而autovacuum 不断唤醒worker进行回收动作）。
+当主库的 autovacuum_naptime=很小的值，同时autovacuum_vacuum_scale_factor=很小的值时，尤为明显。
+代价3，如果期间发生大量垃圾，垃圾版本可能会在事务到达并解禁后，爆炸性的被回收，产生大量的WAL日志，从而造成WAL的写IO尖刺。
+```
+4 reindex 从新建立索引，不要忽略表膨胀中索引的影响，通常来说索引所占的空间和维护成本要高于数据表，在pg version 12版本中预计reindex时不需要锁表。
 
 ###### 处理完毕后需要重新生成统计信息
 

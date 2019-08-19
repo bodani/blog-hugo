@@ -288,7 +288,15 @@ server promoting
 
 8 [pg_rewind](https://www.cnblogs.com/zhangeamon/p/7602269.html)
 
-9 扩展阅读  
+9 从库有查询业务时注意事项
+
+```
+ 1. 如果备库有LONG query，同时需要实时性，可以设置hot_standby_feedback=on，同时建议将主库的autovacuum_naptime，autovacuum_vacuum_scale_factor设置为较大值（例如60秒，0.1），
+    主库的垃圾回收唤醒间隔会长一点，如果突然产生很多垃圾，可能会造成一定的膨胀。
+ 2. 如果备库有LONG QUERY，并且没有很高的实时性要求，建议设置设置hot_standby_feedback=off, 同时设置较大的max_standby_archive_delay， max_standby_streaming_delay。
+```
+
+10 扩展阅读  
  
  - PostgreSQL 10加入了quorum based的同步复制功能，用户可以配置若干standby节点，并配置需要将WAL发送多少份才返回给客户端事务结束的消息。
 
