@@ -14,3 +14,23 @@ https://github.com/digoal/blog/blob/master/201608/20160823_03.md
 
 https://github.com/digoal/blog/blob/master/201608/20160823_04.md
 
+
+```
+
+recovery.conf
+
+recovery_target_action= 'pause'  # promote ,shutdown
+
+```
+
+```
+--- 打lable 
+select pg_create_restore_point('my_daily_process_ended');
+
+
+--- 恢复到指定的lable
+recovery.conf
+
+recovery_target_name = 'my_daily_process_ended'
+```
+
