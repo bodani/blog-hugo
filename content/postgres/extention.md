@@ -31,3 +31,14 @@ draft: false
 - 模糊搜索 pg_trgm
 
 - 连接到远程服务器 postgres_fdw
+
+- k近邻（KNN）搜索 btree_gist
+
+比如检索10左右的数据，价格在100左右的数据。
+
+```
+create index idx_value_001 on t_talbe01 USING gist(value);
+select * from t_table01 where value <-> 100 limit 10;
+```
+
+
