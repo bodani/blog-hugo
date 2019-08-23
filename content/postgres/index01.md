@@ -32,6 +32,7 @@ CREATE [ UNIQUE ] INDEX [ CONCURRENTLY ] [ [ IF NOT EXISTS ] 名称 ] ON 表名 
 - sp-gist：空间分区（平衡）r-tree，支持包含，相交，距离，点面判断等查询；适合几何类型、范围类型、全文检索、异构类型等。 
 - brin：块级索引，适合物理存储与列值存在较好相关性的字段。比如时序数据、物联网传感数据、FEED数据等。支持范围查询、等值查询。  
 - rum：扩展索引接口，支持全文检索，支持附加标量类型的全文检索，支持带位置关系的全文检索。  
+- bloom 布隆过滤器，支持对任意列的组合查询。
 
 详细介绍 https://leopard.in.ua/2015/04/13/postgresql-indexes   
 
@@ -53,14 +54,25 @@ select * from pg_am;
 (6 行记录)
 
 ```
+
+#### 检查缺失的索引
+
+尝试查找出经常被扫描的大型表（avg高），那些表将出现在结果的顶部。
+
+```
+SELECT schemaname, relname, seq_scan,seq_tup_read,idx_scan,seq_tup_read / seq_scan AS avg FROM pg_stat_user_tables WHERE seq_scan > 0 ORDER BY seq_tup_read DESC LIMIT 20;
+```
+
 #### GiST和GIN索引类型
 
-有两种类型的索引可以用于加快全文搜索。注意全文检索不一定非要使用索引。 但是在规则基础上搜索列的情况下，索引往往是可取的。
+两种类型的索引可以用于加快全文搜索。注意全文检索不一定非要使用索引。 但是在规则基础上搜索列的情况下，索引往往是可取的。
 ```
+create extention pg_trgm;
 CREATE INDEX name ON table USING gist(column);
 创建以GiST（通用搜索树）为基础的索引，column可以是tsvector or tsquery 类型。
 ```
 ```
+create extention pg_trgm; 
 CREATE INDEX name ON table USING gin(column);
 创建以GIN（基因倒排索引）为基础的索引，column必须是tsvector类型。
 ```
@@ -85,6 +97,7 @@ GIN索引并没有损耗标准查询，但它们的性能取决于对数独特�
 一般来说，GIN索引对静态数据是最好的，因为查找速度很快。对于动态数据， GiST索引更新比较快。具体而言，GiST索引非常适合动态数据，并且如果独特的字（词）在100,000以下， 则比较快，而GIN索引将处理100,000+词汇，但是更新比较慢。
 
 请注意，GIN索引编译时间通常可以通过增加maintenance_work_mem改进， 而GiST索引编译时间对参数不敏感。 
+
 
 [原文](http://www.postgres.cn/docs/9.4/textsearch-indexes.html)
 

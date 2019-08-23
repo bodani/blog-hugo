@@ -51,9 +51,15 @@ ALTER SYSTEM SET
 ##### 记录执行慢的SQL
 记录超过该时长的所有SQL，对找出当前数据库的慢查询很有效。时间单位ms
 
+全局级
 ```
 ALTER SYSTEM SET
  log_min_duration_statement = 60;
+```
+
+数据库级
+```
+ALTER DATABASE test SET log_min_duration_statement TO 60;
 ```
 
 测试
