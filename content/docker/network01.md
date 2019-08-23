@@ -130,7 +130,7 @@ docker inspect network bridge
         "Scope": "local",
         "Driver": "bridge",
         "EnableIPv6": false,
-        "IPAM": {
+brew cask install emacs        "IPAM": {
             "Driver": "default",
             "Options": null,
             "Config": [
