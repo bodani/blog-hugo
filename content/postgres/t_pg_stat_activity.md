@@ -66,4 +66,13 @@ idle_in_transaction_session_timeout=30000
 track_activity_query_size=32768
 ```
 
+###### 杀死已挂掉的连接
 
+```
+select pg_terminate_backend(pid)
+```
+
+###### 取消正在执行的sql pid (不会释放连接，只会取消sql查询语句)
+```
+SELECT pg_cancel_backend(pid);
+```
