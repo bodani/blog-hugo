@@ -49,7 +49,7 @@ Linux 中tcp默认连接超时时间2小时,如果2个小时没有数据包则�
                                         # 0 selects the system default
 ```
 
-#### checkpoint
+#### 检查点checkpoint
 具体根据磁盘的吞吐量进行设置 https://yq.aliyun.com/articles/582847
 ```
 shared_buffers = 64GB                  # 1/4 内存 如果不使用huge page建议不要超过32GB   
@@ -59,7 +59,7 @@ min_wal_size = 32GB           # shared_buffers * 1/2
 checkpoint_completion_target = 0.9 
 ``` 
 
-#### autovacuum
+#### 垃圾回收autovacuum
 ```
 autovacuum_work_mem = -1 # autovacuum所能使用的内存大小，当其为-1时，使用maintenance_work_mem参数的值，值越大，使用的内存越多
 autovacuum = on # 是否打开autovacuum
@@ -72,7 +72,7 @@ autovacuum_analyze_scale_factor = 0.1  # 当表上dml操作达到多少比例时
 autovacuum_vacuum_cost_limit = -1  # autovacuum 的cost超过此值时，vacuum会sleep一段时间，使用vacuum_cost_limit参数的值，值越大对系统IO压力越大
 ```
 
-#### synchronous_commit
+#### 同步提交synchronous_commit
 
 同步提交参数, 控制事务提交后返回客户端是否成功的策略 
 可选值为:on, remote_write, local, off
