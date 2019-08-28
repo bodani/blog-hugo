@@ -71,6 +71,37 @@ autovacuum_vacuum_scale_factor = 0.2 # 当表上dml操作达到多少比例时�
 autovacuum_analyze_scale_factor = 0.1  # 当表上dml操作达到多少比例时执行autovacuum analyze操作
 autovacuum_vacuum_cost_limit = -1  # autovacuum 的cost超过此值时，vacuum会sleep一段时间，使用vacuum_cost_limit参数的值，值越大对系统IO压力越大
 ```
+
+#### synchronous_commit
+
+同步提交参数, 控制事务提交后返回客户端是否成功的策略 
+可选值为:on, remote_write, local, off
+
+on
+```
+1 为on且没有开启同步备库的时候,会当wal日志真正刷新到磁盘永久存储后才会返回客户端事务已提交成功, 
+2 当为on且开启了同步备库的时候(设置了synchronous_standby_names),必须要等事务日志刷新到本地磁盘,并且还要等远程备库也提交到磁盘才能返回客户端已经提交.
+```
+off
+```
+写到缓存中就会向客户端返回提交成功，但也不是一直不刷到磁盘，延迟写入磁盘,延迟的时间为最大3倍的wal_writer_delay参数的(默认200ms)的时间,所有如果即使关闭synchronous_commit,也只会造成最多600ms的事务丢失,此事务甚至包括已经提交的事务（会丢数据）,但数据库确可以安全启动,不会发生块折断,只是丢失了部分数据,但对高并发的小事务系统来说,性能来说提升较大。
+```
+remote_write
+```
+当事务提交时,不仅要把wal刷新到磁盘,还需要等wal日志发送到备库操作系统(但不用等备库刷新到磁盘),因此如果备库此时发生实例中断不会有数据丢失,因为数据还在操作系统上,而如果操作系统故障,则此部分wal日志还没有来得及写入磁盘就会丢失,备库启动后还需要想主库索取wal日志。
+```
+local
+```
+当事务提交时,仅写入本地磁盘即可返回客户端事务提交成功,而不管是否有同步备库
+如果没有设置同步备库,则 on/remote_write/local都是一样的,仅等待事务刷新到本地磁盘.
+```
+
+此参数还可以局部设置,当有临时批量任务时可以这样设置: 
+```
+SET LOCAL synchronous_commit TO OFF; 
+```
+这样局部事务可向备库异步的方式同步，而其他重要的事务以同步的方式向备库同步。
+
 #### 修改
 
 ```
