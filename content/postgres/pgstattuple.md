@@ -45,9 +45,14 @@ pgstattuple提供了pgstatetuple()和pgstatindex()两个统计表和索引的方
 
 https://www.postgresql.org/docs/current/pgstattuple.html
 
+创建拓展
+```
+create extension pgstattuple ;
+```
+
 ```
 表
-test=> SELECT * FROM pgstattuple('pg_catalog.pg_proc');
+test=> SELECT * FROM pgstattuple('tablename');
 -[ RECORD 1 ]------+-------
 table_len          | 458752
 tuple_count        | 1470
@@ -77,7 +82,7 @@ select tablename, (x).* from pg_tables ,LATERAL (select * from pgstattuple(table
 
 索引
 
-test=> SELECT * FROM pgstatindex('pg_cast_oid_index');
+test=> SELECT * FROM pgstatindex('index_name');
 -[ RECORD 1 ]------+------
 version            | 2
 tree_level         | 0
