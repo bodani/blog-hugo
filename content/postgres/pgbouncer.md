@@ -93,6 +93,7 @@ default_pool_size 表示默认连接池中建立多少个到后端数据库的�
 [pgbouncer]中 user 表示用户连接到pgbouncer中所使用的用户
 
 情况1： 如果在databases中指定user=zabbix Clinet无论使用的是哪个用户，连接postgres的用户都是zabbix
+
 情况2:  如果在database中没有指定user ,连接postgres的用户为Client使用的用户
 
 pg中查看当前用户
@@ -177,9 +178,9 @@ pool_mode: 连接模式
 min_pool_size: 连接池的最小大小，即每个连接池至少会向后端数据库保持多少个连接。Pgboucer -> Postgres     
 reserve_pool_size: How many additional connections to allow to a pool. 0 disables.  
 reserve_pool_timeout: 保留连接的超时时间   
-max_user_connections: Client -> pgbouncer 每个用户最大连接数
-max_db_connections: Client -> Pgbouncer 每个数据库最大连接数
-disable_pqexec:  禁止简单查询。 简单查询协议允许一个请求发送多条Sql，但是容易造成Sql注入风险。
+max_user_connections: Client -> pgbouncer 每个用户最大连接数 
+max_db_connections: Client -> Pgbouncer 每个数据库最大连接数 
+disable_pqexec:  禁止简单查询。 简单查询协议允许一个请求发送多条Sql，但是容易造成Sql注入风险。 
 
 #### 关于日志信息配置说明
 syslog: 是否打开syslog  
