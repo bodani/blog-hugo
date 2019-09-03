@@ -26,4 +26,14 @@ select pg_terminate_backend(pid); # update insert delete
 ```
 
 
+##### 事务的隔离级别
+
+Postgres 数据库共有三种数据隔离级别。
+
+- Read Commit 读看提交  默认级别 在读开始的时候建立数据快照
+- Repeat Read 可重复读。在事务开始的时候建立数据快照
+- SSI Serializable 序列化 理解为只有一个用户使用的情况
+
+使用举例
+
 
