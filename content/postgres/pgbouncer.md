@@ -7,10 +7,11 @@ draft: false
 #### 背景介绍
 
 - Pgbouncer是一个针对PostgreSQL数据库的轻量级连接池  
-- pgbouncer 的目标是降低因为新建到 PostgreSQL 的连接而导致的性能损失   
+- pgbouncer 的目标是降低因为新连接到 PostgreSQL 的连接而导致的性能损失   
 
 使用术语说明：  
 为了后面的描述更清晰，使用如下术语
+
 - Client : 指访问者  
 - Pgboucer: 指连接池  
 - Postgres: 指数据库。
