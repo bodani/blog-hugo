@@ -81,7 +81,7 @@ default_pool_size = 20
 ##### [databases] 
 主要思想承上启下的作用相当于代理，呈上对访问者，启下对后端数据库。   
 第一项的名称是pgbouncer对外提供的数据库名 postgres ,等号后面是连接后端数据库名信息  
-pool_mode = session
+pool_mode = session  
 pool_size , 指定database 连接到后端服务器的连接数的最大值。配合数据库中的database connection limit ;
 
 关于user 配置后面细说
