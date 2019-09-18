@@ -19,6 +19,7 @@ export GOROOT=/usr/local/go
 export GOPATH=~/golib:~/goproject
 export GOBIN=~/gobin
 export PATH=$PATH:$GOROOT/bin:$GOBIN
+export GOPROXY=https://goproxy.cn
 ```
 
 说明: 
@@ -27,6 +28,7 @@ GOROOT go安装包存放位置
 GOPATH 工作区，多个工作区之间用冒号间隔  
 GOBIN  可执行文件目录  
 PATH   系统环境变量 
+Goproxy 中国完全实现了 Go 的模块代理协议。并且它是一个由中国备受信赖的云服务提供商七牛云支持的非营利性项目。目标是为中国和世界上其他地方的 Gopher 们提供一个免费的、可靠的、持续在线的且经过 CDN 加速的模块代理。
 
 3.目录结构
 
