@@ -125,3 +125,15 @@ cat /etc/shells
 /usr/sbin/nologin
 
 ```
+
+原因认证错误
+
+如果是密码错误可在vsftpd 日志中看到
+
+pam 认证问题 ,去掉认证试试
+
+```
+vi /etc/pam.d/vsftpd 
+#auth       required     pam_shells.so
+``` 
+
