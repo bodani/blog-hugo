@@ -70,7 +70,7 @@ tar -zxvf wal-g.linux-amd64.tar.gz
 cat wal-g.env 
 ```
 export PGDATA=/var/lib/pgsql/10/data/
-export WALE_S3_PREFIX=s3://local/bucket003/
+export WALG_S3_PREFIX=s3://bucket003/
 export PGPORT=5432
 export PGUSER=postgres
 export AWS_SECRET_ACCESS_KEY=xxxxx(changeme)
