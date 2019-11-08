@@ -67,6 +67,8 @@ tar -zxvf wal-g.linux-amd64.tar.gz
 
 ###### 设置环境变量
 
+minio
+
 cat wal-g.env 
 ```
 export PGDATA=/var/lib/pgsql/10/data/
@@ -78,6 +80,18 @@ export AWS_REGION=us-east-1
 export AWS_ACCESS_KEY_ID=kkkkk(changeme)
 export AWS_ENDPOINT=http://localhost:9000
 export AWS_S3_FORCE_PATH_STYLE=true
+```
+
+swift
+
+```
+export PGDATA=
+export WALG_SWIFT_PREFIX=swift://buckt003/
+export PGPORT=
+export PGUSER=
+export OS_USERNAME=
+export OS_PASSWORD=
+export OS_AUTH_URL=http://ip:port/auth/v1.0
 ```
 
 ###### 全备份
