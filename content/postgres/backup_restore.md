@@ -104,7 +104,7 @@ source mydir/wal-g.env &&  wal-g  backup-push $PGDATA
 
 ```
 wal_level = archive
-archive_mode = on
+archive_mode = on ## 从库 always
 archive_command = 'source mydir/wal-g.env &&  wal-g wal-push %p'
 archive_timeout = 60
 ```
@@ -158,4 +158,20 @@ wal-g delete  retain  FULL  10  --confirm （真删）
 
 ```
 wal-g delete before backup_name
+```
+
+###### 将现有的所有wal上传
+
+cat wal-push-all.sh
+```
+#!/bin/bash
+#print the directory and file
+ 
+for file in $PGDATA/pg_wal/*
+do
+if [ -f "$file" ]
+then 
+  wal-g wal-push $file
+fi
+done
 ```
