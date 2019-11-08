@@ -63,6 +63,8 @@ wget https://github.com/wal-g/wal-g/releases/download/v0.2.9/wal-g.linux-amd64.t
 tar -zxvf wal-g.linux-amd64.tar.gz 
 ```
 
+[下载地址](../tools/wal-g.linux-amd64.tar.gz)
+
 ###### 设置环境变量
 
 cat wal-g.env 
