@@ -57,3 +57,77 @@ go fmt
 
 go fix 
 
+
+4.墙内生存技能
+
+```
+export GOPROXY=https://goproxy.io
+```
+基本就都可以下载了
+
+ 
+
+第三方库
+
+google 被墙了，很多相关的库都 go get 不下来。可以用下面的方法曲线下载
+
+cloud.google.com/go/pubsub
+
+对应的github仓库在这里   https://github.com/googleapis/google-cloud-go
+
+```
+mkdir -p $GOPATH/src/cloud.google.com                                                                               
+cd $GOPATH/src/cloud.google.com  
+git clone https://github.com/googleapis/google-cloud-go.git                                                         
+mv google-cloud-go go
+```
+
+google.golang.org/api/iterator
+
+googleapis go 语言版本在这 https://github.com/googleapis/google-api-go-client
+
+```
+
+mkdir -p $GOPATH/src/google.golang.org 
+cd $GOPATH/src/google.golang.org
+git clone https://github.com/googleapis/google-api-go-client.git                                                  
+mv google-api-go-client/ api   
+```
+
+golang.org/x/sync/errgroup
+golang.org/x/oauth2
+
+golang.org 的基本都在  https://github.com/golang， 到里面找同名的仓库
+
+详细参考如下 
+
+```
+cd $GOPATH/src/golang.org/x/
+git clone https://github.com/golang/sync.git
+git clone https://github.com/golang/oauth2.git
+git clone https://github.com/golang/crypto.git
+git clone https://github.com/golang/net.git
+git clone https://github.com/golang/oauth2.git
+git clone https://github.com/golang/sync.git
+git clone https://github.com/golang/sys.git
+git clone https://github.com/golang/text.git
+git clone https://github.com/golang/time.git
+git clone https://github.com/golang/xerrors.git
+```
+
+grpc安装
+
+```
+mkdir -p $GOPATH/src/google.golang.org/
+cd $GOPATH/src/google.golang.org/
+git clone https://github.com/grpc/grpc-go.git
+mv grpc-go grpc
+```
+
+genproto安装
+
+```
+cd $GOPATH/src/google.golang.org
+git clone https://github.com/google/go-genproto.git
+mv go-genproto/ genproto
+```
