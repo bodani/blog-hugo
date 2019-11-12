@@ -23,3 +23,9 @@ pgsnap, pgstatspack,pgwatch,pg_statsinfo等。这些工具主要做PG的性能�
 https://github.com/cybertec-postgresql/pgwatch2
 
 https://github.com/wrouesnel/postgres_exporter
+
+https://www.cnblogs.com/ilifeilong/p/10543876.html
+
+基于promethues postgres_exporter
+
+https://github.com/CrunchyData/pgmonitor
