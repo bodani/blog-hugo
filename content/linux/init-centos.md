@@ -99,3 +99,42 @@ systemctl start chronyd.service
 systemctl start ntpd
 systemctl enable ntpd
 ```
+
+##### 总归
+
+```
+#!/bin/bash
+
+echo "===============更新系统 `date`"          
+yum -y update
+echo "===============安装拓展工具 `date`" 
+yum -y install epel-release net-tools bind-utils
+echo "===============修改文件连接数限制 `date`" 
+
+cat >> /etc/security/limits.conf << EOF
+* - nofile 65536
+* soft nproc 65536
+* hard nproc 65536
+* soft nofile 65536
+* hard nofile 65536
+EOF
+
+rm /etc/security/limits.d/*  -rf
+
+
+echo "===============禁用selinux `date`" 
+
+sed 's/SELINUX=/#SELINUX=/g'  /etc/selinux/config -i
+echo "SELINUX=disabled" >> /etc/selinux/config
+
+echo "===============禁用firewalld `date`"
+systemctl disable firewalld
+
+echo "===============安装ntp服务 `date`"
+
+yum install ntp -y
+
+systemctl enable ntpd 
+
+echo "===============初始化系统完毕，重启系统后生效 `date`"
+```
