@@ -30,7 +30,7 @@ yum -y update
 #### 安装扩展及工具
 
 ```
-yum -y install epel-release net-tools bind-utils
+yum -y install epel-release net-tools bind-utils telnet wget 
 ```
 
 #### 文件链接限制
