@@ -131,6 +131,15 @@ gpstop -r
 重新加载
 
 gpstop -u
+
+恢复未启动的节点
+
+gprecoverseg
+
+恢复数据重新分布为最初状态
+
+gprecoverseg -r
+
 ```
 
 
@@ -145,3 +154,4 @@ set allow_system_table_mods=true;
 update gp_segment_configuration set hostname = address;
 
 ```
+
