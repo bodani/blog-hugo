@@ -39,4 +39,8 @@ pg_dist_shard
 pg_dist_placement
 pg_dist_node
 ```
+
+
+[参数]（https://www.modb.pro/db/13049)
+
 [更多参考](https://chenhuajun.github.io)
