@@ -249,4 +249,24 @@ free_percent       | 0.05
 ``` 
 
 
+##### 查看每一页的空间利用
 
+创建拓展
+
+```
+create extension pg_freespacemap;
+
+```
+
+查看没个页的空间利用 
+
+```
+select * from pg_freespace('tablename');
+```
+
+查看表的空间利用
+
+```
+select count(*) as "number of pages", pg_size_pretty(cast(avg(avail) as bigint)) as "freespace size ", round(100* avg(avail)/8192,2) as "freespace ratio" 
+from pg_freespace('tablename');
+```
