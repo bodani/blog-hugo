@@ -184,3 +184,16 @@ vacuum_cost_limit：当超过此值时，vacuum会sleep。默认值为200。
 #### 扩展阅读  
 
 Autovacuum 基础调优 [中文](https://mp.weixin.qq.com/s/ekKuDMEkQsZX5vx0VG0_1A) [英文](https://blog.2ndquadrant.com/autovacuum-tuning-basics/#PostgreSQL%20Performance%20Tuning)
+
+
+#### 实战
+ 
+ autovacuum 在达到触发条件时就会执行。如果触发在业务高峰时发生，对线上的业务性能会带来影响。应避免。
+
+ 数据库的vacuum 为可控的，避免autovacuum对线上数据库在运行高峰时的影响。
+
+ 在必要时进行手动执行vacuum ,在业务低峰期执行。 
+
+ 监控数据库的autovacuum ，使其在达到触发条件前被及时发现。
+
+
