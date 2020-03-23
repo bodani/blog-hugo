@@ -15,6 +15,7 @@ draft: false
 listen_addresses = "*"             # 连接访问控制，哪些ip可以访问， * 全部。 结合pg_hba.conf , iptables设置。
 superuser_reserved_connections = 3 # 预留给超级管理员的连接数。
 port = 5432                        # 默认访问端口
+wal_keep_segments = 1024           # wal 日志保存数量
 ```
 
 #### 成本因子 
