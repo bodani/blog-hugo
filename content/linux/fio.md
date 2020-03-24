@@ -40,7 +40,7 @@ Linux读写SSD等块设备使用的是BIO，Block-IO，这是个数据结构，�
 DEMO 如果缺失libaio驱动引擎可通过 yum install -y libaio-devel 安装后重新编译安装
 
 ```
-fio -rw=randwrite  -ioengine=libaio -direct=1 -thread -numjobs=1  -iodepth=64 -filename=/data/1.data size=10G \
+fio -rw=randwrite  -ioengine=libaio -direct=1 -thread -numjobs=1  -iodepth=64 -filename=/data/1.data -size=10G \
   -name=job1 -offset=0MB -bs=4k -name=job2 -offset=10G -bs=16k \
   -output TestResult.log
 ```
