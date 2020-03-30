@@ -172,7 +172,12 @@ select pg_cancel_backend(pid);
 
 长事务监控
 ```
-select extract(epoch from max(age(now(), query_start))) from pg_stat_activity state<>'idle' and (backend_xid is not null or backend_xmin is not null);
+select extract(epoch from max(age(now(), query_start))) from pg_stat_activity where state <> 'idle' and (backend_xid is not null or backend_xmin is not null);
+```
+
+长事务查看
+```
+select * from pg_stat_activity  pg_stat_activity where state <> 'idle' and (backend_xid is not null or backend_xmin is not null) order by query_start asc limit 1;
 ```
 
 2pc
