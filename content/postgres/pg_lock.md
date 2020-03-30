@@ -36,4 +36,27 @@ Postgres 数据库共有三种数据隔离级别。
 
 使用举例
 
+```
+postgres=# \h lock
+Command:     LOCK
+Description: lock a table
+Syntax:
+LOCK [ TABLE ] [ ONLY ] name [ * ] [, ...] [ IN lockmode MODE ] [ NOWAIT ]
+
+where lockmode is one of:
+
+    ACCESS SHARE | ROW SHARE | ROW EXCLUSIVE | SHARE UPDATE EXCLUSIVE
+    | SHARE | SHARE ROW EXCLUSIVE | EXCLUSIVE | ACCESS EXCLUSIVE
+```
+
+锁定一张表
+
+```
+postgres=# begin ;
+BEGIN
+postgres=# lock TABLE wt IN access exclusive mode ;
+LOCK TABLE
+
+```
+
 
