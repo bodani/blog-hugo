@@ -10,6 +10,8 @@ draft: false
 
 ####  [日志参数](postgres/log/)  
 
+#### [更多参数详解](https://postgresqlco.nf/zh/doc/param/)
+
 ##### 管理
 ```
 listen_addresses = "*"             # 连接访问控制，哪些ip可以访问， * 全部。 结合pg_hba.conf , iptables设置。
