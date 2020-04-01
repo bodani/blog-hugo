@@ -78,6 +78,20 @@ postgres=# \dg
  tester           | 10个连接                                   | {}
 ```
 
+##### 权限分配
+
+语法
+
+grant 权限 on 数据对象 to 用户
+
+revoke 权限 on 数据对象 from 用户
+
+```
+grant SELECT on ALL tables in schema public TO dbuser;
+
+revoke SELECT on ALL tables in schema public from dbuser;
+```
+
 
 更多内容
 
