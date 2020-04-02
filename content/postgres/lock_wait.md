@@ -166,6 +166,9 @@ locktype,datname,relation,page,tuple,virtualxid,transactionid::text,classid,obji
 
 ```
 select pg_cancel_backend(pid);
+
+
+select pg_terminate_backend(pid);
 ```
 
 ##### 监控方案
@@ -178,6 +181,8 @@ select extract(epoch from max(age(now(), query_start))) from pg_stat_activity wh
 长事务查看
 ```
 select * from pg_stat_activity  pg_stat_activity where state <> 'idle' and (backend_xid is not null or backend_xmin is not null) order by query_start asc limit 1;
+
+select * from pg_stat_activity  pg_stat_activity where state <> 'idle' and (backend_xid is not null or backend_xmin is not null) and backend_type = 'client backend' order by query_start asc limit 1;
 ```
 
 2pc
@@ -207,7 +212,13 @@ select * from pg_prepared_statements;
 2020-03-31 09:16:32.704 CST,"postgres","postgres",25436,"[local]",5e8299b7.635c,5,"UPDATE waiting",2020-03-31 09:15:35 CST,4/52140,22112144,LOG,00000,"process 25436 still waiting for ShareLock on transaction 22112143 after 1000.162 ms","Process holding the lock: 24758. Wait queue: 25436.",,,,"while updating tuple (0,39) in relation ""wt""","update wt set t = 'bbbb' where id = 1;",,,"psql"
 2020-03-31 09:18:25.946 CST,"postgres","postgres",25436,"[local]",5e8299b7.635c,6,"UPDATE waiting",2020-03-31 09:15:35 CST,4/52140,22112144,LOG,00000,"process 25436 acquired ShareLock on transaction 22112143 after 114242.016 ms",,,,,"while updating tuple (0,39) in relation ""wt""","update wt set t = 'bbbb' where id = 1;",,,"psql"
 2020-03-31 09:18:25.946 CST,"postgres","postgres",25436,"[local]",5e8299b7.635c,7,"UPDATE",2020-03-31 09:15:35 CST,4/52140,22112144,LOG,00000,"duration: 114244.352 ms",,,,,,,,,"psql"
-
+plate_number
 ```
 
 25436 被 24758 堵塞
+
+##### 查看谁堵塞了谁
+
+```
+pg_blocking_pids(pid)
+```
