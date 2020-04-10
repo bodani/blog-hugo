@@ -43,4 +43,10 @@ draft: false
  https://notes.diguage.com/mysql/
 
 
+视频
 
+https://edu.aliyun.com/course/1762?spm=5176.10731542.0.0.311e6ac8weevK5
+
+视频对应笔记
+
+https://www.cnblogs.com/developer_chan/p/9205401.html
