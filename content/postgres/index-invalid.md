@@ -31,6 +31,7 @@ draft: false
 
 7.多字段索引查询条件使用OR（有时也会走索引扫描，但查询效率不高）
 
+8.表中数据量太少时
 
 ##### 实例
 
@@ -365,6 +366,64 @@ postgres=# explain analyze select * from tbl_indexes where a = 10  or a = 11;
 (10 rows)
 
 Time: 2.928 ms
+```
+
+##### 8.表中数据量少时
+
+```
+postgres=# create table tbl_index_less(a int);
+CREATE TABLE
+
+postgres=# create index tbl_index_less_a on tbl_index_less using btree (a);
+CREATE INDEX
+
+-- 加10条
+postgres=# insert into tbl_index_less select generate_series(1,10);
+INSERT 0 10
+
+postgres=# analyze tbl_index_less ;
+ANALYZE
+
+postgres=# explain analyze select * from tbl_index_less where a = 4;
+                                               QUERY PLAN                                               
+--------------------------------------------------------------------------------------------------------
+ Seq Scan on tbl_index_less  (cost=0.00..1.12 rows=1 width=4) (actual time=0.013..0.016 rows=1 loops=1)
+   Filter: (a = 4)
+   Rows Removed by Filter: 9
+ Planning time: 0.276 ms
+ Execution time: 0.054 ms
+(5 rows)
+
+-- 加100条
+postgres=# insert into tbl_index_less select generate_series(10,100);
+INSERT 0 91
+
+postgres=# explain analyze select * from tbl_index_less where a = 4;
+                                               QUERY PLAN                                               
+--------------------------------------------------------------------------------------------------------
+ Seq Scan on tbl_index_less  (cost=0.00..2.26 rows=1 width=4) (actual time=0.017..0.033 rows=1 loops=1)
+   Filter: (a = 4)
+   Rows Removed by Filter: 100
+ Planning time: 0.236 ms
+ Execution time: 0.062 ms
+(5 rows)
+
+-- 1000条
+postgres=# insert into tbl_index_less select generate_series(100,1000);
+INSERT 0 901
+
+postgres=# analyze tbl_index_less ;
+ANALYZE
+postgres=# explain analyze select * from tbl_index_less where a = 4;
+                                                              QUERY PLAN                                                              
+--------------------------------------------------------------------------------------------------------------------------------------
+ Index Only Scan using tbl_index_less_a on tbl_index_less  (cost=0.28..8.29 rows=1 width=4) (actual time=0.010..0.010 rows=1 loops=1)
+   Index Cond: (a = 4)
+   Heap Fetches: 1
+ Planning time: 0.073 ms
+ Execution time: 0.023 ms
+(5 rows)
+
 ```
 
 <!--
