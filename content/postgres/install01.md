@@ -4,6 +4,8 @@ date: 2018-10-17T14:37:56+08:00
 draft: false
 ---
 
+[官网](https://www.postgresql.org/download/linux/redhat/)
+
 1.准备源
 
 ```
@@ -16,6 +18,8 @@ rpm -r ****
 安装新数据源
 
 yum install https://download.postgresql.org/pub/repos/yum/10/redhat/rhel-7-x86_64/pgdg-centos10-10-2.noarch.rpm
+
+yum install https://download.postgresql.org/pub/repos/yum/reporpms/EL-7-x86_64/pgdg-redhat-repo-latest.noarch.rpm
 
 可将所有的软件更新到最新版本如 ， postgresql-10.2 更新到当前最新的postgresql-10.6
 

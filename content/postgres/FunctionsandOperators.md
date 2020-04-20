@@ -291,3 +291,8 @@ CREATE INDEX
 json和jsonb的操作符
 
 https://www.postgresql.org/docs/9.6/functions-json.html
+
+
+##### 数组函数和操作符
+
+http://postgres.cn/docs/11/functions-array.html
