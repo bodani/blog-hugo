@@ -44,9 +44,6 @@ postgres#=create table tbl_index(a bigint,b timestamp without time zone ,c varch
 
 postgres=# \timing 
 Timing is on.
-postgres=# insert into tbl_index select generate_series(1,10000000),clock_timestamp()::timestamp without time zone,'eamon';
-INSERT 0 10000000
-Time: 30856.652 ms (00:30.857)
 
 postgres=# insert into tbl_index select generate_series(1,10000000),clock_timestamp()::timestamp without time zone,'zhang';
 INSERT 0 10000000
