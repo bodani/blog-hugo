@@ -123,6 +123,9 @@ Time: 5184.795 ms (00:05.185)
 
 create index tbl_index_a2str on tbl_index using btree ((a::varchar));
 create index tbl_index_b2date on tbl_index using btree ((b::date));
+
+select * from tbl_index where b < '2020-04-16 00:00:00' and b >= '2020-04-15 00:00:00';
+
 ```
 ##### 2.!=
 ```
