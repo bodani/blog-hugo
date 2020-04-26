@@ -6,9 +6,29 @@ draft: false
 
 ##### 磁盘空间
 - 全库
+
+```
+select pg_size_pretty(sum(pg_database_size(oid))) from pg_database;
+```
+
 - 数据库
+
+```
+select datname, pg_size_pretty(pg_database_size(oid)) from pg_database order by pg_database_size(oid) desc limit 10;
+```
+
 - 表总
+
+```
+ SELECT table_schema || '.' || table_name AS table_full_name, pg_size_pretty(pg_total_relation_size('"' || table_schema || '"."' || table_name || '"')) AS size
+FROM information_schema.tables where table_schema = 'public' ORDER BY pg_total_relation_size('"' || table_schema || '"."' || table_name || '"') DESC limit 10;
+```
+
 - 表
+
+```
+``
+
 - 索引
 
 ##### 冷热数据
