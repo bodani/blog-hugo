@@ -45,7 +45,7 @@ go build
 
 go install 编译并安装指定的代码包及它们的依赖包 　
 
-go get 下载远程代码到GOPATH第一个工作区中，并编译执行i
+go get 下载远程代码到GOPATH第一个工作区中，并编译执行
 
 go clean 
 
@@ -131,3 +131,23 @@ cd $GOPATH/src/google.golang.org
 git clone https://github.com/google/go-genproto.git
 mv go-genproto/ genproto
 ```
+
+##### IDE　goland 安装
+
+##### 包管理器
+
+glide
+
+go mod
+
+##### 自动编译
+
+gin
+
+##### 类库
+
+日志　zap https://github.com/uber-go/zap
+
+命令行　cli https://github.com/urfave/cli
+
+配置文件　https://github.com/jinzhu/configor
