@@ -75,6 +75,32 @@ autovacuum_analyze_scale_factor = 0.1  # 当表上dml操作达到多少比例时
 autovacuum_vacuum_cost_limit = -1  # autovacuum 的cost超过此值时，vacuum会sleep一段时间，使用vacuum_cost_limit参数的值，值越大对系统IO压力越大
 ```
 
+#### 并行计算
+
+```
+1. 控制整个数据库集群同时能开启多少个work process，必须设置。
+max_worker_processes = 128              # (change requires restart)  
+
+2. 控制一个并行的EXEC NODE最多能开启多少个并行处理单元，同时还需要参考表级参数parallel_workers，或者PG内核内置的算法，根据表的大小计算需要开启多少和并行处理单元。  
+实际取小的。
+max_parallel_workers_per_gather = 16    # taken from max_worker_processes
+
+3. 计算并行处理的成本，如果成本高于非并行，则不会开启并行处理。
+#parallel_tuple_cost = 0.1              # same scale as above
+#parallel_setup_cost = 1000.0   # same scale as above
+
+4. 小于这个值的表，不会开启并行。
+#min_parallel_relation_size = 8MB
+
+5. 告诉优化器，强制开启并行。
+#force_parallel_mode = off
+
+6. 表级参数，不通过表的大小计算并行度，而是直接告诉优化器这个表需要开启多少个并行计算单元。
+parallel_workers (integer)
+
+alter table t_table set(parallel_workers = 4)
+```
+
 #### 同步提交synchronous_commit
 
 同步提交参数, 控制事务提交后返回客户端是否成功的策略 
