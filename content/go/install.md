@@ -20,6 +20,7 @@ export GOPATH=~/golib:~/goproject
 export GOBIN=~/gobin
 export PATH=$PATH:$GOROOT/bin:$GOBIN
 export GOPROXY=https://goproxy.cn
+export GO111MODULE=on
 ```
 
 说明: 
