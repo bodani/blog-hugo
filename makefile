@@ -9,3 +9,8 @@ push:
 .PHONY: deploy
 deploy:
 	bash ./deploy.sh
+
+.PHONY: pull
+pull:
+	git pull
+	cd public && git pull
