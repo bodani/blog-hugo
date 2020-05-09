@@ -78,8 +78,13 @@ exe :上面命令的可执行文件路径
 默认支持
 
 ```
-auditctl -l
-auditcll -h
+aureport -l
+aureport -h
 ```
 
+类似命令
 
+```
+last  登陆成功
+lastb 登陆失败
+```
