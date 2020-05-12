@@ -76,7 +76,9 @@ ssh-keygen 生成钥匙
 
 ssh-copy-id 将公钥上传到被访问的服务器
 
-PermitRootLogin without-password 修改sshd_config文件设置禁止密码登陆
+PermitRootLogin without-password 修改sshd_config文件设置禁止root密码登陆
+
+PasswordAuthentication no  修改sshd_config文件禁止普通用户密码登陆
 ```
 
 连续密码错误3次锁定账户，普通用户5分钟后解锁，root用户10分钟后解锁
