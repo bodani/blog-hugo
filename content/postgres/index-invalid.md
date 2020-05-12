@@ -368,6 +368,64 @@ postgres=# explain analyze select * from tbl_indexes where a = 10  or a = 11;
 Time: 2.928 ms
 ```
 
+如果多个字段为同一类型可使用数组化索引
+
+```
+indexdb=# CREATE TABLE tbloom AS
+indexdb-#    SELECT
+indexdb-#      (random() * 1000000)::int as i1,
+indexdb-#      (random() * 1000000)::int as i2,
+indexdb-#      (random() * 1000000)::int as i3,
+indexdb-#      (random() * 1000000)::int as i4,
+indexdb-#      (random() * 1000000)::int as i5,
+indexdb-#      (random() * 1000000)::int as i6
+indexdb-#    FROM
+indexdb-#   generate_series(1,10000000);
+SELECT 10000000
+
+-- 创建bloom索引
+indexdb=# CREATE index btreeidx ON tbloom (i1, i2, i3, i4, i5, i6);
+CREATE INDEX
+
+indexdb=# EXPLAIN ANALYZE SELECT * FROM tbloom WHERE i2 = 898732 OR i5 = 123451;
+                                                                  QUERY PLAN                                                                  
+----------------------------------------------------------------------------------------------------------------------------------------------
+ Gather  (cost=249337.50..385507.50 rows=99750 width=24) (actual time=345.415..684.760 rows=19 loops=1)
+   Workers Planned: 2
+   Workers Launched: 2
+   ->  Parallel Bitmap Heap Scan on tbloom  (cost=248337.50..374532.50 rows=41562 width=24) (actual time=397.157..672.875 rows=6 loops=3)
+         Filter: ((i2 = 898732) OR (i5 = 123451))
+         Rows Removed by Filter: 3333327
+         Heap Blocks: exact=21455
+         ->  Bitmap Index Scan on btreeidx  (cost=0.00..248312.56 rows=10000000 width=0) (actual time=331.686..331.686 rows=10000000 loops=1)
+ Planning time: 0.165 ms
+ Execution time: 684.813 ms
+(10 rows)
+
+-- 创建数组化索引
+indexdb=# create index ON tbloom USING gin ( (array[i2,i5]));
+CREATE INDEX
+
+indexdb=# explain analyze select * from tbloom where (ARRAY[i2, i5]) && array[898732] or (ARRAY[i2, i5]) && array[123451];
+                                                              QUERY PLAN                                                              
+--------------------------------------------------------------------------------------------------------------------------------------
+ Bitmap Heap Scan on tbloom  (cost=991.87..68961.41 rows=99750 width=24) (actual time=0.068..0.174 rows=41 loops=1)
+   Recheck Cond: ((ARRAY[i2, i5] && '{898732}'::integer[]) OR (ARRAY[i2, i5] && '{123451}'::integer[]))
+   Heap Blocks: exact=41
+   ->  BitmapOr  (cost=991.87..991.87 rows=100000 width=0) (actual time=0.046..0.046 rows=0 loops=1)
+         ->  Bitmap Index Scan on tbloom_array_idx  (cost=0.00..471.00 rows=50000 width=0) (actual time=0.030..0.030 rows=23 loops=1)
+               Index Cond: (ARRAY[i2, i5] && '{898732}'::integer[])
+         ->  Bitmap Index Scan on tbloom_array_idx  (cost=0.00..471.00 rows=50000 width=0) (actual time=0.015..0.015 rows=18 loops=1)
+               Index Cond: (ARRAY[i2, i5] && '{123451}'::integer[])
+ Planning time: 0.266 ms
+ Execution time: 0.242 ms
+(10 rows)
+
+Time: 1.311 ms
+```
+性能提升明显
+
+
 ##### 8.表中数据量少时
 
 ```
