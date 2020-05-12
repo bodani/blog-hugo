@@ -12,7 +12,7 @@ useradd NewUser
 
 passwd NewUser
 
-gpasswd -a NewUser whell
+gpasswd -a NewUser wheel
 ```
 
 ###### 本地禁用root登陆
@@ -70,7 +70,7 @@ PASS_WARN_AGE 7 #密码过期警告天数
 
 #### 登陆错误锁定
 
-###### 使用方式直接使用ssh 密钥登陆 ， 下面的方法自找麻烦
+###### 使用方式直接使用ssh 密钥登陆 ， 后面的方法自找麻烦
 ```
 ssh-keygen 生成钥匙
 
