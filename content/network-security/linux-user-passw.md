@@ -36,15 +36,18 @@ PermitRootLogin no
 修改 /etc/ssh/sshd_config
 ```
 #Port 22
-Port 2222
+Port 46608
 ```
 
-#### 修改ssh限制Ip规则
+#### 安全认证
 
 ```
-#ListenAddress 0.0.0.0
-ListenAddress x.x.0.0
-``` 
+LoginGraceTime 2m
+PermitRootLogin no
+#StrictModes yes
+#MaxAuthTries 6
+#MaxSessions 10
+```
 
 #### 超时退出
 
@@ -68,6 +71,13 @@ PASS_WARN_AGE 7 #密码过期警告天数
 #### 登陆错误锁定
 
 ###### 使用方式直接使用ssh 密钥登陆 ， 下面的方法自找麻烦
+```
+ssh-keygen 生成钥匙
+
+ssh-copy-id 将公钥上传到被访问的服务器
+
+PermitRootLogin without-password 修改sshd_config文件设置禁止密码登陆
+```
 
 连续密码错误3次锁定账户，普通用户5分钟后解锁，root用户10分钟后解锁
 
