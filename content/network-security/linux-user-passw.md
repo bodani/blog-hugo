@@ -39,6 +39,13 @@ PermitRootLogin no
 Port 2222
 ```
 
+#### 修改ssh限制Ip规则
+
+```
+#ListenAddress 0.0.0.0
+ListenAddress x.x.0.0
+``` 
+
 #### 超时退出
 
 例如客户端60秒无操作自动退出
