@@ -302,4 +302,46 @@ server promoting
 
  - [性能](https://m.aliyun.com/yunqi/articles/73540)   
 
+11 冲突及解决
+
+###### 冲突
+```
+FATAL:  terminating connection due to conflict with recovery  
+DETAIL:  User query might have needed to see row versions that must be removed.  
+HINT:  In a moment you should be able to reconnect to the database and repeat your command. 
+```
+
+###### 原因
+
+报错是备库事务或者单SQL查询时间长，和备库的日志apply发生冲突，如果业务上有长事务、长查询，主库上又再修改同一行数据，很容易造成备库的wal日志无法apply。
+
+wal无法apply数据库有两个策略：
+
+- 备库告诉主库需要哪些版本，让主库保留，备库查询始终能拿到需要的版本，不阻塞apply，因为备库总能拿到需要的版本
+
+- 备库apply进入等待，直到备库冲突查询结束，继续apply。可以设置超时时间。max_standby_streaming_delay
+
+###### 对应解决方法
+
+方法一
+```
+vacuum_defer_cleanup_age > 0
+或
+hot_standby_feedback=on
+
+```
+
+代价1，主库膨胀，因为垃圾版本要延迟若干个事务后才能被回收。
+
+代价2，重复扫描垃圾版本，重复耗费垃圾回收进程的CPU资源。（n_dead_tup会一直处于超过垃圾回收阈值的状态，从而autovacuum 不断唤醒worker进行回收动作）。
+
+代价3，如果期间发生大量垃圾，垃圾版本可能会在事务到达并解禁后，爆炸性的被回收，产生大量的WAL日志，从而造成WAL的写IO尖刺。
+
+方法二
+```
+max_standby_streaming_delay
+
+max_standby_archive_delay和max_standby_streaming_delay
+```
+代价，如果备库的QUERY与APPLY（恢复进程）冲突，那么备库的apply会出现延迟，也许从备库读到的是N秒以前的数据。
 
