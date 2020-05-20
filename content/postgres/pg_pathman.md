@@ -46,4 +46,44 @@ shared_preload_libraries = 'pg_stat_statements,pg_pathman'
 https://github.com/postgrespro/pg_pathman
 
 https://github.com/digoal/blog/blob/362b84417ca8b7aaf1add31fe7689c347642bb9a/201610/20161024_01.md
- 
+
+
+#### 简单应用
+
+1 将现有表分区，禁止数据迁移
+
+2 并行迁移数据
+
+3 禁止主表
+
+表 log
+字段 created_time not null
+
+按月分表,后续数据超出范围会自动创建分区（默认）
+
+查看表中最早日期
+```
+select min(created_time) from log;
+---
+2018-05-18 00:00:00
+```
+
+分表 false 表示禁止数据移动
+```
+select create_range_partitions('log'::regclass,'created_time','2018-05-18 00:00:00'::timestamp,interval '1 month', null,false);
+```
+
+并行迁移数据
+```
+select partition_table_concurrently('log'::regclass,10000,1.0);
+```
+
+查看迁移状态
+```
+select * from pathman_concurrent_part_tasks ;
+```
+
+禁主表
+```
+select set_enable_parent('log'::regclass,false);
+```
