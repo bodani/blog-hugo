@@ -67,6 +67,13 @@ SELECT add_drop_chunks_policy('conditions', INTERVAL '6 months');
 SELECT remove_drop_chunks_policy('conditions');
 ```
 
-#### 实验
+#### 注意事项
+
+```
+When creating hypertables, one constraing that TimescaleDB imposes is that the partitioning column (in your case 'date_time') must be included in any unique indexes (and Primary Keys) for that table.
+```
+https://stackoverflow.com/questions/61205063/error-cannot-create-a-unique-index-without-the-column-date-time-used-in-part
+
+
 
 
