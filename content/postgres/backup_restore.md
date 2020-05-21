@@ -11,6 +11,23 @@ Postgres 数据库备份恢复命令
 
 备份表：pg_dump -U postgres -t tablename dbname > 33.sql
 恢复表：psql -U postgres -d dbname < 33.sql
+
+只备份表结构 pg_dump -U postgres -s -t tablename dbname > 33.sql
+```
+
+copy 拷贝数据
+```
+数据拷贝到本地： psql -U postgres -d databasename  -p 5432 -h 10.1.1.1 -c "\copy (select * from $tablename where xxx) to '/tmp/db/$tablename.csv'";
+
+数据恢复到数据库: psql -U postgres -d databasename -p 5432 -h 127.0.0.1 -c "\copy $tablename from '/tmp/db/$tablename.csv'"; 
+```
+说明： cpoy 与 \copy 区别， \copy cvs数据在client端、copy svs数据在server端。
+
+注意事项: 需要在新数据库中对序列进行更新
+
+```
+psql -U postgres -d databasename -p 5432 -h 127.0.0.1 -c "select setval('xxxx_id_seq', max(id)) from xxx_table";
+
 ```
 
 实时备份恢复
