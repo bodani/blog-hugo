@@ -73,6 +73,11 @@ select min(created_time) from log;
 select create_range_partitions('log'::regclass,'created_time','2018-05-18 00:00:00'::timestamp,interval '1 month', null,false);
 ```
 
+查看分区表
+```
+select * from pathman_partition_list where parent = 'log'::regclass;
+```
+
 并行迁移数据
 ```
 select partition_table_concurrently('log'::regclass,10000,1.0);
@@ -87,3 +92,10 @@ select * from pathman_concurrent_part_tasks ;
 ```
 select set_enable_parent('log'::regclass,false);
 ```
+
+查看数据
+```
+select count(1) from only log;
+```
+
+
