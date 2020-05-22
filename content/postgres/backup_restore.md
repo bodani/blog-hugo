@@ -21,7 +21,7 @@ copy 拷贝数据
 
 数据恢复到数据库: psql -U postgres -d databasename -p 5432 -h 127.0.0.1 -c "\copy $tablename from '/tmp/db/$tablename.csv'"; 
 ```
-说明： cpoy 与 \copy 区别， \copy cvs数据在client端、copy svs数据在server端。
+说明： copy 与 \copy 区别， \copy cvs数据在client端、copy svs数据在server端。
 
 注意事项: 需要在新数据库中对序列进行更新
 
@@ -29,6 +29,14 @@ copy 拷贝数据
 psql -U postgres -d databasename -p 5432 -h 127.0.0.1 -c "select setval('xxxx_id_seq', max(id)) from xxx_table";
 
 ```
+
+copy from 数据量大时效率太低替代方法
+
+```
+/usr/pgsql-10/bin/pg_bulkload -U postgres -d dataname -i /xxx/xxx.csv -O tablename -l /tmp/xxx.log -P /tmp/xxx.bad -o "TYPE=CSV" -o $'DELIMITER=\t'
+```
+
+说明： pg_bulkload 为拓展形式。 需要在数据库中'create extends pg_bulkload' 。 
 
 实时备份恢复
 
