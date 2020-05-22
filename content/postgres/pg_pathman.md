@@ -56,8 +56,11 @@ https://github.com/digoal/blog/blob/362b84417ca8b7aaf1add31fe7689c347642bb9a/201
 
 3 禁止主表
 
-表 log
-字段 created_time not null
+表 log  必需满足
+
+- 字段 created_time not null
+
+- 无外键约束 
 
 按月分表,后续数据超出范围会自动创建分区（默认）
 
@@ -98,4 +101,75 @@ select set_enable_parent('log'::regclass,false);
 select count(1) from only log;
 ```
 
+#### 分区表常用管理
 
+将一个分区拆分为两个分区
+```
+split_range_partition(partition_relid REGCLASS,
+                      split_value     ANYELEMENT,
+                      partition_name  TEXT DEFAULT NULL,
+                      tablespace      TEXT DEFAULT NULL)
+```
+
+合并多个连续分区,数据将到第一个分区
+```
+merge_range_partitions(variadic partitions REGCLASS[])
+```
+
+向后追加一个分区,分区间隔默认
+```
+append_range_partition(parent_relid   REGCLASS,
+                       partition_name TEXT DEFAULT NULL,
+                       tablespace     TEXT DEFAULT NULL)
+```
+
+向前追加一个分区，分区间隔默认
+```
+prepend_range_partition(parent_relid   REGCLASS,
+                        partition_name TEXT DEFAULT NULL,
+                        tablespace     TEXT DEFAULT NULL)
+```
+
+添加一个自定义间隔分区: 如加一个
+```
+add_range_partition(parent_relid   REGCLASS,
+                    start_value    ANYELEMENT,
+                    end_value      ANYELEMENT,
+                    partition_name TEXT DEFAULT NULL,
+                    tablespace     TEXT DEFAULT NULL)
+```
+
+删除一个分区，及数据是否删除. 不删除数据将入主表
+```
+drop_range_partition(partition TEXT, delete_data BOOLEAN DEFAULT TRUE)
+```
+
+卸载分区为普通表
+```
+detach_range_partition(partition_relid REGCLASS)
+```
+
+挂载不同表为分区表
+```
+attach_range_partition(parent_relid    REGCLASS,
+                       partition_relid REGCLASS,
+                       start_value     ANYELEMENT,
+                       end_value       ANYELEMENT)
+```
+
+##### 参数
+
+修改默认分区间隔
+```
+set_interval(relation REGCLASS, value ANYELEMENT)
+```
+
+是否禁用主表,禁用后执行计划将不在走主表
+```
+set_enable_parent(relation REGCLASS, value BOOLEAN)
+```
+
+是否自动创建分区. 开启后注意事项， 如果有一条数据的时间异常，会创建大量的分区表。灾难
+```
+set_auto(relation REGCLASS, value BOOLEAN)
+```
