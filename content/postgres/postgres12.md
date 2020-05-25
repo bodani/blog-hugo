@@ -10,7 +10,7 @@ draft: false
 #下载源
 yum install https://download.postgresql.org/pub/repos/yum/reporpms/EL-7-x86_64/pgdg-redhat-repo-latest.noarch.rpm
 #安装服务
-yum install postgresql12 postgresql12-server
+yum install postgresql12 postgresql12-server postgresql12-contrib
 #初始化
 /usr/pgsql-12/bin/postgresql-12-setup initdb
 #启动服务
@@ -88,7 +88,7 @@ select  cast(random()*10 as integer), date'2006-02-01'  + (id||' hour')::interva
     from generate_series(1,2000) t(id);
 ```
 
-创建索引,与以前版本的区别可以在父表上统一创建索引。也可以在没个子表上根据需求分别创建索引。更灵活。  
+创建索引,与以前版本的区别可以在父表上统一创建索引。也可以在每个子表上根据需求分别创建索引。更灵活。  
 建议在分区列上创建索引，利用分区裁剪（enable_partition_pruning）提高效率。
 ```
 CREATE INDEX ON measurement (logdate);
@@ -105,7 +105,7 @@ ALTER TABLE measurement DETACH PARTITION measurement_y2006m02;
 ALTER TABLE measurement ATTACH PARTITION measurement_y2008m02
     FOR VALUES FROM ('2008-02-01') TO ('2008-03-01' );
 
---- 通常做法，对需要对加入的分区表加检查约束，然后在讲分区表加入到主表中
+--- 通常做法，对需要对加入的分区表加检查约束，然后在将分区表加入到主表中
 
 ALTER TABLE measurement_y2008m02 ADD CONSTRAINT y2008m02
    CHECK ( logdate >= DATE '2008-02-01' AND logdate < DATE '2008-03-01' );
@@ -120,7 +120,7 @@ ALTER TABLE measurement ATTACH PARTITION measurement_y2008m02
 
 通常情况下如果对一张表加入索引会堵塞该表的dml操作，特别是对一张大表的操作。
 
-默认情况下，如果在主表中加入一个索引，该索引也会加入到索引的子表中，无论是现有的子表还是将来新加入的子辫。这样极大的方便了对分区表的维护。目前在分区表上建立索引时不支持CONCURRENTLY
+默认情况下，如果在主表中加入一个索引，该索引也会加入到索引的子表中，无论是现有的子表还是将来新加入的字表。这样极大的方便了对分区表的维护。目前在分区表上建立索引时不支持CONCURRENTLY
 
 但是考虑的对在线业务的影响，在分区表中建议的操作流程。 
 

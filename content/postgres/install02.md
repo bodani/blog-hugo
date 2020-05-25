@@ -26,6 +26,12 @@ apt-get install postgresql-12 postgresql-client-12 postgresql-12-postgis-2.5 pos
 
 ```
 
+初始化
+
+```
+/usr/pgsql-12/bin/postgresql-12-setup initdb
+```
+
 启动
 
 ```
