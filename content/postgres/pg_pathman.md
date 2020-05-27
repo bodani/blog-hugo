@@ -173,3 +173,7 @@ set_enable_parent(relation REGCLASS, value BOOLEAN)
 ```
 set_auto(relation REGCLASS, value BOOLEAN)
 ```
+
+#### 遗留问题
+
+原表分区后数据磁盘占用增加近一倍，需要vaccum full 解决.
