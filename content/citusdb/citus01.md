@@ -61,3 +61,7 @@ sql 限制
 1 max_adptive_executor_pool_size 防止但库负载过大
 
 2 参考表默认查询每次都是访问一个数据库的分布。 设置 task_assigment_policy TO 'rond ' 轮询使用
+
+3 ddl 语言需要在每个节点中执行。
+
+https://blog.csdn.net/icreasy3/article/details/90720192
