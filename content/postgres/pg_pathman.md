@@ -179,3 +179,15 @@ set_auto(relation REGCLASS, value BOOLEAN)
 原表分区后数据磁盘占用增加近一倍，需要vacuum full 解决. 主表残留
 
 数据全部分区后 vacuum 速度也很快
+
+#### 注意事项
+
+对已经分区的表使用copy 方式导入数据后数据只存在于父表中，此时执行partition_table_concurrently 无效果
+
+解决
+
+ 1 set_enable_parent('log'::regclass, true)
+
+ 2 创建分区表 如插入一条数据 ， 时间比最小时间还小，select min(create) from only log
+
+ 3 partition_table_concurrently
