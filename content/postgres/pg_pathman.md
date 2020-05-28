@@ -149,7 +149,7 @@ drop_range_partition(partition TEXT, delete_data BOOLEAN DEFAULT TRUE)
 detach_range_partition(partition_relid REGCLASS)
 ```
 
-挂载不同表为分区表
+挂载普通表为分区表
 ```
 attach_range_partition(parent_relid    REGCLASS,
                        partition_relid REGCLASS,
@@ -176,4 +176,6 @@ set_auto(relation REGCLASS, value BOOLEAN)
 
 #### 遗留问题
 
-原表分区后数据磁盘占用增加近一倍，需要vaccum full 解决.
+原表分区后数据磁盘占用增加近一倍，需要vacuum full 解决. 主表残留
+
+数据全部分区后 vacuum 速度也很快
