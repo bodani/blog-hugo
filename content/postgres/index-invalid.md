@@ -61,7 +61,11 @@ postgres=# insert into tbl_index select generate_series(1,10000000),clock_timest
 INSERT 0 10000000
 Time: 153963.850 ms (02:33.964)
 ```
+tips 
+
 大量数据导入时建议先导入数据后创建索引
+
+更新频繁的字段不建议建索引，如update_time
 
 ##### 1.任何计算、函数、类型转换
 ```
@@ -366,6 +370,8 @@ postgres=# explain analyze select * from tbl_indexes where a = 10  or a = 11;
 (10 rows)
 
 Time: 2.928 ms
+
+如果检索条件为同一个字段 如a = 1 or a =2  转换为 a in (1,2) 会更优。
 ```
 
 如果多个字段为同一类型可使用数组化索引
@@ -483,6 +489,11 @@ postgres=# explain analyze select * from tbl_index_less where a = 4;
 (5 rows)
 
 ```
+tips 
+
+数据库是如何知道表中的数据量及数据分布情况 ，主要是依赖统计信息 pg_class ,pg_stats。
+
+当表数据变更很大时，如批量导入数据或删除数据时。需要及时使用analyze更新统计信息。
 
 <!--
 索引在哪些情况下失效
