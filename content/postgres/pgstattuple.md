@@ -14,7 +14,7 @@ draft: false
 
 - vacuum  ,tuple被清理。数据库可以自动执行autovacuum
 - vacuum full ,tuple被清理并且空间连续紧凑。弊端，在执行过程中会锁表。应用不可用
-- 为了避免锁表的影响，提供的pg_squeeze拓展。使用逻辑复制。[pg_repack拓展](https://www.timbotetsu.com/blog/postgresql-bloatbusters/)，使用了触发器，影响业务的性能。
+- 为了避免锁表的影响，提供的[pg_squeeze](https://github.com/cybertec-postgresql/pg_squeeze)拓展,使用逻辑复制。[pg_repack拓展](https://www.timbotetsu.com/blog/postgresql-bloatbusters/)，使用了触发器，影响业务的性能。
 
 2 fillfactor
 
