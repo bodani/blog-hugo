@@ -5,6 +5,7 @@ draft: false
 ---
 https://blog.csdn.net/pg_hgdb/article/details/79403651
 
+https://habr.com/en/company/postgrespro/blog/500714/
 ```
 查看被堵塞的任务
 select * from pg_locks where not granted;
