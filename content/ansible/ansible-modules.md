@@ -220,7 +220,7 @@ ansible all -m user -a "name=user123 state=absent remove=yes"
 用户组管理
 
 ```
-ansible all -m user -a "name=group123 state=present"
+ansible all -m group -a "name=group123 state=present"
 
 - name 用户组
 - state
