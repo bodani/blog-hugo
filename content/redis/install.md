@@ -98,3 +98,12 @@ config set requirepass foopassword
 ```
 
 [更多](https://blog.csdn.net/gfl1427097103/article/details/106256691)
+
+
+https://www.cnblogs.com/richiewlq/p/12191278.html
+
+##### 压测 
+
+```
+ redis-benchmark -h 127.0.0.1 -p 6379 -t set,lpush -n 10000 -q
+```
