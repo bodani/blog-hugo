@@ -20,7 +20,7 @@ draft: false
 
 ###### 方法
 
-- reposync 下载源，将远程服务源下载到本地
+- reposync , yumdownloader 下载源，将远程服务源下载到本地
 - nginx 将本地源对外提供服务
 - createrepo 生成本地源
 
