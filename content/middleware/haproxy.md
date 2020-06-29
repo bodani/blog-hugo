@@ -20,3 +20,6 @@ draft: false
 
 8. balance rdp-cookie(name) # 根据据cookie(name)来锁定并哈希每一次TCP请求 
 
+配置
+
+https://www.jianshu.com/p/baa296770bd5
