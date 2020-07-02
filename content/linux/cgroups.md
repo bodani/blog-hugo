@@ -6,6 +6,8 @@ draft: false
 
 https://www.certdepot.net/rhel7-get-started-cgroups/
 
+https://www.oracle.com/technical-resources/articles/linux/resource-controllers-linux.html
+
 iops和bps限制
 
 限制sda 的读写
