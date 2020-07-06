@@ -10,6 +10,8 @@ https://www.linode.com/docs/databases/postgresql/create-a-highly-available-postg
 
 [使用维护手册](./book/patroni使用维护手册.pdf)
 
+[ansible 管理](https://github.com/vitabaks/postgresql_cluster)
+
 
 其他HA 方案
 
