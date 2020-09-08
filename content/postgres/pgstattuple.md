@@ -270,3 +270,5 @@ select * from pg_freespace('tablename');
 select count(*) as "number of pages", pg_size_pretty(cast(avg(avail) as bigint)) as "freespace size ", round(100* avg(avail)/8192,2) as "freespace ratio" 
 from pg_freespace('tablename');
 ```
+
+[实战](https://mp.weixin.qq.com/s/g6j3WsBTGQipgEfrkzObRw)
