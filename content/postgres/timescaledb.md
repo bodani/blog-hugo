@@ -76,4 +76,15 @@ https://stackoverflow.com/questions/61205063/error-cannot-create-a-unique-index-
 
 
 
+#### 时序数据特征
+
+- have a timestamp
+- append only ,less update or delete
+- recent hot
+
+#### 限制
+
+除分区列外不可以在其他列中有唯一约束
+
+原数据库中的唯一约束为全局表内唯一约束，在分区表（chunks）中不能够保证全局唯一
 
