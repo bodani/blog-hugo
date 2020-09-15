@@ -88,3 +88,7 @@ https://stackoverflow.com/questions/61205063/error-cannot-create-a-unique-index-
 
 原数据库中的唯一约束为全局表内唯一约束，在分区表（chunks）中不能够保证全局唯一
 
+```
+When converting a normal SQL table to a hypertable, pay attention to how you handle constraints.
+A hypertable can contain foreign keys to normal SQL table columns, but the reverse is not allowed. UNIQUE and PRIMARY constraints must include the partitioning key.
+```
