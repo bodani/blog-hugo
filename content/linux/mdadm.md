@@ -172,3 +172,15 @@ active
 
 
 [更过详情](https://www.tecmint.com/category/raid/)
+
+#### 异常处理
+
+在组装过程中意外中断，机器重启，如下状态
+```
+ State : clean, resyncing (PENDING) 
+```
+
+解决
+```
+mdadm --readwrite /dev/md127 
+```
