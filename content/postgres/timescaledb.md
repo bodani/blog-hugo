@@ -58,6 +58,10 @@ SELECT show_chunks(newer_than => INTERVAL '3 months');
 SELECT show_chunks(older_than => INTERVAL '3 months', newer_than => INTERVAL '4 months');
 
 ```
+查看数数大小
+```
+SELECT * FROM timescaledb_information.hypertable;
+```
 
 自动删除
 ```
@@ -95,6 +99,13 @@ A hypertable can contain foreign keys to normal SQL table columns, but the rever
 
 #### 最佳实践
 
+##### chunk 时间范围
+
+ 与数据量有关，一个chunk容量约1/4 内存大小
+```
+SELECT * FROM create_hypertable('conditions', 'time',
+       chunk_time_interval => INTERVAL '1 day');
+```
 ##### 组合索引
 
  1 等值查询 （e,time）e 为等值查询列 time 为分区时间列   
@@ -106,10 +117,37 @@ A hypertable can contain foreign keys to normal SQL table columns, but the rever
 
  设置历史数据压缩策略，压缩后变成列存，且为只读
 
+ ```
+  alter table conditions set()
+
+  timescaledb.compress_segmentby
+  timescaledb.compress_orderby
+ ```
+ 设置压缩策略
+ ```
+  SELECT add_compress_chunks_policy('conditions', INTERVAL '60d'); 
+ ```
+ 删除压缩策略
+ ```
+  remove_compress_chunks_policy()
+ ```
+ 手动压缩
+ ```
+ SELECT compress_chunk('_timescaledb_internal._hyper_1_2_chunk');
+ ```
+ 解压缩
+ ```
+ SELECT compress_chunk('_timescaledb_internal._hyper_1_2_chunk');
+ ```
+ 
+
 ##### 保留策略
 
  设置保留数据策略
 
+```
+SELECT add_drop_chunks_policy('conditions', INTERVAL '24 hours');
+```
 ##### 连续分析窗口
 
  物化视图自动持续更新
