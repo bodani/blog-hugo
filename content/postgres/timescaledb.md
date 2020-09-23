@@ -92,3 +92,26 @@ https://stackoverflow.com/questions/61205063/error-cannot-create-a-unique-index-
 When converting a normal SQL table to a hypertable, pay attention to how you handle constraints.
 A hypertable can contain foreign keys to normal SQL table columns, but the reverse is not allowed. UNIQUE and PRIMARY constraints must include the partitioning key.
 ```
+
+#### 最佳实践
+
+##### 组合索引
+
+ 1 等值查询 （e,time）e 为等值查询列 time 为分区时间列   
+ 2 范围查询  (time,c) c 为连续值列 
+
+##### 排序
+
+##### 压缩
+
+ 设置历史数据压缩策略，压缩后变成列存，且为只读
+
+##### 保留策略
+
+ 设置保留数据策略
+
+##### 连续分析窗口
+
+ 物化视图自动持续更新
+
+
