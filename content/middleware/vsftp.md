@@ -144,5 +144,4 @@ vi /etc/pam.d/vsftpd
 ```
 write_enable=YES
 ```
-u
 
