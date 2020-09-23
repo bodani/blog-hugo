@@ -137,3 +137,12 @@ vi /etc/pam.d/vsftpd
 #auth       required     pam_shells.so
 ``` 
 
+问题5
+
+550 Ubuntu 下只有读权限没有写权限
+
+```
+write_enable=YES
+```
+u
+
