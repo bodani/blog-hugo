@@ -58,7 +58,7 @@ SELECT show_chunks(newer_than => INTERVAL '3 months');
 SELECT show_chunks(older_than => INTERVAL '3 months', newer_than => INTERVAL '4 months');
 
 ```
-查看数数大小
+查看数据大小
 ```
 SELECT * FROM timescaledb_information.hypertable;
 ```
@@ -118,7 +118,7 @@ SELECT * FROM create_hypertable('conditions', 'time',
  设置历史数据压缩策略，压缩后变成列存，且为只读
 
  ```
-  alter table conditions set()
+  alter table conditions set( timescaledb.compress);
 
   timescaledb.compress_segmentby
   timescaledb.compress_orderby
@@ -139,7 +139,16 @@ SELECT * FROM create_hypertable('conditions', 'time',
  ```
  SELECT compress_chunk('_timescaledb_internal._hyper_1_2_chunk');
  ```
+ 查看压缩情况
+ ```
+ SELECT * FROM timescaledb_information.compressed_chunk_stats;
+ ```
  
+ 手动批量压缩
+
+ ```
+ SELECT compress_chunk(i) from show_chunks('conditions', newer_than, older_than) i;	
+ ```
 
 ##### 保留策略
 
@@ -152,4 +161,21 @@ SELECT add_drop_chunks_policy('conditions', INTERVAL '24 hours');
 
  物化视图自动持续更新
 
+#### 更多信息查看
 
+比如压缩策略，保留策略，持续集成策略等
+```
+\dv timescaledb_information.*
+                            List of relations
+         Schema          |            Name             | Type |  Owner   
+-------------------------+-----------------------------+------+----------
+ timescaledb_information | compressed_chunk_stats      | view | postgres
+ timescaledb_information | compressed_hypertable_stats | view | postgres
+ timescaledb_information | continuous_aggregate_stats  | view | postgres
+ timescaledb_information | continuous_aggregates       | view | postgres
+ timescaledb_information | drop_chunks_policies        | view | postgres
+ timescaledb_information | hypertable                  | view | postgres
+ timescaledb_information | license                     | view | postgres
+ timescaledb_information | policy_stats                | view | postgres
+ timescaledb_information | reorder_policies            | view | postgres
+```
