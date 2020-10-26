@@ -12,6 +12,7 @@ https://www.linode.com/docs/databases/postgresql/create-a-highly-available-postg
 
 [ansible 管理](https://github.com/vitabaks/postgresql_cluster)
 
+[实践](https://mp.weixin.qq.com/s/edvWkTb-WF7YyVAFz5GCfw)
 
 其他HA 方案
 
