@@ -54,6 +54,26 @@ END LOOP;
 END$$;
 ```
 
+```
+DO $$DECLARE r record;
+BEGIN
+FOR r IN SELECT 
+  c.relname as Name 
+FROM pg_catalog.pg_class c
+     LEFT JOIN pg_catalog.pg_namespace n ON n.oid = c.relnamespace
+WHERE c.relkind IN ('r','p','v','m','S','f','')
+      AND n.nspname <> 'pg_catalog'
+      AND n.nspname <> 'information_schema'
+      AND n.nspname !~ '^pg_toast'
+  AND pg_catalog.pg_table_is_visible(c.oid) 
+  AND  pg_catalog.pg_get_userbyid(c.relowner) = 'postgres'
+  and n.nspname = 'public'
+LOOP
+EXECUTE 'alter table '|| r.Name ||' owner to new_owner;';
+END LOOP;
+END$$;
+```
+
 
 ##### 查看用户&数据库
 ```
