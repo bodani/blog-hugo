@@ -8,7 +8,15 @@ draft: false
 
 麒麟系统默认自带postgresql10.5
 
-安装过程与centos基本相同 , 但是如果想安装其他版本的postgres 需一番周折
+安装过程与centos基本相同 ,
+
+注意事项 
+
+1 安装postgresql-dev 
+
+2 编译 postgis 时./configure --with-pgconfig=/usr/bin/pg_config 
+
+但是如果想安装其他版本的postgres 需一番周折
 
 首先第一个问题麒麟系统对openssl过进行改造。在编译postgres支持ssl时不能通过。
 
@@ -84,4 +92,72 @@ make install
 
 wget https://download.osgeo.org/postgis/source/postgis-3.0.2.tar.gz
 
-./configure --with-pgconfig=/usr/pgsql-12/bin/pg_config --with-geoconfig=/usr/local/bin/geos-config
+./configure --with-pgconfig=/usr/pgsql-12/bin/pg_config --with-geosconfig=/usr/local/bin/geos-config
+
+
+```
+-------------- Dependencies -------------- 
+  GEOS config:          /usr/local/bin/geos-config
+  GEOS version:         3.8.1
+  GDAL config:          /usr/local/bin/gdal-config
+  GDAL version:         3.1.4
+  PostgreSQL config:    /usr/pgsql-12/bin/pg_config
+  PostgreSQL version:   PostgreSQL 12.5
+  PROJ4 version:        63
+  Libxml2 config:       /usr/bin/xml2-config
+  Libxml2 version:      2.9.8
+  JSON-C support:       no
+  protobuf support:     no
+  PCRE support:         yes
+  Perl:                 /usr/bin/perl
+  Wagyu:                no
+
+```
+
+问题
+
+```
+ldd /usr/pgsql-12/lib/postgis-3.so
+	linux-vdso.so.1 (0x0000fffdf6fa0000)
+	libgeos_c.so.1 => not found
+	libproj.so.15 => not found
+	libxml2.so.2 => /lib64/libxml2.so.2 (0x0000fffdf6cc0000)
+	libz.so.1 => /lib64/libz.so.1 (0x0000fffdf6c80000)
+	liblzma.so.5 => /lib64/liblzma.so.5 (0x0000fffdf6c30000)
+	libm.so.6 => /lib64/libm.so.6 (0x0000fffdf6b60000)
+	libdl.so.2 => /lib64/libdl.so.2 (0x0000fffdf6b30000)
+	libc.so.6 => /lib64/libc.so.6 (0x0000fffdf69a0000)
+	/lib/ld-linux-aarch64.so.1 (0x0000fffdf6fb0000)
+	libpthread.so.0 => /lib64/libpthread.so.0 (0x0000fffdf6960000)
+```
+
+解决
+
+```
+#新建文件
+vi /etc/ld.so.conf.d/postgis.conf
+#添加
+/usr/local/lib
+生效
+ldconfig 
+```
+
+查看
+```
+ldd /usr/pgsql-12/lib/postgis-3.so
+	linux-vdso.so.1 (0x0000fffdd96a0000)
+	libgeos_c.so.1 => /usr/local/lib/libgeos_c.so.1 (0x0000fffdd94f0000)
+	libproj.so.15 => /usr/local/lib/libproj.so.15 (0x0000fffdd9230000)
+	libxml2.so.2 => /lib64/libxml2.so.2 (0x0000fffdd90a0000)
+	libz.so.1 => /lib64/libz.so.1 (0x0000fffdd9060000)
+	liblzma.so.5 => /lib64/liblzma.so.5 (0x0000fffdd9010000)
+	libm.so.6 => /lib64/libm.so.6 (0x0000fffdd8f40000)
+	libdl.so.2 => /lib64/libdl.so.2 (0x0000fffdd8f10000)
+	libc.so.6 => /lib64/libc.so.6 (0x0000fffdd8d80000)
+	libgeos-3.8.1.so => /usr/local/lib/libgeos-3.8.1.so (0x0000fffdd8b90000)
+	libstdc++.so.6 => /lib64/libstdc++.so.6 (0x0000fffdd89e0000)
+	libgcc_s.so.1 => /lib64/libgcc_s.so.1 (0x0000fffdd89a0000)
+	libsqlite3.so.0 => /lib64/libsqlite3.so.0 (0x0000fffdd8870000)
+	libpthread.so.0 => /lib64/libpthread.so.0 (0x0000fffdd8830000)
+	/lib/ld-linux-aarch64.so.1 (0x0000fffdd96b0000)
+```
