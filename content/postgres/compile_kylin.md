@@ -161,3 +161,23 @@ ldd /usr/pgsql-12/lib/postgis-3.so
 	libpthread.so.0 => /lib64/libpthread.so.0 (0x0000fffdd8830000)
 	/lib/ld-linux-aarch64.so.1 (0x0000fffdd96b0000)
 ```
+
+##### pipelinedb
+
+编译安装zeromq
+```
+#!/bin/bash                                                                       
+      
+  
+      # pkg-config may not be necessary to install on all systems  
+      sudo apt-get install -y wget libtool autoconf automake pkg-config  
+      
+  
+      wget https://github.com/zeromq/libzmq/releases/download/v4.2.5/zeromq-4.2.5.tar.gz && \  
+          tar -xvf zeromq-4.2.5.tar.gz && \  
+          cd zeromq-4.2.5/ && \  
+          ./autogen.sh && \  
+          ./configure CPPFLAGS=-DPIC CFLAGS=-fPIC CXXFLAGS=-fPIC LDFLAGS=-fPIC --prefix=/usr && \  
+          make && \  
+          make install
+```
