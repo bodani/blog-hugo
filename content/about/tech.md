@@ -4,9 +4,13 @@ date: 2018-10-16T11:25:47+08:00
 draft: false
 ---
 
-##### 技术架构
-![Example image](images/tech.png)
+##### 基础服务架构
+![base image](images/tech.png)
 
+---
+##### Postgres架构
+
+![pg image](images/pg.png)
 ---
 
 ##### 服务治理
