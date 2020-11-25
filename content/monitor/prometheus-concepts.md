@@ -88,7 +88,7 @@ exporter　通过http暴露自己的数据，prometheus服务主要采用pull的
 
 2, prometheus与alertmanger
 
-在prometheus的配置中指定报名服务altermanager,同时在prometheus中自定rules触发报警的规则。
+在prometheus的配置中指定报警服务altermanager,同时在prometheus中制定rules触发报警的规则。
 altertmanger中定义配置各种报警机制,如email, stack等
 
 #### 架构
