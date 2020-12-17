@@ -384,7 +384,7 @@ CREATE OR REPLACE VIEW monitor.pg_index_bloat_human AS
     FROM monitor.pg_index_bloat;
 ```
 
-##### 主要原因分析
+##### 主要原因分析及监控措施
 
 ###### 长事务
 ```
