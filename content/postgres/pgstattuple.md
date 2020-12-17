@@ -387,12 +387,22 @@ CREATE OR REPLACE VIEW monitor.pg_index_bloat_human AS
 ##### 主要原因分析及监控措施
 
 ###### 长事务
+
 ```
+-- 跨事务
 SELECT pid, datname, usename, state, backend_xmin
 FROM pg_stat_activity
 WHERE backend_xmin IS NOT NULL
 ORDER BY age(backend_xmin) DESC;
 ```
+```
+-- 跨时间
+select * from pg_stat_activity 
+where state<>'idle' and pg_backend_pid()!=pid and (backend_xid is not null or backend_xmin is not null) and 
+extract(epoch from(now()-xact_start))>6 
+order by xact_start;
+```
+
 ###### 废弃的复制槽
 ```
 SELECT slot_name, slot_type, database, xmin
