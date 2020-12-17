@@ -383,3 +383,26 @@ CREATE OR REPLACE VIEW monitor.pg_index_bloat_human AS
            round(100 * ratio::NUMERIC, 2)         as ratio
     FROM monitor.pg_index_bloat;
 ```
+
+##### 原因分析
+
+###### 长事务
+```
+SELECT pid, datname, usename, state, backend_xmin
+FROM pg_stat_activity
+WHERE backend_xmin IS NOT NULL
+ORDER BY age(backend_xmin) DESC;
+```
+###### 废弃的复制槽
+```
+SELECT slot_name, slot_type, database, xmin
+FROM pg_replication_slots
+ORDER BY age(xmin) DESC;
+```
+
+###### 两阶段提交
+```
+SELECT gid, prepared, owner, database, transaction AS xmin
+FROM pg_prepared_xacts
+ORDER BY age(transaction) DESC;
+```
