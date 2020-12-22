@@ -98,3 +98,6 @@ altertmanger中定义配置各种报警机制,如email, stack等
 
 
 
+#### 配置
+
+- 抓取时间设置 https://www.robustperception.io/keep-it-simple-scrape_interval-id

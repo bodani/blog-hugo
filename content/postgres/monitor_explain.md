@@ -31,9 +31,15 @@ VACUUM ANALYZE VERBOSE ;
 ##### 垃圾回收
 
 ```
+-- 表空间膨胀率, 死元组
 select relname,size,ratio from monitor.pg_table_bloat;
 ```
 [视图定义 -见](./postgres/pgstattuple/)
+
+```
+-- 垃圾回收开始时间结束时间 进程数
+
+```
 
 ##### WAL
 
@@ -44,3 +50,27 @@ select count(1) from pg_catalog.pg_ls_waldir() where modification > CURRENT_TIME
 --- wal写入速率
 SELECT CASE WHEN pg_is_in_recovery() THEN pg_last_wal_replay_lsn() ELSE pg_current_wal_lsn() END - '0/0' as wal_lsn;
 ```
+
+##### CheckPoint 
+```
+-- checkpoint  发生频率
+```
+
+##### 连接数
+```
+
+```
+
+##### 长事物
+```
+pg_stat_activity > 2小时
+```
+
+##### 2pc 未提交事物
+```
+pg_prepared_xact() > 5 分钟
+```
+
+##### 复制槽 
+
+##### 
