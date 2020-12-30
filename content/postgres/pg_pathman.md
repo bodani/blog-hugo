@@ -41,12 +41,24 @@ https://www.jianshu.com/p/1cba77d18694
 ```
 shared_preload_libraries = 'pg_stat_statements,pg_pathman'
 ```
+创建拓展
+```
+CREATE SCHEMA pathman;
+GRANT USAGE ON SCHEMA pathman TO PUBLIC;
+CREATE EXTENSION pg_pathman WITH SCHEMA pathman;
+```
+
 #### 参考
 
 https://github.com/postgrespro/pg_pathman
 
 https://github.com/digoal/blog/blob/362b84417ca8b7aaf1add31fe7689c347642bb9a/201610/20161024_01.md
 
+#### 常见错误
+```
+FATAL:  could not load library "/usr/pgsql-12/lib/pg_pathman.so": /usr/pgsql-12/lib/pg_pathman.so: undefined symbol: expandTableLikeClause
+postgres 版本问题
+```
 
 #### 简单应用
 

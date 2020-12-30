@@ -38,6 +38,19 @@ pid     cl_addr      cl_port   datname       usename    appname    backend_type 
 27410   10.1.88.22   34058     timescaledb   postgres              client backend                                  active   00:00:00   00:00:00          00:00:00          COMMIT                 
 ```
 
+[pg_activity](https://github.com/dalibo/pg_activity)
+```
+pg_activity
+- postgres@localhost:5432/postgres - Ref.: 2s
+  Size:   60.54G -     0.00B/s        | TPS:        1243        | Active Connections:           2        | Duration mode:       query
+  Mem.:   24.40% -     4.51G/62.66G   | IO Max:      342/s
+  Swap:    2.10% -   515.50M/23.85G   | Read :      0.00B/s -      0/s
+  Load:    0.93 1.38 1.49             | Write:      0.00B/s -      0/s
+                                                                               RUNNING QUERIES
+PID    DATABASE                      APP             USER           CLIENT   CPU% MEM%   READ/s  WRITE/s     TIME+  W  IOW              state   Query
+33430  None                  walreceiver         postgres     10.1.80.6/32    1.0  0.0    0.00B    0.00B  0.000000  N    N             active
+```
+
 [monitoring-stats](https://www.postgresql.org/docs/devel/monitoring-stats.html)
 
 
