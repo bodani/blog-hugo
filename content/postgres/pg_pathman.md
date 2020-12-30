@@ -41,6 +41,7 @@ https://www.jianshu.com/p/1cba77d18694
 ```
 shared_preload_libraries = 'pg_stat_statements,pg_pathman'
 ```
+
 创建拓展
 ```
 CREATE SCHEMA pathman;
@@ -188,9 +189,11 @@ set_auto(relation REGCLASS, value BOOLEAN)
 
 #### 遗留问题
 
-原表分区后数据磁盘占用增加近一倍，需要vacuum full 解决. 主表残留
+1 原表分区后数据磁盘占用增加近一倍，需要vacuum full 解决. 主表残留
 
 数据全部分区后 vacuum 速度也很快
+
+2 分区后对父表添加或删除索引操作对现有分区表不产生作用，仅对新生成的分区有效。[How do I create indexes?](https://github.com/postgrespro/pg_pathman/wiki/How-do-I-create-indexes%3F)
 
 #### 注意事项
 
