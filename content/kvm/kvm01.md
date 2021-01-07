@@ -16,6 +16,7 @@ apt-get install qemu-kvm libvirt0 virtinst bridge-utils virt-viewer
 
  cat /etc/network/interfaces
 
+```
 auto lo
 iface lo inet loopback
 auto br0
@@ -26,6 +27,7 @@ gateway 10.1.0.1
 type bridge
 bridge_ports eth0
 dns-nameservers 114.114.114.114
+```
 
 .创建一个虚拟机
 
