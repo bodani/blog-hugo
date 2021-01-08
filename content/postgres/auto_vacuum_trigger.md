@@ -25,7 +25,9 @@ draft: false
 
 这样就会过于频繁的满足触发条件。于是50就相当于一个最低门槛。表中总数量在50以内的就暂时不触发垃圾回收了。
 
-即：if (当前表更新数> 触发条件) do ...
+  * threshold = vac_base_thresh + vac_scale_factor * reltuples
+
+即：if (当前表更新数> 触发阀值) do ...
 
 ###### 今天思考的是等号左边的事情
 
@@ -51,6 +53,7 @@ draft: false
 ##### 真相
 
 ‘计数器’ 是有stats collector 进程来维护。 当数据库进行dml操作时，stats collector 进行实时计数统计。该值存在于pg_stat_all_table 中
+
 
 查看pg_stats_all_table 表定义
 ```
@@ -159,6 +162,32 @@ postgres=# \d+ pg_class
 ```
 
 pg_class 中的信息是analyze 操作后更新，而计数器是oid上不同维度的统计。
+
+统计维度设置
+
+```
+#------------------------------------------------------------------------------
+# STATISTICS
+#------------------------------------------------------------------------------
+
+# - Query and Index Statistics Collector -
+
+#track_activities = on
+#track_counts = on
+#track_io_timing = off
+#track_functions = none                 # none, pl, all
+#track_activity_query_size = 1024       # (change requires restart)
+#stats_temp_directory = 'pg_stat_tmp  统计信息存放位置
+```
+```
+tree pg_stat_tmp/
+pg_stat_tmp/
+├── db_0.stat
+├── db_14187.stat
+├── db_16384.stat
+├── db_20579.stat
+└── global.stat
+```
 
 思考->迷惑->寻找答案->日渐清晰 ，日进一步
 
