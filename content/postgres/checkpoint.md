@@ -139,3 +139,7 @@ http://www.postgres.cn/news/viewone/1/273
 更多细节说明
 
 https://yq.aliyun.com/articles/582847
+
+原理
+
+https://zhmin.github.io/2019/11/24/postgresql-checkpoint/
