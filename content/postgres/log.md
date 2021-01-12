@@ -161,4 +161,6 @@ COPY postgres_log FROM 'log/postgresql-2018-12-05_103141.csv' WITH csv;
 
 自由发挥
 
+日志分析报表 [PGBADGER](http://pgbadger.darold.net/documentation.html)
+
 拓展 pgaudit

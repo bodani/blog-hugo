@@ -108,3 +108,7 @@ ctid
 可以看到test1中因为填充率为100%,update后第一页中没有位置存储新的数据了,所以检查最大的页文件是否还有位置,如果有直接插入,如果没有则再新建一页后插入,在本例中跳过了132个页文件.
 
 test2中因为填充率为80%,还有20%的空间可以存储数据,因此update后直接在历史数据所在的页后面插入数据.
+
+#### fillfactor 的设置
+
+fillfactor 的设置可直接影响hotupdate的比例， 通过wal日志的解析可以查看hotupdate的情况 [checkpoint](./postgres/checkpoint)
