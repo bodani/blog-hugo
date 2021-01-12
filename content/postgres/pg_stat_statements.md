@@ -121,6 +121,12 @@ select userid::regrole, dbid, query from pg_stat_statements order by (shared_blk
 select userid::regrole, dbid, query from pg_stat_statements order by temp_blks_written desc limit 5;  
 ```
 
+最访问频繁 SQL 
+
+```
+select userid::regrole, dbid, query ,calls from pg_stat_statements order by calls desc limit 5;
+```
+
 #### 重置统计信息
 pg_stat_statements是累积的统计，如果要查看某个时间段的统计，需要打快照
 
