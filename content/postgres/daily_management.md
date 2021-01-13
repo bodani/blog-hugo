@@ -1,8 +1,23 @@
 ---
-title: "数据库日常管理查看"
+title: "数据库日常管理"
 date: 2020-04-07T10:38:45+08:00
 draft: false
 ---
+
+#### 日常管理
+
+- 可用性
+- 监测项
+
+#### 可用性
+
+- 主从
+- HA
+- 全量备份
+- 增量备份
+- 恢复
+
+#### 监测项
 
 ##### 磁盘空间
 - 全库
@@ -26,8 +41,6 @@ FROM information_schema.tables where table_schema = 'public' ORDER BY pg_total_r
 
 - 表
 
-```
-``
 
 - 索引
 
@@ -55,6 +68,11 @@ FROM information_schema.tables where table_schema = 'public' ORDER BY pg_total_r
 - 系统膨胀时间点
 - 引发自动回收次数
 - 关闭自动回收
+
+##### checkpiont
+
+- 频率
+- wal膨胀
 
 ##### 锁
 
