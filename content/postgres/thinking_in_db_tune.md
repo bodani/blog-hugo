@@ -20,6 +20,8 @@ draft: false
 
 ##### 监测很重要
 
+你是我的眼 👀
+
 作用
 
 - 早期发现问题
@@ -37,18 +39,33 @@ draft: false
 
 - vacuum
 
+避免在高峰时发生，又能及时处理，避免表膨胀。调整触发条件及手动触发
+
 - checkpoint
+
+频率，IO平滑度
 
 - sql
 
+满足功能同时是否考虑性能
+
 - wal
+
+输出量，FPI
 
 - hotupdate 
 
-- buffer 
+热更新比例 调整fillfactor
 
-- index
+- 缓存 buffer 
 
-- lock
+命中率 是否产生tempfile
 
+- 索引 index
 
+利用率，需要加，没必要的删
+
+- 锁 lock
+
+锁等待,死锁
+ 

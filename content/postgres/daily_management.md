@@ -88,3 +88,5 @@ FROM information_schema.tables where table_schema = 'public' ORDER BY pg_total_r
 - 性能抖动
 - 内存
 - 临时空间
+- 长事务
+- 慢查询
