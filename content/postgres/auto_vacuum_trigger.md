@@ -25,11 +25,27 @@ draft: false
 
 这样就会过于频繁的满足触发条件。于是50就相当于一个最低门槛。表中总数量在50以内的就暂时不触发垃圾回收了。
 
-  * threshold = vac_base_thresh + vac_scale_factor * reltuples
+  * threshold = pg_class.reltuples*autovacuum_vacuum_scale_factor+autovacuum_vacuum_threshold
 
 即：if (当前表更新数> 触发阀值) do ...
 
-###### 今天思考的是等号左边的事情
+###### 等号右边的理解
+
+```
+-- 触发自动analyze
+pg_class.reltuples*autovacuum_analyze_scale_factor+autovacuum_analyze_threshold
+-- 触发自动autovacuum
+pg_class.reltuples*autovacuum_vacuum_scale_factor+autovacuum_vacuum_threshold
+```
+两个公式相似。其中的值都除了pg_class.reltuples 以外都是来自于配置
+
+pg_class.reltuples 来自系统统计表，在analyze 后更新。
+
+所以通常配置触发参数时，尽量将analyze 触发条件要更敏感性。
+
+[测试参考](https://blog.csdn.net/cmzhuang/article/details/84643618)
+
+###### 思考的是等号左边的事情
 
 数据库是如何知道当前更的数量, 按照已有的经验（经验不足）。
 

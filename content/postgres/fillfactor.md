@@ -78,10 +78,12 @@ insert into test2(name)
 ****************************************************************************************/
 
 select ctid,objectid from test1 limit 500;
+略
 
-select ctid,objectid from test1 limit 500;
+select ctid,objectid from test2 limit 500;
+略
 
----test1
+---test1 --- fillfactor = 100
  select ctid from test1 where objectid = 93;
  ctid 
 -------- 
@@ -91,7 +93,8 @@ select ctid from test1 where objectid = 93;
 ctid 
 ---------- 
 (133,31) (1 row) 
---test2 
+
+--test2 --- fillfactor = 80 
 select ctid from test2 where objectid = 93;
 ctid 
 -------- 
