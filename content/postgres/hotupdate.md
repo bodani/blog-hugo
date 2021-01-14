@@ -16,6 +16,10 @@ HOT是“Heap Only Tuple”（仅元组堆）的缩写, 用来提高update效率
 
 - 在已修改值的任何列上均未定义索引
 
+##### 生产应用
+
+使用[fillfactor](./postgres/fillfactor)以获取HOT更新
+
 ##### 例子
 
 建表
