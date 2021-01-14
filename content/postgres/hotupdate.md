@@ -116,3 +116,5 @@ postgres=# select  n_tup_upd, n_tup_hot_upd from pg_stat_all_tables where relnam
 (1 行记录)
 
 ```
+
+[more](https://www.modb.pro/db/33457)
