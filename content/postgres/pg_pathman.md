@@ -35,6 +35,20 @@ Default partition Partition improvements
 
 https://www.jianshu.com/p/1cba77d18694
 
+#### pathman 分区表 转换为原生分区表
+
+https://github.com/digoal/blog/blob/master/201911/20191113_01.md
+
+主要思路
+
+1 创建一个与原来分区表一样的主表包括分区方式 。
+
+2 将原来的主表上的分区都卸载为普通表，在重新按照原生分区表的方式挂载上去。
+
+直接2 也行
+
+拓展思考。 分区数据迁移使用pg_pathman，迁移后再转换到原生表。
+
 #### 注意事项
 
 需要将pg_pathman放在后面注册，如pg_stat_statements。
