@@ -215,6 +215,30 @@ TYPE (简要模式不可见)存在两种类型, Pre-failed(故障预警)和Old_a
 
 UPDATED (简要模式不可见)存在两种更新模式 Always(持续更新)和 Offline(离线更新)
 
+#### 已使用寿命参考
+
+Percentage Used Endurance Indicator
+``
+smartctl -l devstat /dev/sdb
+smartctl 7.0 2018-12-30 r4883 [x86_64-linux-3.10.0-957.10.1.el7.x86_64] (local build)
+Copyright (C) 2002-18, Bruce Allen, Christian Franke, www.smartmontools.org
+
+Device Statistics (GP Log 0x04)
+Page  Offset Size        Value Flags Description
+0x01  =====  =               =  ===  == General Statistics (rev 1) ==
+0x01  0x008  4              26  ---  Lifetime Power-On Resets
+0x01  0x010  4           15617  ---  Power-on Hours
+0x01  0x018  6      3482676599  ---  Logical Sectors Written
+0x01  0x020  6        71733219  ---  Number of Write Commands
+0x01  0x028  6      2754401909  ---  Logical Sectors Read
+0x01  0x030  6        16315927  ---  Number of Read Commands
+0x07  =====  =               =  ===  == Solid State Device Statistics (rev 1) ==
+0x07  0x008  1               8  ---  Percentage Used Endurance Indicator
+                                |||_ C monitored condition met
+                                ||__ D supports DSN
+                                |___ N normalized value
+```
+
 #### TODO Smartd 服务
 
 ```
@@ -224,3 +248,6 @@ systemctl status smartd
 配置　
 
 vi /etc/smartmontools/smartd.conf
+
+
+集成监控 [smartctl_exporter](https://github.com/Sheridan/smartctl_exporter)
