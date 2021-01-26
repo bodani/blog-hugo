@@ -1,5 +1,5 @@
 ---
-title: "安装 Postgresql 10"
+title: "安装 Postgresql"
 date: 2018-10-17T14:37:56+08:00
 draft: false
 ---
@@ -172,3 +172,13 @@ reboot 生效
 #### 数据库参数
 
 [参见](postgres/params/)
+
+#### 常见问题
+
+```
+Package: postgresql12-devel-12.3-1PGDG.rhel7.x86_64 (pgdg12)
+           Requires: llvm-toolset-7-clang >= 4.0.1
+install CentOS SCLo RH repository and install llvm-toolset-7-clang to resolve it.
+yum install centos-release-scl-rh
+yum install llvm-toolset-7-clang
+```
