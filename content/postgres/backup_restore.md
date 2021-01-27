@@ -13,6 +13,7 @@ Postgres 数据库备份恢复命令
 恢复表：psql -U postgres -d dbname < 33.sql
 
 只备份表结构 pg_dump -U postgres -s -t tablename dbname > 33.sql
+只备份数据 pg_dump -U postgres -a -t tablename dbname > 33.sql
 ```
 
 copy 拷贝数据
