@@ -345,3 +345,18 @@ max_standby_archive_delay和max_standby_streaming_delay
 ```
 代价，如果备库的QUERY与APPLY（恢复进程）冲突，那么备库的apply会出现延迟，也许从备库读到的是N秒以前的数据。
 
+12 pg 12 变更
+
+- recovery.conf 中的配置内容位置变更到postgresql.auto.conf
+
+- trigger_file -> promte_trigger_file
+
+- 增加 standby.signal recovery.signal
+
+13 虚拟备库
+
+```
+pg_receivewal
+```
+
+备份增量wal日志，并可压缩备份。结合wal-g 做数据备份
