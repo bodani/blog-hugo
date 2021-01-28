@@ -39,8 +39,8 @@ pg_rewind登场 告别一下回到解放前。
 
 注意事项 : 
 
-- 必须开启full page write 默认开启
-- 必须开启wal hint或者data block checksum 修改后需要重启
+- 必须开启full_page_writes 默认开启
+- 必须开启wal_log_hints 修改后需要重启 或者data block checksum 数据库初始化时设置
 
 1 将10.1.88.72从库变成主库
 
@@ -61,7 +61,7 @@ touch /home/postgres.trigger
 
 3 将数据库原主库（10.1.88.71）变为从库
 
-##### 一下步骤必须按照顺序执行，并且中间不能出现误操作！！！
+##### 一下步骤必须按照顺序执行，并且中间不要操作失误！！！
 
 a 停库
 
@@ -88,6 +88,7 @@ mv recovery.done recovery.conf
 
 vi recovery.conf
 ```
+recovery_target_timeline='latest'
 standby_mode = 'on'
 primary_conninfo = 'user=postgres passfile=''/root/.pgpass'' host=10.1.88.72 port=5432 sslmode=prefer sslcompression=1 krbsrvname=postgres target_session_attrs=any'
 ```
