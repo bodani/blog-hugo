@@ -19,6 +19,11 @@ superuser_reserved_connections = 3 # 预留给超级管理员的连接数。
 port = 5432                        # 默认访问端口
 wal_keep_segments = 1024           # wal 日志保存数量
 ```
+##### wal日志
+```
+wal_log_hints = on 
+full_page_writes = on
+```
 
 #### 成本因子 
 
