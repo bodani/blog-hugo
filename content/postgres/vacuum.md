@@ -196,4 +196,12 @@ Autovacuum 基础调优 [中文](https://mp.weixin.qq.com/s/ekKuDMEkQsZX5vx0VG0_
 
  监控数据库的autovacuum ，使其在达到触发条件前被及时发现。
 
+##### DBA 维护
+
+- 参考表空间膨胀率计算执行预期效果
+- 执行前设置 main_workme 增加临时使用内存
+- 执行前设置 vacuum_cost_delay , vacuum_cost_limit 调整处理速度
+- 执行vacuum VERVOSE ANALYZE
+- 执行analyze 更新统计信息
+- 进度查看 select * from pg_stat_pro vacuum
 

@@ -4,6 +4,25 @@ date: 2018-11-19T09:00:44+08:00
 draft: false
 ---
 
+#### 用途
+
+优点
+
+- 主键唯一约束
+- 加速检索
+- 排序 
+
+缺点
+
+- 更新数据时需要同时维护对应索引
+- 占用磁盘空间，甚至比表数据本身还要多
+
+使用场景利弊分析
+
+- TP与AP应用
+- 读写使用比例
+- 点查询批量查询
+
 #### 创建索引
 
 ```
@@ -18,16 +37,18 @@ CREATE [ UNIQUE ] INDEX [ CONCURRENTLY ] [ [ IF NOT EXISTS ] 名称 ] ON 表名 
     [ WHERE 述词 ]
 ```
 
+#### 注意事项
+
 1. 增加maintenance_work_mem,有利于提高创建索引的效率
 2. 创建索引时会有一个share锁锁表，确保表不能有任何更改。在生产系统中如果在一个大表中阻塞时间过长会有问题，解决方法， create index CONCURRENTLY 。  
    创建的时间会增加一倍，不保证会创建成功。
 
 
-#### 数据库索引类型概览
+#### 数据库索引类型概览(实现算法)
 
-- b-tree适合所有的数据类型，支持排序，支持大于、小于、等于、大于或等于、小于或等于的搜索。
+- b-tree适合所有的数据类型，支持排序，支持大于、小于、等于、大于或等于、小于或等于的搜索。LIKE,ILIKE,~ 搜索。  
 - hash 只支持等值查询,特别适用于字段VALUE非常长,例如很长的字符串，并且用户只需要等值搜索，建议使用hash index。 注意：hash索引没有产生wal,主从流复制时从库没有创建 
-- gin是倒排索引,适合多值类型，例如数组、全文检索、TOKEN。  
+- gin是倒排索引,适合多值类型，例如数组、JSON、全文检索、TOKEN。  
 - gist：R-Tree索引，支持包含，相交，距离，点面判断等查询；适合几何类型、范围类型、全文检索、异构类型等。 
 - sp-gist：空间分区（平衡）r-tree，支持包含，相交，距离，点面判断等查询；适合几何类型、范围类型、全文检索、异构类型等。 
 - brin：块级索引，适合物理存储与列值存在较好相关性的字段。比如时序数据、物联网传感数据、FEED数据等。支持范围查询、等值查询。  
@@ -36,9 +57,7 @@ CREATE [ UNIQUE ] INDEX [ CONCURRENTLY ] [ [ IF NOT EXISTS ] 名称 ] ON 表名 
 
 详细介绍 https://leopard.in.ua/2015/04/13/postgresql-indexes   
 
-还可以创建部分索引和表达式索引
-
-通过[pageinspect](https://www.postgresql.org/docs/10/pageinspect.html)debug索引
+通过[pageinspect](https://www.postgresql.org/docs/10/pageinspect.html) debug 索引
 
 查看数据库有哪些索引类型
 ```
@@ -55,9 +74,18 @@ select * from pg_am;
 
 ```
 
+#### 数据索引类型（创建方式）
+
+- 部分索引
+- 表达式索引
+- 唯一索引
+- 多列索引
+
+#### 应用举例
+
 #### 检查缺失的索引
 
-尝试查找出经常被扫描的大型表（avg高），那些表将出现在结果的顶部。
+尝试查找出经常被扫描的大型表（avg高）,顺序扫描的占比高，那些表将出现在结果的顶部。
 
 ```
 SELECT schemaname, relname, seq_scan,seq_tup_read,idx_scan,seq_tup_read / seq_scan AS avg FROM pg_stat_user_tables WHERE seq_scan > 0 ORDER BY seq_tup_read DESC LIMIT 20;
