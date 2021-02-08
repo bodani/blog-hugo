@@ -5,7 +5,7 @@ echo -e "\033[0;32mDeploying updates to GitHub...\033[0m"
 # Build the project.
 cd public 
 
-git pull
+git pull origin main
 
 cd ..
 
@@ -15,7 +15,7 @@ hugo -t simple # if using a theme, replace with `hugo -t <YOURTHEME>`
 cd public
 # Add changes to git.
 
-git pull
+git pull origin main
 
 git add .
 
@@ -27,7 +27,7 @@ fi
 git commit -m "$msg"
 
 # Push source and build repos.
-git push origin master
+git push origin main
 
 # Come Back up to the Project Root
 cd ..
