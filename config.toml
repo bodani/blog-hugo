@@ -6,7 +6,7 @@ title = "Let's Go!"
 staticDir = "static"
 [Params]
 	subTitle = "Let's build cloud native together,  go! go! go! "
-	copyright = "2018 by Eamon"
+	copyright = "2018-2021 by Eamon"
         linkGithub = "https://github.com/bodani/blog-hugo"
 [NavBar]
        
