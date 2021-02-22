@@ -24,4 +24,8 @@
     
 ## 下载
 
-   git clone --recurse-submodules=public https://github.com/bodani/blog-hugo.git 
+   文档
+   git clone https://github.com/bodani/blog-hugo.git
+
+   主题
+   git submodule add https://github.com/bodani/Simple/ themes/simple 
