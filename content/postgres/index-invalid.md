@@ -514,3 +514,8 @@ http://www.cnblogs.com/alianbog/p/5631505.html
 
 mysql 索引建议 参考
 https://mp.weixin.qq.com/s/xdbo67F72a9eTV93TEuL6w
+
+[索引利用统计](https://github.com/powa-team/pg_qualstats)
+```
+A PostgreSQL extension for collecting statistics about predicates, helping find what indices are missing
+```

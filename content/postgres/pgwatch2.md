@@ -8,6 +8,8 @@ draft: false
 
 [pgwatch2官方](https://github.com/cybertec-postgresql/pgwatch2)
 
+[官方演示示例](https://demo.pgwatch.com/)
+
 架构 agent server
 
 - agent 在被监控的pg上自定义方法，用于收集数据库信息。这些自定义的方法需要依赖需要数据库扩展如pg_stat_statements,plpythonu.
