@@ -139,6 +139,7 @@ postgres=#\l
 
 状态查看
 
+[WAL Sender 信息说明](https://mp.weixin.qq.com/s/VlXRPUzu0On7aYPqGjfkrg)
 ```
 主库 查看同步状态
 postgres=# select * from pg_stat_replication ;

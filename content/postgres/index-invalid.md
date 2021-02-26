@@ -511,3 +511,6 @@ select * from pg_stat_all_indexes where relname = 'tbl_name';
 ```
 创建索引
 http://www.cnblogs.com/alianbog/p/5631505.html 
+
+mysql 索引建议 参考
+https://mp.weixin.qq.com/s/xdbo67F72a9eTV93TEuL6w
