@@ -1,8 +1,29 @@
 ---
-title: "patroni auto ha"
+title: "PG高可用Patroni"
 date: 2019-01-30T10:14:55+08:00
 draft: false
 ---
+
+#### 实现目标
+
+- 高可用方案对比
+- patroni 架构分析
+- patroni 搭建新集群
+- patroni 接管现有集群
+- patroni 管理pg配置
+- 手动swithover
+- 自动failover
+- 维护模式
+- 弹性扩容，缩容
+- 对外提供统一服务
+- 备份恢复
+- 监控
+- 日志
+- 升级
+
+
+
+[参考]
 
 https://www.cnblogs.com/zhangeamon/p/9772118.html
 
