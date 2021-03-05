@@ -1,5 +1,5 @@
 ---
-title: "pg_rewind"
+title: "PG主从切换 pg_rewind"
 date: 2019-01-30T10:16:17+08:00
 draft: false
 ---
