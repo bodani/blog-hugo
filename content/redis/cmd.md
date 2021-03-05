@@ -1,7 +1,7 @@
 ---
 title: "常用命令"
 date: 2021-02-19T21:32:46+08:00
-draft: false
+draft: true 
 ---
 
 - [Features](/redis/cmd/#features)
