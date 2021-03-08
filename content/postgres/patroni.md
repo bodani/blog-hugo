@@ -116,7 +116,7 @@ bootstrap:                            # 心跳
         ttl: 30
         loop_wait: 10
         retry_timeout: 10
-        maximum_lag_on_failover: 1048576  #自动切换阀值
+        maximum_lag_on_failover: 1048576  #从库落后主库多少bytes后failover时不能被选为主
         postgresql:                 # 流复制
           use_pg_rewind: true
           use_slots: false          # 默认true  主从数据库wal保留策略
