@@ -25,8 +25,8 @@ draft: false
 实现方法： 在yml 中的tag配置如下
 ```
 tags: 
-  nofailover: true
-  nosync: true
+  nofailover: true # failover 时不能选为主节点
+  nosync: true # 异步
 ```
 
 ```
