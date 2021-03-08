@@ -104,9 +104,10 @@ draft: false
 
 ##### 高可用
 ---
+- [主从流复制](postgres/replication01/)
+- [PG主从切换 pg_rewind](postgres/pg_rewind/)
 - [PG高可用Patroni搭建](postgres/patroni/)
 - [PG高可用Patroni管理进阶](postgres/patroni02/)
-- [PG主从切换 pg_rewind](postgres/pg_rewind/)
 
 ##### 分布式
 --- 
