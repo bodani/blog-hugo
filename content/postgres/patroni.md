@@ -22,6 +22,7 @@ draft: false
 - [维护模式](postgres/patroni/#维护模式)
 - [弹性扩容，缩容](postgres/patroni/#弹性扩容缩容)
 - [对外提供统一服务](postgres/patroni/#对外提供统一服务)
+- [RestFULLAPI](RestFULLAPI)
 - 备份恢复
 - 监控
 - 日志
@@ -364,6 +365,10 @@ Success: cluster management is paused
 # 退出维护模式
 patronictl -c /etc/patroni.yml resume
 Success: cluster management is resumed
+
+# 当前状态 是否为维护模式
+1 可查看在DSC 中的config信息
+2 API 接口信息
 ```
 被动维护模式： 当DCS 失效时集群变为只读模式
 
@@ -386,6 +391,69 @@ Success: cluster management is resumed
 - 七层 DNS
 
 
+##### RestFULLAPI
+
+```
+-- 读取配置文件
+# curl -s http://10.10.1.11:8008/config | jq .
+{
+  "loop_wait": 10,
+  "maximum_lag_on_failover": 1048576,
+  "postgresql": {
+    "parameters": {
+      "max_connections": 1001,
+      "synchronous_standby_names": "*"
+    },
+    "use_pg_rewind": true,
+    "use_slots": false
+  },
+  "retry_timeout": 10,
+  "ttl": 30
+}
+-- 读取集群信息
+curl -s http://10.10.1.11:8008/cluster | jq .
+{
+  "members": [
+    {
+      "name": "postgresql0",
+      "role": "leader",
+      "state": "running",
+      "api_url": "http://10.10.1.11:8008/patroni",
+      "host": "10.10.1.11",
+      "port": 5432,
+      "timeline": 16
+    },
+    {
+      "name": "postgresql2",
+      "role": "replica",
+      "state": "running",
+      "api_url": "http://10.10.1.12:8008/patroni",
+      "host": "10.10.1.12",
+      "port": 5432,
+      "timeline": 16,
+      "lag": 0
+    },
+    {
+      "name": "postgresql3",
+      "role": "replica",
+      "state": "running",
+      "api_url": "http://10.10.1.13:8008/patroni",
+      "host": "10.10.1.13",
+      "port": 5432,
+      "timeline": 16,
+      "lag": 0
+    }
+  ]
+}
+-- 获取节点角色信息
+curl -s http://10.10.1.12:8008/health | jq .role
+"replica"
+
+curl -s http://10.10.1.11:8008/health | jq .role
+"master"
+
+
+```
 
 [参考]
 
