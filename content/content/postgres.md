@@ -69,6 +69,7 @@ draft: false
 - [Archive wal归档](postgres/archive/)
 - [时间点恢复](postgres/pitr/)
 - [误操作闪回](postgres/reback/)
+- [使用PG_RMAN管理备份恢复](postgres/pg_rman/)
 
 ##### 索引
 

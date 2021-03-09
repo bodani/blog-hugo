@@ -17,6 +17,7 @@ draft: false
 - 加入节点复制数据限流
 - 主从切换流量,避免重新拉取
 - 级联复制
+- callback
 - 日志&监控
 
 ##### 异地多机房策略
@@ -58,3 +59,6 @@ B. 当异地节点为多个节点时
 
  Standby cluster
 
+
+
+https://zhuanlan.zhihu.com/p/260958352
