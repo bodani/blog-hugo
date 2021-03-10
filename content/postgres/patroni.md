@@ -215,7 +215,12 @@ KillSignal=SIGINT
 # during crash recovery.
 TimeoutSec=0
 [Install]
-WantedBy=multi-user.targ
+WantedBy=multi-user.target
+```
+
+验证
+```
+ sudo systemd-analyze verify patroni.service
 ```
 
 启动
