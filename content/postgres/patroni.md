@@ -354,7 +354,6 @@ Are you sure you want to switchover cluster postgres, demoting current master po
 - 节点断电，通信失败，停服
 - 通信成功，服务停
 - dcs 失效, 集群变为只读
-- fencing 
 - 失联节点重新加入集群
 
 ##### 维护模式

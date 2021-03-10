@@ -7,4 +7,6 @@ draft: false
 ##### 缓存穿透（Cache Penetration）
 
 
+了解下
 
+布隆过滤器Bloom Filter
