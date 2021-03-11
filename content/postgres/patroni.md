@@ -13,7 +13,7 @@ draft: false
 #### 实现目标
 
 - [高可用方案对比](postgres/patroni/#高可用方案对比)
-- [patroni 架构分析](postgres/patroni/#patroni架构分析)
+- [patroni 结构分析](postgres/patroni/#patroni结构分析)
 - [patroni 搭建新集群](postgres/patroni/#patroni搭建新集群)
 - patroni 接管现有集群
 - [patroni 管理pg配置](postgres/patroni/#patroni管理pg配置)
@@ -22,11 +22,11 @@ draft: false
 - [维护模式](postgres/patroni/#维护模式)
 - [弹性扩容，缩容](postgres/patroni/#弹性扩容缩容)
 - [对外提供统一服务](postgres/patroni/#对外提供统一服务)
-- [RestFULLAPI](RestFULLAPI)
-- 备份恢复
-- 监控
-- 日志
-- 升级
+- [RestFULLAPI](postgres/patroni/#restFULLAPI)
+- [备份恢复](postgres/patroni/#备份恢复)
+- [监控](postgres/patroni/#监控)
+- [日志](postgres/patroni/#日志)
+- [升级](postgres/patroni/#升级)
 
 
 
@@ -55,8 +55,8 @@ repmgrd 自动流复制管理 守护进程
 1 [虚拟机环境](kvm/vagrant)
 
 ```
-10.10.10.10 node0 外部节点etcd
-10.10.10.11 - 13 node1-node3 集群节点
+10.10.1.10 node0 外部节点etcd
+10.10.1.11 - 13 node1-node3 集群节点
 ```
 
 2 node0 安装etcd
@@ -68,10 +68,10 @@ yum install etcd
 配置其他节点可访问
 etc/etcd/etcd.conf
 ```
-ETCD_LISTEN_CLIENT_URLS="http://10.10.10.10:2379"
+ETCD_LISTEN_CLIENT_URLS="http://10.10.1.10:2379"
 ```
 
-[etcd 集群管理](.//)
+[etcd 集群管理](./)
 
 3 node1-node3 安装配置patroni
 
@@ -115,7 +115,7 @@ bootstrap:                            # 心跳
     dcs:
         ttl: 30
         loop_wait: 10
-        retry_timeout: 10
+        retry_timeout: 10      # 访问etcd 超时多久后重试
         maximum_lag_on_failover: 1048576  #从库落后主库多少bytes后failover时不能被选为主
         postgresql:                 # 流复制
           use_pg_rewind: true
@@ -394,8 +394,9 @@ Success: cluster management is resumed
 - 四层 haproxy
 - 七层 DNS
 
+服务发现参考下面的 restfullapi
 
-##### RestFULLAPI
+##### restFULLAPI
 
 ```
 -- 读取配置文件
@@ -456,8 +457,38 @@ curl -s http://10.10.1.12:8008/health | jq .role
 curl -s http://10.10.1.11:8008/health | jq .role
 "master"
 
+-- 根据response code status
+主节点 200 , 从节点503 
+curl -si http://10.10.1.13:8008/master
+从节点 200 ,主节点503
+curl -si http://10.10.1.13:8008/replica
 
 ```
+
+##### 备份恢复
+- etcd 备份恢复
+
+1. patroni 节点关闭后删除etcd数据 ，重新启动后数据再次生成
+
+2. 正在运行的集群删除etcd数据 , 数据再次自动生成。
+
+- pg 备份恢复
+
+1. 全量备份
+2. wal 备份
+
+##### 监控
+
+- patroni_exporter 
+- etcd_exporter
+- postgres_exporter
+
+##### 日志
+
+- FLK
+
+##### 升级
+
 
 [参考]
 
@@ -465,8 +496,6 @@ curl -s http://10.10.1.11:8008/health | jq .role
 https://www.cnblogs.com/zhangeamon/p/9772118.html
 
 https://www.linode.com/docs/databases/postgresql/create-a-highly-available-postgresql-cluster-using-patroni-and-haproxy
-
-[使用维护手册](./book/patroni使用维护手册.pdf)
 
 [ansible 管理](https://github.com/vitabaks/postgresql_cluster)
 

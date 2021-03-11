@@ -12,9 +12,9 @@ draft: false
 - [访问认证](postgres/patroni02/#访问认证)
 - [watch-dog](postgres/patroni02/#watch-dog)
 - 配置文件详情
-- fencing
+- [fencing](postgres/patroni02/#fencing)
 - [DCS 失效处理](postgres/patroni02/#dcs失效处理)
-- 加入节点复制数据限流
+- [加入节点复制数据限流](postgres/patroni02/#加入节点复制数据限流)
 - 主从切换流量,避免重新拉取
 - 级联复制
 - callback
@@ -39,7 +39,7 @@ synchronous_commit = on
 patroni同步管理
 
 ```
-patronictl edit-config -s 'synchronous_mode=true'
+patronictl edit-config -s 'synchronous_mode=true'加入节点复制数据限流
 patronictl edit-config -s 'synchronous_mode_strict:true'
 
 参数说明:
@@ -146,6 +146,27 @@ watchdog:
   safety_margin: 5
 ```
 
+##### fencing
+
+避免双主问题
+
+patroni 在主节点网络与dcs不通信发生故障时会降级为只读。但可能存在一个心跳周期的双主。
+
+更严格的方式是采用pg的同步模式，当主节点发现无任何可用的从库时写操作被hang住。
+```
+patronictl edit-config -s 'synchronous_mode=true'
+patronictl edit-config -s 'synchronous_mode_strict:true'
+```
+
+当集群是一主多从，比如一主4从。可能发生2节点之间互通， 另外3节点之间互通的情况。
+
+pg 实现请自行结合 pg 'quorum' 参数进行考量。具体结合业务数据安全等级要求。 
+
+patroni 
+```
+synchronous_node_count = 1 # default 1
+```
+
 ##### dcs失效处理
 
 首先当DCS失效后集群的反应：
@@ -176,4 +197,14 @@ retry_timeout: timeout for DCS and PostgreSQL operation retries (in seconds). DC
 具体方法 
 
 ```
+
+##### 加入节点复制数据限流
+
+pg 流复制新加入节点限流 
+
+```
+pg_basebackup -r
+```
+
+
 https://zhuanlan.zhihu.com/p/260958352

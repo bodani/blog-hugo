@@ -86,3 +86,6 @@ rabbitmqctl set_user_tags rabbit administrator
 rabbitmqctl add_vhost /test
 rabbitmqctl set_permissions -p /test rabbit ".*" ".*" ".*"
 ```
+
+
+https://www.cnblogs.com/knowledgesea/p/6535766.html

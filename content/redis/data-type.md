@@ -7,4 +7,7 @@ draft: false
 - Hash：健值对的无序散列列表  
 - List：链表 
 - Set：无序集合 
-- Zset：有序集合 
+- Zset：有序集合
+
+
+https://www.cnblogs.com/knowledgesea/category/722602.html 
