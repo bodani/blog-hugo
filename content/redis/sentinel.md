@@ -1,7 +1,7 @@
 ---
 title: "Redis 高可用 Sentinel"
 date: 2021-03-09T16:57:34+08:00
-draft: false 
+draft: true 
 ---
 
 ##### 介绍
