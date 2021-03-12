@@ -35,4 +35,4 @@ git push origin main
 # Come Back up to the Project Root
 cd ..
 
-echo -e "\033[0;32m Well done , GOOK LUCK Eeamon !!!...\033[0m"
+echo -e "\033[0;32m Well done !!!, GOOK LUCK Eamon ...\033[0m"
