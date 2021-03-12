@@ -1,10 +1,9 @@
 #!/bin/bash
 
-echo -e "\033[0;32mDeploying updates to GitHub...\033[0m"
-
+echo -e "\033[0;32mDeploying markdown updates to GitHub...\033[0m"
 
 # Go To Public folder
-
+echo -e "\033[0;32mPull markdown code from GitHub...\033[0m"
 git pull
 
 git add *
@@ -17,6 +16,8 @@ fi
 git commit -m "$msg"
 
 # Push source and build repos.
+
+echo -e "\033[0;32mPush markdown code to GitHub...\033[0m"
 git push origin master
 
 # Come Back up to the Project Root
