@@ -22,6 +22,7 @@ draft: false
 - [fillfactor 填充因子](postgres/fillfactor/)
 - [TOAST 技术](postgres/toast/)
 - [hot update](postgres/hotupdate/)
+- [checkpoint](postgres/checkpoint/)
 - [tablespace 表空间](postgres/tablespace/)
 - [锁机制](postgres/pg_lock/)
 - [锁等待](postgres/lock_wait/)

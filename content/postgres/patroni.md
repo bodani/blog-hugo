@@ -477,6 +477,8 @@ curl -si http://10.10.1.13:8008/replica
 1. 全量备份
 2. wal 备份
 
+官方方案 wal-e
+
 ##### 监控
 
 - patroni_exporter 
