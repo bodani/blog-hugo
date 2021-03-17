@@ -22,6 +22,4 @@ draft: false
 - cd           切换目录
 - D:           切换到D目录
 - dir          当前目录下文件信息
-
-
-
+- ipconfig /flushdns 刷新本地dns缓存
