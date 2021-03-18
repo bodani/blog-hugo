@@ -181,4 +181,9 @@ DB 的核心业务能力是ACID处理。通过前面APP与DB的对比可知，DB
 - 共享存储 
 - no sharing 2pc 比如greenplum
 - gmt 集中事务比如 pgxc
-- fdw 外存储 
+- fdw 外存储
+
+- 分布式计算存储
+- 分布式计算
+- 分布式存储
+- 分布式事务 
